@@ -12,7 +12,7 @@ import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
-    <Router basename="/so-yummy-frontend">
+    <Router basename="/">
       <Routes>
         <Route path="/" element={<WelcomePage />} />
         <Route path="/register" element={<RegisterPage />} />
