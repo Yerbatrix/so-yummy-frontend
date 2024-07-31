@@ -10,9 +10,11 @@ import Favorites from "./pages/Favorites";
 import ShoppingList from "./pages/ShoppingList";
 import PrivateRoute from "./components/PrivateRoute";
 
+const basename = import.meta.env.DEV ? "/" : "/so-yummy-frontend/";
+
 function App() {
   return (
-    <Router basename="/">
+    <Router basename={basename}>
       <Routes>
         <Route path="/" element={<WelcomePage />} />
         <Route path="/register" element={<RegisterPage />} />
