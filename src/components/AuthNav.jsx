@@ -1,3 +1,4 @@
+import { Link as RouterLink } from "react-router-dom";
 import {
   Box,
   Container,
@@ -25,8 +26,12 @@ const AuthNav = () => {
             </Content>
           </Header>
           <Nav>
-            <Link to="/register">Registration</Link>
-            <Link to="/signin">Sign In</Link>
+            <Link to="/register" as={RouterLink}>
+              Registration
+            </Link>
+            <Link to="/signin" as={RouterLink}>
+              Sign In
+            </Link>
           </Nav>
         </Welcome>
       </Container>
