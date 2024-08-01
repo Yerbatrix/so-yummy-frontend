@@ -7,7 +7,7 @@ const AuthNav = () => (
       Register
     </Link>
     <Link as={RouterLink} to="/signin">
-      Sign In
+      Sign In Test PR
     </Link>
   </Box>
 );
