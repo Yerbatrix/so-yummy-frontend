@@ -1,6 +1,6 @@
-import { Box, Flex, Heading, Link, Button } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Link } from "@chakra-ui/react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../redux/slices/authSlice";
 
 const Header = () => {
@@ -12,37 +12,72 @@ const Header = () => {
   };
 
   return (
-    <Box bg="teal.500" p={4}>
+    <Box bg="transparent" p={4} zIndex={999} position="relative">
       <Flex align="center" justify="space-between">
-        <Heading color="white">So Yummy</Heading>
+        <Heading color="hsla(214, 9%, 15%, 1)">So Yummy</Heading>
         <Box>
           {!isAuthenticated ? (
             <>
-              <Link as={RouterLink} to="/register" color="white" mr={4}>
+              <Link
+                as={RouterLink}
+                to="/register"
+                color="hsla(214, 9%, 15%, 1)"
+                mr={4}
+              >
                 Register
               </Link>
-              <Link as={RouterLink} to="/signin" color="white">
+              <Link as={RouterLink} to="/signin" color="hsla(214, 9%, 15%, 1)">
                 Sign In
               </Link>
             </>
           ) : (
             <>
-              <Link as={RouterLink} to="/main" color="white" mr={4}>
+              <Link
+                as={RouterLink}
+                to="/main"
+                color="hsla(214, 9%, 15%, 1)"
+                mr={4}
+              >
                 Main
               </Link>
-              <Link as={RouterLink} to="/categories" color="white" mr={4}>
+              <Link
+                as={RouterLink}
+                to="/categories"
+                color="hsla(214, 9%, 15%, 1)"
+                mr={4}
+              >
                 Categories
               </Link>
-              <Link as={RouterLink} to="/add" color="white" mr={4}>
+              <Link
+                as={RouterLink}
+                to="/add"
+                color="hsla(214, 9%, 15%, 1)"
+                mr={4}
+              >
                 Add Recipes
               </Link>
-              <Link as={RouterLink} to="/my" color="white" mr={4}>
+              <Link
+                as={RouterLink}
+                to="/my"
+                color="hsla(214, 9%, 15%, 1)"
+                mr={4}
+              >
                 My Recipes
               </Link>
-              <Link as={RouterLink} to="/favorites" color="white" mr={4}>
+              <Link
+                as={RouterLink}
+                to="/favorites"
+                color="hsla(214, 9%, 15%, 1)"
+                mr={4}
+              >
                 Favorites
               </Link>
-              <Link as={RouterLink} to="/shopping-list" color="white" mr={4}>
+              <Link
+                as={RouterLink}
+                to="/shopping-list"
+                color="hsla(214, 9%, 15%, 1)"
+                mr={4}
+              >
                 Shopping List
               </Link>
               <Button
