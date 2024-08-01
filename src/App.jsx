@@ -9,6 +9,8 @@ import MyRecipes from "./pages/MyRecipes";
 import Favorites from "./pages/Favorites";
 import ShoppingList from "./pages/ShoppingList";
 import PrivateRoute from "./components/PrivateRoute";
+import { LogOut } from "./components/Modals/LogOut";
+import { UserProfile } from "./components/Modals/UserProfile";
 
 const basename = import.meta.env.DEV ? "/" : "/so-yummy-frontend/";
 
@@ -16,7 +18,14 @@ function App() {
   return (
     <Router basename={basename}>
       <Routes>
-        <Route path="/" element={<WelcomePage />} />
+        <Route
+          path="/"
+          element={
+            <>
+              <WelcomePage /> <LogOut /> <UserProfile />
+            </>
+          }
+        />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/signin" element={<SigninPage />} />
         <Route
