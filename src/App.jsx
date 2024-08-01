@@ -1,16 +1,18 @@
+import { lazy } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import WelcomePage from "./pages/WelcomePage";
-import RegisterPage from "./pages/RegisterPage";
-import SigninPage from "./pages/SigninPage";
-import MainPage from "./pages/MainPage";
-import Categories from "./pages/Categories";
-import AddRecipes from "./pages/AddRecipes";
-import MyRecipes from "./pages/MyRecipes";
-import Favorites from "./pages/Favorites";
-import ShoppingList from "./pages/ShoppingList";
+const WelcomePage = lazy(() => import("./pages/WelcomePage"));
+const RegisterPage = lazy(() => import("./pages/RegisterPage"));
+const SigninPage = lazy(() => import("./pages/SigninPage"));
+const MainPage = lazy(() => import("./pages/MainPage"));
+const Categories = lazy(() => import("./pages/Categories"));
+const AddRecipes = lazy(() => import("./pages/AddRecipes"));
+const MyRecipes = lazy(() => import("./pages/MyRecipes"));
+const Favorites = lazy(() => import("./pages/Favorites"));
+const ShoppingList = lazy(() => import("./pages/ShoppingList"));
 import PrivateRoute from "./components/PrivateRoute";
-import { LogOut } from "./components/Modals/LogOut";
-import { UserProfile } from "./components/Modals/UserProfile";
+
+// import { LogOut } from "./components/Modals/LogOut";
+// import { UserProfile } from "./components/Modals/UserProfile";
 
 const basename = import.meta.env.DEV ? "/" : "/so-yummy-frontend/";
 
@@ -22,7 +24,9 @@ function App() {
           path="/"
           element={
             <>
-              <WelcomePage /> <LogOut /> <UserProfile />
+              <WelcomePage />
+              {/* <LogOut /> 
+              <UserProfile /> */}
             </>
           }
         />
