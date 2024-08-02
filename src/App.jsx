@@ -10,11 +10,9 @@ import ShoppingList from "./pages/ShoppingList";
 import SigninPage from "./pages/SigninPage";
 import WelcomePage from "./pages/WelcomePage";
 
-const basename = import.meta.env.DEV ? "/" : "/so-yummy-frontend/";
-
 function App() {
   return (
-    <Router basename={basename}>
+    <Router basename="/">
       <Routes>
         <Route path="/" element={<WelcomePage />} />
         <Route path="/register" element={<RegisterPage />} />
