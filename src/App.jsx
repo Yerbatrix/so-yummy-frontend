@@ -1,14 +1,14 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import WelcomePage from "./pages/WelcomePage";
-import RegisterPage from "./pages/RegisterPage";
-import SigninPage from "./pages/SigninPage";
-import MainPage from "./pages/MainPage";
-import Categories from "./pages/Categories";
-import AddRecipes from "./pages/AddRecipes";
-import MyRecipes from "./pages/MyRecipes";
-import Favorites from "./pages/Favorites";
-import ShoppingList from "./pages/ShoppingList";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
+import AddRecipes from "./pages/AddRecipes";
+import Categories from "./pages/Categories";
+import Favorites from "./pages/Favorites";
+import MainPage from "./pages/MainPage";
+import MyRecipes from "./pages/MyRecipes";
+import RegisterPage from "./pages/RegisterPage";
+import ShoppingList from "./pages/ShoppingList";
+import SigninPage from "./pages/SigninPage";
+import WelcomePage from "./pages/WelcomePage";
 
 function App() {
   return (
