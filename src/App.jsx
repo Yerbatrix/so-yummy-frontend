@@ -10,7 +10,7 @@ import ShoppingList from "./pages/ShoppingList";
 import SigninPage from "./pages/SigninPage";
 import WelcomePage from "./pages/WelcomePage";
 
-const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFounPage"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 
 function App() {
   return (
