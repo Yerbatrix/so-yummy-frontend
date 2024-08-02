@@ -1,4 +1,4 @@
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 const WelcomePage = lazy(() => import("./pages/WelcomePage"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage"));
@@ -11,14 +11,9 @@ const Favorites = lazy(() => import("./pages/Favorites"));
 const ShoppingList = lazy(() => import("./pages/ShoppingList"));
 import PrivateRoute from "./components/PrivateRoute";
 
-// import { LogOut } from "./components/Modals/LogOut";
-// import { UserProfile } from "./components/Modals/UserProfile";
-
-const basename = import.meta.env.DEV ? "/" : "/so-yummy-frontend/";
-
 function App() {
   return (
-    <Router basename={basename}>
+    <Router basename="/">
       <Routes>
         <Route
           path="/"
