@@ -10,6 +10,8 @@ import ShoppingList from "./pages/ShoppingList";
 import SigninPage from "./pages/SigninPage";
 import WelcomePage from "./pages/WelcomePage";
 
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFounPage"));
+
 function App() {
   return (
     <Router basename="/">
@@ -62,6 +64,14 @@ function App() {
           element={
             <PrivateRoute>
               <ShoppingList />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <PrivateRoute>
+              <NotFoundPage />
             </PrivateRoute>
           }
         />
