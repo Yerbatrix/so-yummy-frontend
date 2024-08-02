@@ -20,7 +20,7 @@ const AuthNav = () => {
       <Box>
         <Container>
           <Logo src={LogoIcon} alt="Primary logo in app" />
-          <Title> Welcome to the app!</Title>
+          <Title> Welcome to the app! ZMIANA</Title>
           <Content>
             This app offers more than just a collection of recipes - it is
             designed to be your very own digital cookbook. You can easily save
