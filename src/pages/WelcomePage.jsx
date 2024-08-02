@@ -1,9 +1,9 @@
 import { Box } from "@chakra-ui/react";
-import AuthNav from "../components/AuthNav";
+import Welcome from "../components/WelcomePage/Welcome";
 
 const WelcomePage = () => (
   <Box>
-    <AuthNav />
+    <Welcome />
   </Box>
 );
 
