@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Flex,
+  Grid,
   Heading,
   Image,
   Input,
@@ -28,14 +29,14 @@ const HeroSection = () => {
     <Box
       height="800px"
       display="flex"
-      flexDirection={{ base: "column", md: "row" }} // Column on mobile, row on desktop/tablet
+      flexDirection={{ base: "column", md: "row" }}
       alignItems="center"
       justifyContent="center"
       maxWidth="1440px"
       mx="auto"
       zIndex={1}
       position="relative"
-      // overflow="hidden" // Ensure nothing overflows outside the container
+      // overflow="hidden"
     >
       {/* Left Section */}
       <Flex
@@ -43,19 +44,32 @@ const HeroSection = () => {
         align="left"
         // justify="center"
         width={{ base: "100%", md: "50%" }}
-        textAlign={{ base: "center", md: "left" }} // Center text on mobile, left-align on larger screens
+        textAlign={{ base: "center", md: "left" }}
         p={4}
         zIndex={1}
       >
-        <Heading as="h1" size="2xl" mb={4}>
-          SoYummy
+        <Heading
+          as="h1"
+          size="2xl"
+          mb={4}
+          sx={{
+            fontSize: "100px",
+            fontWeight: 400,
+            lineHeight: "100px",
+            letterSpacing: "-0.005em",
+          }}
+        >
+          <Text as="span" color="hsla(76, 52%, 44%, 1)">
+            So
+          </Text>
+          Yummy
         </Heading>
         <Text fontSize="xl" mb={4}>
           "What to cook?" is not only a recipe app, it is, in fact, your
           cookbook. You can add your own recipes to save them for the future.
         </Text>
         <Flex
-          direction={{ base: "column", md: "row" }} // Stack input and button on mobile, row on desktop
+          direction={{ base: "column", md: "row" }}
           align="left"
           justify="left"
           mt={4}
@@ -63,9 +77,9 @@ const HeroSection = () => {
           <Input
             placeholder="Search..."
             size="lg"
-            mr={{ base: 0, md: 0 }} // Margin-right on larger screens
-            mb={{ base: 2, md: 0 }} // Margin-bottom on mobile
-            width={{ base: "100%", md: "auto" }} // Full width on mobile, auto on desktop
+            mr={{ base: 0, md: 0 }}
+            mb={{ base: 2, md: 0 }}
+            width={{ base: "100%", md: "auto" }}
           />
           <Button colorScheme="teal" size="lg">
             Search
@@ -80,7 +94,8 @@ const HeroSection = () => {
         align="center"
         justify="center"
         width={{ base: "100%", md: "50%" }}
-        // overflow="hidden" // Ensure content does not overflow outside the container
+        height={{ base: "300px", md: "auto" }}
+        // overflow="hidden"
       >
         {/* Background layer */}
         <Box
@@ -88,13 +103,13 @@ const HeroSection = () => {
           width="941px"
           height="912px"
           top="-628px"
-          left="auto" // Center background layer
-          // right="  0" // Adjust to be within the visible area
+          left="auto"
+          // right="  0"
           backgroundColor="hsla(75, 56%, 89%, 1)"
           transform="rotate(10.57deg)"
-          zIndex={-1} // Set to ensure it's behind the content
+          zIndex={-3}
           borderRadius="60px"
-          display={{ base: "none", md: "block" }} // Hide on mobile
+          display={{ base: "block", md: "block" }}
         />
 
         {/* Image layer */}
@@ -103,18 +118,18 @@ const HeroSection = () => {
           width="578px"
           height="539px"
           top="-200px"
-          left="auto" // Center image layer
-          right="0" // Adjust to be within the visible area
+          left="auto"
+          right="0"
           opacity="1"
-          zIndex={3} // Ensure this is above the background layer
-          display={{ base: "none", md: "block" }} // Hide on mobile
+          zIndex={-1}
+          display={{ base: "block", md: "block" }}
         >
           <Image
-            src="/images/unsplash_IGfIGP5ONV0.png" // Ensure this path is correct
+            src="/images/unsplash_IGfIGP5ONV0.png"
             alt="Decorative"
             width="100%"
             height="100%"
-            objectFit="contain" // Adjust as needed, e.g., 'cover' or 'contain'
+            objectFit="contain"
           />
         </Box>
         <Box
@@ -123,17 +138,17 @@ const HeroSection = () => {
           height="944px"
           top="-486px"
           left="-87px"
-          // opacity="0" // Make sure this is visible; adjust as needed
+          // opacity="0"
           // transform="rotate(-65deg)"
-          zIndex={1} // Ensure this is behind the other images and background
-          display={{ base: "none", md: "block" }} // Hide on mobile
+          zIndex={-2}
+          display={{ base: "block", md: "block" }}
         >
           <Image
-            src="/public/images/kisspng-pasta-spinach-dip-english-muffin-breakfast-sandwic-spinach-5abcc32f2ee473 1.png" // Ensure this path is correct
+            src="/public/images/kisspng-pasta-spinach-dip-english-muffin-breakfast-sandwic-spinach-5abcc32f2ee473 1.png"
             alt="Additional Decorative"
             width="100%"
             height="100%"
-            objectFit="contain" // Adjust as needed, e.g., 'cover' or 'contain'
+            objectFit="contain"
           />
         </Box>
       </Flex>
@@ -143,56 +158,61 @@ const HeroSection = () => {
 
 const Section = ({ title, images }) => {
   return (
-    <Box p={8} maxWidth="1440px" mx="auto">
-      <Heading as="h2" size="xl" mb={4}>
-        {title}
-      </Heading>
-      <Flex wrap="wrap" gap={4}>
-        {images.map((image, index) => (
-          <Box
-            key={index}
-            position="relative"
-            width={{ base: "100%", md: "23%" }}
-            mb={4}
+    <Box p={8} width="100%" overflow="hidden">
+      <Box maxWidth="1440px" mx="auto">
+        <Heading as="h2" size="xl" mb={4}>
+          {title}
+        </Heading>
+        <Grid
+          templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(4, 1fr)" }}
+          gap={4}
+        >
+          {images.map((image, index) => (
+            <Box key={index} position="relative" width="100%" mb={4}>
+              <Link as={RouterLink} to={image.link}>
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  width="100%"
+                  height="auto"
+                  borderRadius="md"
+                  objectFit="cover"
+                />
+                <Box
+                  position="absolute"
+                  bottom="5"
+                  left="7"
+                  width="80%"
+                  bg="white"
+                  color="black"
+                  p={2}
+                  textAlign="center"
+                  borderRadius="10px"
+                >
+                  {image.name}
+                </Box>
+              </Link>
+            </Box>
+          ))}
+        </Grid>
+        <Box textAlign="right" mt={4}>
+          <Button
+            as={RouterLink}
+            to={`/${title.toLowerCase()}`}
+            variant="solid"
+            bg="hsla(76, 52%, 44%, 1)" // Background color
+            color="white" // Text color
+            size="lg"
+            _hover={{ bg: "hsla(76, 52%, 54%, 1)" }} // Hover color
           >
-            <Link as={RouterLink} to={image.link}>
-              <Image
-                src={image.src}
-                alt={image.alt}
-                width="100%"
-                height="auto"
-                borderRadius="md"
-                objectFit="cover"
-              />
-              <Box
-                position="absolute"
-                bottom="0"
-                left="0"
-                width="100%"
-                bg="rgba(255, 255, 255, 0.7)"
-                color="black"
-                p={2}
-                textAlign="center"
-              >
-                {image.name}
-              </Box>
-            </Link>
-          </Box>
-        ))}
-      </Flex>
-      <Button
-        as={RouterLink}
-        to={`/${title.toLowerCase()}`}
-        variant="solid"
-        mt={4}
-      >
-        See All
-      </Button>
+            See All
+          </Button>
+        </Box>
+      </Box>
     </Box>
   );
 };
 
-// Dummy image data
 const breakfastImages = [
   {
     src: "/public/images/assorted-sliced-fruits-in-white-ceramic-bowl-1092730 1.jpg",

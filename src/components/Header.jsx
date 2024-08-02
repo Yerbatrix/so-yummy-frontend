@@ -12,7 +12,14 @@ const Header = () => {
   };
 
   return (
-    <Box bg="transparent" p={4} zIndex={999} position="relative">
+    <Box
+      maxW="1440px"
+      mx="auto"
+      bg="transparent"
+      p={4}
+      zIndex={999}
+      position="relative"
+    >
       <Flex align="center" justify="space-between">
         <Heading color="hsla(214, 9%, 15%, 1)">So Yummy</Heading>
         <Box>
