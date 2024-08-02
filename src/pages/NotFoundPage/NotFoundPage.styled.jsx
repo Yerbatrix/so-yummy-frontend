@@ -49,7 +49,7 @@ export const TextBox = styled.div`
   }
 `;
 
-export const ImgContainter = styled.div`
+export const ImgContainer = styled.div`
   width: 259px;
   height: 171px;
   margin: 0 auto;
