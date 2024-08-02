@@ -5,8 +5,10 @@ import {
   Heading,
   Image,
   Input,
+  Link,
   Text,
 } from "@chakra-ui/react";
+import { Link as RouterLink } from "react-router-dom";
 // import React from "react";
 
 const MainPage = () => {
@@ -153,30 +155,37 @@ const Section = ({ title, images }) => {
             width={{ base: "100%", md: "23%" }}
             mb={4}
           >
-            <Image
-              src={image.src}
-              alt={image.alt}
-              width="100%"
-              height="auto"
-              borderRadius="md"
-              objectFit="cover"
-            />
-            <Box
-              position="absolute"
-              bottom="0"
-              left="0"
-              width="100%"
-              bg="rgba(255, 255, 255, 0.7)" // White background with some transparency
-              color="black"
-              p={2}
-              textAlign="center"
-            >
-              {image.name}
-            </Box>
+            <Link as={RouterLink} to={image.link}>
+              <Image
+                src={image.src}
+                alt={image.alt}
+                width="100%"
+                height="auto"
+                borderRadius="md"
+                objectFit="cover"
+              />
+              <Box
+                position="absolute"
+                bottom="0"
+                left="0"
+                width="100%"
+                bg="rgba(255, 255, 255, 0.7)"
+                color="black"
+                p={2}
+                textAlign="center"
+              >
+                {image.name}
+              </Box>
+            </Link>
           </Box>
         ))}
       </Flex>
-      <Button mt={4} colorScheme="teal">
+      <Button
+        as={RouterLink}
+        to={`/${title.toLowerCase()}`}
+        variant="solid"
+        mt={4}
+      >
         See All
       </Button>
     </Box>
@@ -189,43 +198,107 @@ const breakfastImages = [
     src: "/public/images/assorted-sliced-fruits-in-white-ceramic-bowl-1092730 1.jpg",
     alt: "Breakfast Item 1",
     name: "Pancakes",
+    link: "/pancakes",
   },
-  { src: "/images/breakfast2.jpg", alt: "Breakfast Item 2", name: "Waffles" },
-  { src: "/images/breakfast3.jpg", alt: "Breakfast Item 3", name: "Omelette" },
-  { src: "/images/breakfast4.jpg", alt: "Breakfast Item 4", name: "Smoothie" },
+  {
+    src: "/public/images/M6A1135.jpg",
+    alt: "Breakfast Item 2",
+    name: "Waffles",
+    link: "/pancakes",
+  },
+  {
+    src: "/public/images/Spinach_quinoa_patties_01.jpg",
+    alt: "Breakfast Item 3",
+    name: "Omelette",
+    link: "/pancakes",
+  },
+  {
+    src: "/public/images/Spinach_quinoa_patties_01 (1).jpg",
+    alt: "Breakfast Item 4",
+    name: "Smoothie",
+    link: "/pancakes",
+  },
 ];
 
 const miscellaneousImages = [
   {
-    src: "/images/misc1.jpg",
+    src: "/public/images/m1.jpg",
     alt: "Miscellaneous Item 1",
     name: "Spring Rolls",
+    link: "/pancakes",
   },
-  { src: "/images/misc2.jpg", alt: "Miscellaneous Item 2", name: "Samosas" },
-  { src: "/images/misc3.jpg", alt: "Miscellaneous Item 3", name: "Bruschetta" },
-  { src: "/images/misc4.jpg", alt: "Miscellaneous Item 4", name: "Guacamole" },
+  {
+    src: "/public/images/m2.jpg",
+    alt: "Miscellaneous Item 2",
+    name: "Samosas",
+    link: "/pancakes",
+  },
+  {
+    src: "/public/images/m3.jpg",
+    alt: "Miscellaneous Item 3",
+    name: "Bruschetta",
+    link: "/pancakes",
+  },
+  {
+    src: "/public/images/m4.jpg",
+    alt: "Miscellaneous Item 4",
+    name: "Guacamole",
+    link: "/pancakes",
+  },
 ];
 
 const chickenImages = [
   {
-    src: "/images/chicken1.jpg",
+    src: "/public/images/chicken1.jpg",
     alt: "Chicken Item 1",
     name: "Grilled Chicken",
+    link: "/pancakes",
   },
-  { src: "/images/chicken2.jpg", alt: "Chicken Item 2", name: "Chicken Curry" },
-  { src: "/images/chicken3.jpg", alt: "Chicken Item 3", name: "Chicken Salad" },
-  { src: "/images/chicken4.jpg", alt: "Chicken Item 4", name: "Chicken Wings" },
+  {
+    src: "/public/images/chicken2.jpg",
+    alt: "Chicken Item 2",
+    name: "Chicken Curry",
+    link: "/pancakes",
+  },
+  {
+    src: "/public/images/chicken3.jpg",
+    alt: "Chicken Item 3",
+    name: "Chicken Salad",
+    link: "/pancakes",
+  },
+  {
+    src: "/public/images/chicken4.jpg",
+    alt: "Chicken Item 4",
+    name: "Chicken Wings",
+    link: "/pancakes",
+  },
 ];
 
 const dessertsImages = [
   {
-    src: "/images/dessert1.jpg",
+    src: "/public/images/desert1.jpg",
     alt: "Dessert Item 1",
     name: "Chocolate Cake",
+    link: "/pancakes",
   },
-  { src: "/images/dessert2.jpg", alt: "Dessert Item 2", name: "Ice Cream" },
-  { src: "/images/dessert3.jpg", alt: "Dessert Item 3", name: "Cookies" },
-  { src: "/images/dessert4.jpg", alt: "Dessert Item 4", name: "Brownies" },
+  {
+    src: "/public/images/desert2.jpg",
+    alt: "Dessert Item 2",
+    name: "Ice Cream",
+    link: "/pancakes",
+  },
+  {
+    src: "/public/images/desertr3.jpg",
+    alt: "Dessert Item 3",
+    name: "Cookies",
+    link: "/pancakes",
+  },
+  {
+    src: "/public/images/desert4.jpg",
+    alt: "Dessert Item 4",
+    name: "Brownies",
+    link: "/pancakes",
+  },
 ];
 
 export default MainPage;
