@@ -1,4 +1,6 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { lazy } from "react";
+
 import PrivateRoute from "./components/PrivateRoute";
 import AddRecipes from "./pages/AddRecipes";
 import Categories from "./pages/Categories";
