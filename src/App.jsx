@@ -1,30 +1,20 @@
-import { lazy, Suspense } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-const WelcomePage = lazy(() => import("./pages/WelcomePage"));
-const RegisterPage = lazy(() => import("./pages/RegisterPage"));
-const SigninPage = lazy(() => import("./pages/SigninPage"));
-const MainPage = lazy(() => import("./pages/MainPage"));
-const Categories = lazy(() => import("./pages/Categories"));
-const AddRecipes = lazy(() => import("./pages/AddRecipes"));
-const MyRecipes = lazy(() => import("./pages/MyRecipes"));
-const Favorites = lazy(() => import("./pages/Favorites"));
-const ShoppingList = lazy(() => import("./pages/ShoppingList"));
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
+import AddRecipes from "./pages/AddRecipes";
+import Categories from "./pages/Categories";
+import Favorites from "./pages/Favorites";
+import MainPage from "./pages/MainPage";
+import MyRecipes from "./pages/MyRecipes";
+import RegisterPage from "./pages/RegisterPage";
+import ShoppingList from "./pages/ShoppingList";
+import SigninPage from "./pages/SigninPage";
+import WelcomePage from "./pages/WelcomePage";
 
 function App() {
   return (
     <Router basename="/">
       <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <WelcomePage />
-              {/* <LogOut /> 
-              <UserProfile /> */}
-            </>
-          }
-        />
+        <Route path="/" element={<WelcomePage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/signin" element={<SigninPage />} />
         <Route
