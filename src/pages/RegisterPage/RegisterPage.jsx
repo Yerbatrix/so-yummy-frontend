@@ -1,6 +1,5 @@
+import { ToastContainer } from "react-toastify";
 import AuthForm from "../../components/AuthForm/AuthForm";
-import { RegisterContainer, Section } from "./RegisterPage.styled";
-
 import imageDesktop from "../../images/register/signin-image-desktop.png";
 import imageDesktop2x from "../../images/register/signin-image-desktop@2x.png";
 import imageDesktop3x from "../../images/register/signin-image-desktop@3x.png";
@@ -10,6 +9,7 @@ import imageMobile3x from "../../images/register/signin-image-mobile@3x.png";
 import imageTablet from "../../images/register/signin-image-tablet.png";
 import imageTablet2x from "../../images/register/signin-image-tablet@2x.png";
 import imageTablet3x from "../../images/register/signin-image-tablet@3x.png";
+import { RegisterContainer, Section } from "./RegisterPage.styled";
 const RegisterPage = () => {
   return (
     <>
@@ -26,7 +26,8 @@ const RegisterPage = () => {
           />
           <AuthForm />
         </RegisterContainer>
-        {/* <ToastContainer /> */}
+        {/* ToastContainer jest kontenerem, który renderuje powiadomienia typu “toast”. To miejsce, w którym wyświetlane są komunikaty dla użytkownika. */}
+        <ToastContainer />
       </Section>
     </>
   );
