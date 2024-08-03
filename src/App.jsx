@@ -5,7 +5,7 @@ import Categories from "./pages/Categories";
 import Favorites from "./pages/Favorites";
 import MainPage from "./pages/MainPage";
 import MyRecipes from "./pages/MyRecipes";
-import RegisterPage from "./pages/RegisterPage";
+import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import ShoppingList from "./pages/ShoppingList";
 import SigninPage from "./pages/SigninPage";
 import WelcomePage from "./pages/WelcomePage";
