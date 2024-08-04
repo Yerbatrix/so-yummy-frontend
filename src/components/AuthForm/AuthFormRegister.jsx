@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { FaUser } from "react-icons/fa";
+import { MdOutlineEmail } from "react-icons/md";
+import { RiLockPasswordLine } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../redux/slices/authSlice";
@@ -7,12 +10,12 @@ import {
   Container,
   ContainerForm,
   Form,
+  Icon,
   Input,
   List,
   SignLink,
   Title,
 } from "./AuthForm.styled";
-
 const AuthFormRegister = () => {
   const [formState, setFormState] = useState({
     name: "",
@@ -57,6 +60,7 @@ const AuthFormRegister = () => {
                 onChange={handleChange}
                 required
               />
+              <Icon as={FaUser} color="fff" mr={5} />
             </List>
             <List>
               <Input
@@ -67,6 +71,7 @@ const AuthFormRegister = () => {
                 onChange={handleChange}
                 required
               />
+              <Icon as={MdOutlineEmail} color="fff" mr={5} />
             </List>
             <List>
               <Input
@@ -77,6 +82,7 @@ const AuthFormRegister = () => {
                 onChange={handleChange}
                 required
               />
+              <Icon as={RiLockPasswordLine} color="fff" mr={5} />
             </List>
           </ContainerForm>
         </div>

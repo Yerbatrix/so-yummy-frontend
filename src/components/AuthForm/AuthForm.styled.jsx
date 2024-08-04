@@ -1,3 +1,4 @@
+import { RiLockPasswordLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { devices } from "../../const/breakpoints";
@@ -106,25 +107,20 @@ export const Input = styled.input`
   width: 100%;
   padding: 12px 14px 12px 40px;
   background-color: transparent;
-  border: 1px solid
-   #FAFAFA;
-    
+  border: 1px solid #fafafa;
   border-radius: 6px;
-  color:  #FAFAFA;
-  }};
+  color: #fafafa;
   font-size: 14px;
   font-weight: 400;
   line-height: normal;
   letter-spacing: -0.28px;
   outline: none;
-  opacity:  0.8;
-  }};
+  opacity: 0.8;
   transition: 250ms cubic-bezier(0.17, 0.67, 0.83, 0.67);
   transition-property: border, opacity;
 
   &::placeholder {
-    color:  #FAFAFA;
-    }};
+    color: #fafafa;
     font-size: 14px;
     font-weight: 400;
     line-height: normal;
@@ -135,9 +131,7 @@ export const Input = styled.input`
   }
 
   &:is(:focus) {
-    border: 1px solid
-     #FFFFFF;
-      ;
+    border: 1px solid #fafafa;
     opacity: 1;
   }
 
@@ -193,5 +187,27 @@ export const SignLink = styled(Link)`
 
   @media only screen and $(devices.tablet) {
     font-size: 16px;
+  }
+`;
+export const Icon = styled(RiLockPasswordLine)`
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  left: 14px;
+  top: 50%;
+
+  transform: translateY(-50%);
+  opacity: 0.8;
+  stroke: #fafafa;
+
+  @media only screen and ${devices.tablet} {
+    width: 24px;
+    height: 24px;
+    left: 14px;
+  }
+  @media only screen and ${devices.desktop} {
+    width: 28px;
+    height: 28px;
+    left: 10px;
   }
 `;

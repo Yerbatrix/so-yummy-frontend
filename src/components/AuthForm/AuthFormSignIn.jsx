@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { MdOutlineEmail } from "react-icons/md";
+import { RiLockPasswordLine } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../redux/slices/authSlice";
@@ -7,12 +9,12 @@ import {
   Container,
   ContainerForm,
   Form,
+  Icon,
   Input,
   List,
   SignLink,
   Title,
 } from "./AuthForm.styled";
-
 const AuthFormSignIn = () => {
   const [formState, setFormState] = useState({
     email: "",
@@ -56,6 +58,7 @@ const AuthFormSignIn = () => {
                 onChange={handleChange}
                 required
               />
+              <Icon as={MdOutlineEmail} color="fff" mr={5} />
             </List>
             <List>
               <Input
@@ -66,6 +69,7 @@ const AuthFormSignIn = () => {
                 onChange={handleChange}
                 required
               />
+              <Icon as={RiLockPasswordLine} color="fff" mr={5} />
             </List>
           </ContainerForm>
         </div>
