@@ -1,4 +1,3 @@
-// operations.js
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -8,8 +7,8 @@ export const getCategoryList = createAsyncThunk(
   "categories/getCategoryList",
   async (_, thunkAPI) => {
     try {
-      const { data } = await axios.get("/recipes/category-list");
-      return data.categories;
+      const { data } = await axios.get(`api/recipes/category-list/`);
+      return data.data.categories;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
