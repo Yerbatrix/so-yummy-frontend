@@ -13,7 +13,7 @@ import {
   Title,
 } from "./AuthForm.styled";
 
-const AuthForm = () => {
+const AuthFormRegister = () => {
   const [formState, setFormState] = useState({
     name: "",
     email: "",
@@ -88,4 +88,4 @@ const AuthForm = () => {
   );
 };
 
-export default AuthForm;
+export default AuthFormRegister;

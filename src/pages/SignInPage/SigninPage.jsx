@@ -1,4 +1,4 @@
-import AuthFormRegister from "../../components/AuthForm/AuthFormRegister";
+import AuthFormSignIn from "../../components/AuthForm/AuthFormSignIn";
 import imageDesktop from "../../images/register/signin-image-desktop.png";
 import imageDesktop2x from "../../images/register/signin-image-desktop@2x.png";
 import imageDesktop3x from "../../images/register/signin-image-desktop@3x.png";
@@ -8,8 +8,8 @@ import imageMobile3x from "../../images/register/signin-image-mobile@3x.png";
 import imageTablet from "../../images/register/signin-image-tablet.png";
 import imageTablet2x from "../../images/register/signin-image-tablet@2x.png";
 import imageTablet3x from "../../images/register/signin-image-tablet@3x.png";
-import { RegisterContainer, Section } from "./RegisterPage.styled";
-const RegisterPage = () => {
+import { RegisterContainer, Section } from "./SigninPage.styled";
+const SigninPage = () => {
   return (
     <>
       <Section>
@@ -23,11 +23,11 @@ const RegisterPage = () => {
             sizes="(min-width: 1280px) 532px, (min-width: 768px) 409px, (min-width: 320px) 285px, 100vw"
             alt="Register hero"
           />
-          <AuthFormRegister />
+          <AuthFormSignIn />
         </RegisterContainer>
       </Section>
     </>
   );
 };
 
-export default RegisterPage;
+export default SigninPage;
