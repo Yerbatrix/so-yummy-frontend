@@ -1,6 +1,8 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { lazy } from "react";
+
 import PrivateRoute from "./components/PrivateRoute";
-import AddRecipes from "./pages/AddRecipes";
+import AddRecipes from "./pages/AddRecipePage/AddRecipes";
 import Categories from "./pages/Categories";
 import Favorites from "./pages/Favorites";
 import MainPage from "./pages/MainPage";
@@ -9,6 +11,8 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import ShoppingList from "./pages/ShoppingList";
 import SigninPage from "./pages/SignInPage/SigninPage";
 import WelcomePage from "./pages/WelcomePage";
+
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 
 function App() {
   return (
@@ -62,6 +66,14 @@ function App() {
           element={
             <PrivateRoute>
               <ShoppingList />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <PrivateRoute>
+              <NotFoundPage />
             </PrivateRoute>
           }
         />
