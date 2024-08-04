@@ -1,5 +1,5 @@
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { lazy } from "react";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 import PrivateRoute from "./components/PrivateRoute";
 import AddRecipes from "./pages/AddRecipePage/AddRecipes";

@@ -10,16 +10,23 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
-// import React from "react";
 
 const MainPage = () => {
   return (
     <>
       <HeroSection />
-      <Section title="Breakfast" images={breakfastImages} />
-      <Section title="Miscellaneous" images={miscellaneousImages} />
-      <Section title="Chicken" images={chickenImages} />
-      <Section title="Desserts" images={dessertsImages} />
+      <Section
+        title="Breakfast"
+        images={breakfastImages}
+        category="breakfast"
+      />
+      <Section
+        title="Miscellaneous"
+        images={miscellaneousImages}
+        category="miscellaneous"
+      />
+      <Section title="Chicken" images={chickenImages} category="chicken" />
+      <Section title="Desserts" images={dessertsImages} category="desserts" />
     </>
   );
 };
@@ -36,13 +43,11 @@ const HeroSection = () => {
       mx="auto"
       zIndex={1}
       position="relative"
-      // overflow="hidden"
     >
       {/* Left Section */}
       <Flex
         direction="column"
         align="left"
-        // justify="center"
         width={{ base: "100%", md: "50%" }}
         textAlign={{ base: "center", md: "left" }}
         p={4}
@@ -95,7 +100,6 @@ const HeroSection = () => {
         justify="center"
         width={{ base: "100%", md: "50%" }}
         height={{ base: "300px", md: "auto" }}
-        // overflow="hidden"
       >
         {/* Background layer */}
         <Box
@@ -104,7 +108,6 @@ const HeroSection = () => {
           height="912px"
           top="-628px"
           left="auto"
-          // right="  0"
           backgroundColor="hsla(75, 56%, 89%, 1)"
           transform="rotate(10.57deg)"
           zIndex={-3}
@@ -138,8 +141,6 @@ const HeroSection = () => {
           height="944px"
           top="-486px"
           left="-87px"
-          // opacity="0"
-          // transform="rotate(-65deg)"
           zIndex={-2}
           display={{ base: "block", md: "block" }}
         >
@@ -156,7 +157,7 @@ const HeroSection = () => {
   );
 };
 
-const Section = ({ title, images }) => {
+const Section = ({ title, images, category }) => {
   return (
     <Box p={8} width="100%" overflow="hidden">
       <Box maxWidth="1440px" mx="auto">
@@ -198,7 +199,7 @@ const Section = ({ title, images }) => {
         <Box textAlign="right" mt={4}>
           <Button
             as={RouterLink}
-            to={`/${title.toLowerCase()}`}
+            to={`/categories/${title.toLowerCase()}`}
             variant="solid"
             bg="hsla(76, 52%, 44%, 1)" // Background color
             color="white" // Text color
