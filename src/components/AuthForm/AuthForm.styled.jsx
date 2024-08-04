@@ -13,7 +13,12 @@ export const Container = styled.div`
   @media only screen and ${devices.tablet} {
     top: 347px;
   }
-
+  @media only screen and ${devices.desktopMini} {
+    position: static;
+    display: inline;
+    flex-direction: column;
+    max-width: 500px;
+  }
   @media only screen and ${devices.desktop} {
     position: static;
     display: inline;
@@ -102,35 +107,23 @@ export const Input = styled.input`
   padding: 12px 14px 12px 40px;
   background-color: transparent;
   border: 1px solid
-    ${(props) => {
-      if (props.$isvalid === "true") return "#3CBC81";
-      if (props.$isvalid === "false") return "#E74A3B";
-      return "#FAFAFA";
-    }};
+   #FAFAFA;
+    
   border-radius: 6px;
-  color: ${(props) => {
-    if (props.$isvalid === "true") return "#3CBC81";
-    if (props.$isvalid === "false") return "#E74A3B";
-    return "#FAFAFA";
+  color:  #FAFAFA;
   }};
   font-size: 14px;
   font-weight: 400;
   line-height: normal;
   letter-spacing: -0.28px;
   outline: none;
-  opacity: ${(props) => {
-    if (props.$isvalid === "true") return "1";
-    if (props.$isvalid === "false") return "1";
-    return "0.8";
+  opacity:  0.8;
   }};
   transition: 250ms cubic-bezier(0.17, 0.67, 0.83, 0.67);
   transition-property: border, opacity;
 
   &::placeholder {
-    color: ${(props) => {
-      if (props.$isvalid === "true") return "#3CBC81";
-      if (props.$isvalid === "false") return "#E74A3B";
-      return "#FAFAFA";
+    color:  #FAFAFA;
     }};
     font-size: 14px;
     font-weight: 400;
@@ -143,11 +136,8 @@ export const Input = styled.input`
 
   &:is(:focus) {
     border: 1px solid
-      ${(props) => {
-        if (props.$isvalid === "true") return "#3CBC81";
-        if (props.$isvalid === "false") return "#E74A3B";
-        return "#FFFFFF";
-      }};
+     #FFFFFF;
+      ;
     opacity: 1;
   }
 
@@ -203,23 +193,5 @@ export const SignLink = styled(Link)`
 
   @media only screen and $(devices.tablet) {
     font-size: 16px;
-  }
-`;
-
-export const Notice = styled.p`
-  position: absolute;
-  bottom: -15px;
-  font-size: 10px;
-  margin: 0;
-  color: #e74a3b;
-  display: ${(props) => {
-    if (props.$isvalid === "true") return "none";
-    if (props.$isvalid === "false") return "block";
-    return "none";
-  }};
-
-  @media only screen and ${devices.tablet} {
-    bottom: -16px;
-    font-size: 12px;
   }
 `;

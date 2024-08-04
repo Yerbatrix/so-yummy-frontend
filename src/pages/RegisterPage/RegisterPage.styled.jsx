@@ -21,7 +21,10 @@ export const Section = styled.section`
     min-height: 0;
     background-image: url(${tablet});
   }
-
+  @media only screen and ${devices.desktopMini} {
+    padding: 0;
+    background-size: 100%;
+  }
   @media only screen and ${devices.desktop} {
     padding: 0;
     background-image: url(${desktop});
@@ -35,6 +38,12 @@ export const RegisterContainer = styled.div`
   align-items: center;
   position: relative;
 
+  @media only screen and ${devices.desktopMini} {
+    max-width: 1020px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
   @media only screen and ${devices.desktop} {
     max-width: 1440px;
     display: flex;

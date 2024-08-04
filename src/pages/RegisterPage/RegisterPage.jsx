@@ -1,4 +1,3 @@
-import { ToastContainer } from "react-toastify";
 import AuthForm from "../../components/AuthForm/AuthForm";
 import imageDesktop from "../../images/register/signin-image-desktop.png";
 import imageDesktop2x from "../../images/register/signin-image-desktop@2x.png";
@@ -26,8 +25,6 @@ const RegisterPage = () => {
           />
           <AuthForm />
         </RegisterContainer>
-        {/* ToastContainer jest kontenerem, który renderuje powiadomienia typu “toast”. To miejsce, w którym wyświetlane są komunikaty dla użytkownika. */}
-        <ToastContainer />
       </Section>
     </>
   );
