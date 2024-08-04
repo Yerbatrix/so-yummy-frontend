@@ -4,7 +4,7 @@ import { lazy } from "react";
 import PrivateRoute from "./components/PrivateRoute";
 import AddRecipes from "./pages/AddRecipePage/AddRecipes";
 import Categories from "./pages/Categories";
-import Favorites from "./pages/Favorites";
+import Favorites from "./pages/Favorites/Favorites";
 import MainPage from "./pages/MainPage";
 import MyRecipes from "./pages/MyRecipes";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
