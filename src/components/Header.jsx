@@ -91,7 +91,7 @@ const Header = () => {
       <Flex align="center" justify="space-between">
         <Heading color="hsla(214, 9%, 15%, 1)">
           <Link as={RouterLink} to="/">
-            <Image src="../../public/images/logo.svg" alt="Logo" />
+            <Image src="../../images/logo.svg" alt="Logo" />
           </Link>
         </Heading>
 

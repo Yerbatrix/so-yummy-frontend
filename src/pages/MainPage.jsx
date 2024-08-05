@@ -91,7 +91,6 @@ const HeroSection = () => {
           </Button>
         </Flex>
       </Flex>
-
       {/* Right Section */}
       <Flex
         position="relative"
@@ -145,7 +144,7 @@ const HeroSection = () => {
           display={{ base: "block", md: "block" }}
         >
           <Image
-            src="/public/images/kisspng-pasta-spinach-dip-english-muffin-breakfast-sandwic-spinach-5abcc32f2ee473 1.png"
+            src="/images/kisspng-pasta-spinach-dip-english-muffin-breakfast-sandwic-spinach-5abcc32f2ee473 1.png"
             alt="Additional Decorative"
             width="100%"
             height="100%"
@@ -153,6 +152,7 @@ const HeroSection = () => {
           />
         </Box>
       </Flex>
+      s
     </Box>
   );
 };
