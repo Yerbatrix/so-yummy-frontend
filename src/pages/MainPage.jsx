@@ -91,7 +91,6 @@ const HeroSection = () => {
           </Button>
         </Flex>
       </Flex>
-
       {/* Right Section */}
       <Flex
         position="relative"
@@ -145,7 +144,7 @@ const HeroSection = () => {
           display={{ base: "block", md: "block" }}
         >
           <Image
-            src="/public/images/kisspng-pasta-spinach-dip-english-muffin-breakfast-sandwic-spinach-5abcc32f2ee473 1.png"
+            src="/images/kisspng-pasta-spinach-dip-english-muffin-breakfast-sandwic-spinach-5abcc32f2ee473 1.png"
             alt="Additional Decorative"
             width="100%"
             height="100%"
@@ -153,6 +152,7 @@ const HeroSection = () => {
           />
         </Box>
       </Flex>
+      s
     </Box>
   );
 };
@@ -216,25 +216,25 @@ const Section = ({ title, images, category }) => {
 
 const breakfastImages = [
   {
-    src: "/public/images/assorted-sliced-fruits-in-white-ceramic-bowl-1092730 1.jpg",
+    src: "/images/assorted-sliced-fruits-in-white-ceramic-bowl-1092730 1.jpg",
     alt: "Breakfast Item 1",
     name: "Pancakes",
     link: "/pancakes",
   },
   {
-    src: "/public/images/M6A1135.jpg",
+    src: "/images/M6A1135.jpg",
     alt: "Breakfast Item 2",
     name: "Waffles",
     link: "/pancakes",
   },
   {
-    src: "/public/images/Spinach_quinoa_patties_01.jpg",
+    src: "/images/Spinach_quinoa_patties_01.jpg",
     alt: "Breakfast Item 3",
     name: "Omelette",
     link: "/pancakes",
   },
   {
-    src: "/public/images/Spinach_quinoa_patties_01 (1).jpg",
+    src: "/images/Spinach_quinoa_patties_01 (1).jpg",
     alt: "Breakfast Item 4",
     name: "Smoothie",
     link: "/pancakes",
@@ -243,25 +243,25 @@ const breakfastImages = [
 
 const miscellaneousImages = [
   {
-    src: "/public/images/m1.jpg",
+    src: "/images/m1.jpg",
     alt: "Miscellaneous Item 1",
     name: "Spring Rolls",
     link: "/pancakes",
   },
   {
-    src: "/public/images/m2.jpg",
+    src: "/images/m2.jpg",
     alt: "Miscellaneous Item 2",
     name: "Samosas",
     link: "/pancakes",
   },
   {
-    src: "/public/images/m3.jpg",
+    src: "/images/m3.jpg",
     alt: "Miscellaneous Item 3",
     name: "Bruschetta",
     link: "/pancakes",
   },
   {
-    src: "/public/images/m4.jpg",
+    src: "/images/m4.jpg",
     alt: "Miscellaneous Item 4",
     name: "Guacamole",
     link: "/pancakes",
@@ -270,25 +270,25 @@ const miscellaneousImages = [
 
 const chickenImages = [
   {
-    src: "/public/images/chicken1.jpg",
+    src: "/images/chicken1.jpg",
     alt: "Chicken Item 1",
     name: "Grilled Chicken",
     link: "/pancakes",
   },
   {
-    src: "/public/images/chicken2.jpg",
+    src: "/images/chicken2.jpg",
     alt: "Chicken Item 2",
     name: "Chicken Curry",
     link: "/pancakes",
   },
   {
-    src: "/public/images/chicken3.jpg",
+    src: "/images/chicken3.jpg",
     alt: "Chicken Item 3",
     name: "Chicken Salad",
     link: "/pancakes",
   },
   {
-    src: "/public/images/chicken4.jpg",
+    src: "/images/chicken4.jpg",
     alt: "Chicken Item 4",
     name: "Chicken Wings",
     link: "/pancakes",
@@ -297,25 +297,25 @@ const chickenImages = [
 
 const dessertsImages = [
   {
-    src: "/public/images/desert1.jpg",
+    src: "images/desert1.jpg",
     alt: "Dessert Item 1",
     name: "Chocolate Cake",
     link: "/pancakes",
   },
   {
-    src: "/public/images/desert2.jpg",
+    src: "images/desert2.jpg",
     alt: "Dessert Item 2",
     name: "Ice Cream",
     link: "/pancakes",
   },
   {
-    src: "/public/images/desertr3.jpg",
+    src: "/images/desertr3.jpg",
     alt: "Dessert Item 3",
     name: "Cookies",
     link: "/pancakes",
   },
   {
-    src: "/public/images/desert4.jpg",
+    src: "/images/desert4.jpg",
     alt: "Dessert Item 4",
     name: "Brownies",
     link: "/pancakes",
