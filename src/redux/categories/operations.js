@@ -1,7 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-
-axios.defaults.baseURL = "https://t4-soyummy-api-2752d40c2586.herokuapp.com/";
+import axios from "../axiosConfig";
 
 export const getCategoryList = createAsyncThunk(
   "categories/getCategoryList",
