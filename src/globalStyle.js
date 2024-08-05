@@ -8,10 +8,10 @@ const theme = extendTheme({
         margin: 0,
         padding: 0,
       },
-      a: {
-        color: "hsla(76, 52%, 44%, 1)",
-        textDecoration: "none",
-      },
+      // a: {
+      //   color: "hsla(76, 52%, 44%, 1)",
+      //   textDecoration: "none",
+      // },
     },
   },
   //   components: {

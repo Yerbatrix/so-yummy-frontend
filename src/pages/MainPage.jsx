@@ -201,10 +201,10 @@ const Section = ({ title, images, category }) => {
             as={RouterLink}
             to={`/categories/${title.toLowerCase()}`}
             variant="solid"
-            bg="hsla(76, 52%, 44%, 1)" // Background color
-            color="white" // Text color
+            bg="hsla(76, 52%, 44%, 1)"
+            color="white"
             size="lg"
-            _hover={{ bg: "hsla(76, 52%, 54%, 1)" }} // Hover color
+            _hover={{ bg: "hsla(76, 52%, 54%, 1)" }}
           >
             See All
           </Button>

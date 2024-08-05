@@ -3,7 +3,7 @@ import Footer from "./Footer";
 import Header from "./Header";
 
 const Layout = ({ children }) => (
-  <Box>
+  <Box overflow="hidden">
     <Header />
     <Box maxW="1440px" mx="auto" p={4}>
       {children}

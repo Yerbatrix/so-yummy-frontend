@@ -1,4 +1,6 @@
 import { HamburgerIcon } from "@chakra-ui/icons";
+import { NavLink } from "react-router-dom";
+
 import {
   Avatar,
   Box,
@@ -102,21 +104,23 @@ const Header = () => {
           {[
             "main",
             "categories",
-            "add",
-            "my",
+            "add-recipes",
+            "my-recipes",
             "favorites",
             "shopping-list",
           ].map((path) => (
-            <Link
-              as={RouterLink}
+            <NavLink
               to={`/${path}`}
               key={path}
-              mx={2}
-              _hover={{ textDecoration: "none" }}
-              _activeLink={{ color: "teal.500" }}
+              style={({ isActive }) => ({
+                margin: "0 0.5rem",
+                textDecoration: "none",
+                color: isActive ? "hsla(76, 52%, 44%, 1)" : "inherit",
+                backgroundColor: isActive ? "transparent" : "transparent",
+              })}
             >
               {path.charAt(0).toUpperCase() + path.slice(1).replace("-", " ")}
-            </Link>
+            </NavLink>
           ))}
         </Flex>
 
@@ -142,21 +146,34 @@ const Header = () => {
                   </Flex>
                 </MenuItem>
                 <MenuItem
-                  width="90%"
+                  width="70%" // Ustaw na 100% dla pełnej szerokości elementu nadrzędnego
                   borderRadius="24px 44px"
                   bg="hsla(76, 52%, 44%, 1)"
                   onClick={handleLogout}
                   color="white"
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  mx="auto"
                 >
-                  <Flex justify="center" align="center" width="100%">
-                    Logout
-                  </Flex>
+                  Logout
                 </MenuItem>
               </MenuList>
             </Menu>
           )}
 
-          <Switch ml={4} display={{ base: "none", md: "block" }} />
+          <Switch
+            ml={4}
+            display={{ base: "none", md: "block" }}
+            css={{
+              ".chakra-switch__track": {
+                backgroundColor: "hsla(76, 52%, 44%, 1)",
+              },
+              ".chakra-switch__thumb": {
+                backgroundColor: "white",
+              },
+            }}
+          />
 
           {/* Mobile and Tablet Menu Button */}
           <IconButton
@@ -165,6 +182,7 @@ const Header = () => {
             onClick={onDrawerOpen}
             variant="outline"
             aria-label="Open Menu"
+            marginLeft="20px"
           />
         </Flex>
       </Flex>
@@ -172,15 +190,23 @@ const Header = () => {
       {/* Drawer for Mobile and Tablet */}
       <Drawer isOpen={isDrawerOpen} placement="right" onClose={onDrawerClose}>
         <DrawerOverlay>
-          <DrawerContent>
+          <DrawerContent
+            width="100vw"
+            height="100vh"
+            maxWidth="100vw"
+            display="flex"
+            flexDirection="column"
+            backgroundColor="hsla(75, 56%, 89%, 1);
+"
+          >
             <DrawerCloseButton />
             <DrawerHeader>
               <Link as={RouterLink} to="/" onClick={onDrawerClose}>
-                So Yummy
+                <Image src="../../public/images/logo.svg" alt="Logo" />
               </Link>
             </DrawerHeader>
-            <DrawerBody>
-              <Flex direction="column" align="start" p={4}>
+            <DrawerBody flex="1">
+              <Flex direction="column" align="start" p={4} width="100%">
                 {[
                   "main",
                   "categories",
@@ -197,6 +223,8 @@ const Header = () => {
                     onClick={onDrawerClose}
                     _hover={{ textDecoration: "none" }}
                     _activeLink={{ color: "teal.500" }}
+                    width="100%"
+                    textAlign="center" // Dodaj wyrównanie do środka
                   >
                     {path.charAt(0).toUpperCase() +
                       path.slice(1).replace("-", " ")}
