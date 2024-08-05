@@ -193,6 +193,8 @@ export const DescrCategoryItem = styled.li`
   color: #000000;
   opacity: 0.5;
   cursor: pointer;
+  list-style-type: none;
+  width: 90px;
 
   :not(:last-child) {
     margin-bottom: 4px;
