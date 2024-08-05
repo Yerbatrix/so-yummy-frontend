@@ -4,7 +4,6 @@ import { MdOutlineEmail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { login } from "../../redux/slices/authSlice";
 import {
   Button,
   Container,
@@ -16,6 +15,8 @@ import {
   SignLink,
   Title,
 } from "./AuthForm.styled";
+import axios from "axios";
+
 const AuthFormRegister = () => {
   const [formState, setFormState] = useState({
     name: "",
@@ -23,7 +24,6 @@ const AuthFormRegister = () => {
     password: "",
   });
   const [errors, setErrors] = useState({});
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -33,16 +33,24 @@ const AuthFormRegister = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Walidacja formularza
     if (!formState.name || !formState.email || !formState.password) {
       setErrors({ message: "Please fill in all fields" });
       return;
     }
-    // Symulowanie logowania
-    dispatch(login({ email: formState.email }));
-    navigate("/main");
+
+    try {
+      await axios.post(
+        "https://t4-soyummy-api-2752d40c2586.herokuapp.com/api/auth/register",
+        formState
+      );
+      // Przekierowanie na stronę logowania po udanej rejestracji
+      navigate("/signin");
+    } catch (error) {
+      setErrors({ message: error.response.data.msg });
+    }
   };
 
   return (
@@ -86,6 +94,8 @@ const AuthFormRegister = () => {
             </List>
           </ContainerForm>
         </div>
+
+        {errors.message && <p>{errors.message}</p>}
 
         <Button type="submit">Sign up</Button>
       </Form>
