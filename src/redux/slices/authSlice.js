@@ -22,9 +22,16 @@ const authSlice = createSlice({
       state.token = null;
       localStorage.removeItem("token");
     },
+    checkAuth(state) {
+      const token = localStorage.getItem("token");
+      if (token) {
+        state.isAuthenticated = true;
+        state.token = token;
+      }
+    },
   },
 });
 
-export const { login, logout } = authSlice.actions;
+export const { login, logout, checkAuth } = authSlice.actions;
 
 export default authSlice.reducer;
