@@ -15,6 +15,7 @@ import {
   SignLink,
   Title,
 } from "./AuthForm.styled";
+
 const AuthFormSignIn = () => {
   const [formState, setFormState] = useState({
     email: "",
@@ -31,16 +32,38 @@ const AuthFormSignIn = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Walidacja formularza
     if (!formState.email || !formState.password) {
       setErrors({ message: "Please fill in all fields" });
       return;
     }
-    // Symulowanie logowania
-    dispatch(login({ email: formState.email }));
-    navigate("/main");
+
+    try {
+      const response = await fetch(
+        "https://t4-soyummy-api-2752d40c2586.herokuapp.com/api/auth/signin",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formState),
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        setErrors({ message: errorData.msg });
+        return;
+      }
+
+      const data = await response.json();
+      localStorage.setItem("token", data.token);
+      dispatch(login({ user: data.user, token: data.token }));
+      navigate("/main");
+    } catch (err) {
+      setErrors({ message: "An error occurred during sign in" });
+    }
   };
 
   return (
@@ -73,6 +96,8 @@ const AuthFormSignIn = () => {
             </List>
           </ContainerForm>
         </div>
+
+        {errors.message && <p style={{ color: "red" }}>{errors.message}</p>}
 
         <Button type="submit">Sign in</Button>
       </Form>
