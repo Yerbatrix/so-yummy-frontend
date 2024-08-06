@@ -11,6 +11,7 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import ShoppingList from "./pages/ShoppingList";
 import SigninPage from "./pages/SignInPage/SigninPage";
 import WelcomePage from "./pages/WelcomePage";
+import SearchPage from "./pages/SearchPage/SearchPage";
 
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/" element={<WelcomePage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/signin" element={<SigninPage />} />
+
         <Route
           path="/main"
           element={
@@ -66,6 +68,14 @@ function App() {
           element={
             <PrivateRoute>
               <ShoppingList />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/search"
+          element={
+            <PrivateRoute>
+              <SearchPage />
             </PrivateRoute>
           }
         />
