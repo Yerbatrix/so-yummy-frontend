@@ -74,10 +74,10 @@ const AuthFormSignIn = () => {
     const { value } = event.currentTarget;
     if (value.length === 0 || !value.includes("@")) {
       setIsEmailValid(false);
-      setEmailBorderColor("green");
+      setEmailBorderColor("red");
     } else {
       setIsEmailValid(true);
-      setEmailBorderColor("red");
+      setEmailBorderColor("green");
     }
   };
 
@@ -90,10 +90,10 @@ const AuthFormSignIn = () => {
       !/\d/.test(value)
     ) {
       setIsPasswordValid(false);
-      setPasswordBorderColor("green");
+      setPasswordBorderColor("red");
     } else {
       setIsPasswordValid(true);
-      setPasswordBorderColor("red");
+      setPasswordBorderColor("green");
     }
   };
 
