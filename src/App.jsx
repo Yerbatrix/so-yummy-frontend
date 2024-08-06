@@ -7,10 +7,11 @@ import Categories from "./pages/Categories";
 import Favorites from "./pages/Favorites/Favorites";
 import MainPage from "./pages/MainPage";
 import MyRecipes from "./pages/MyRecipes";
-import RegisterPage from "./pages/RegisterPage/RegisterPage";
+// import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import ShoppingList from "./pages/ShoppingList";
 import SigninPage from "./pages/SignInPage/SigninPage";
 import WelcomePage from "./pages/WelcomePage";
+import SearchPage from "./pages/SearchPage/SearchPage";
 
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 
@@ -19,8 +20,9 @@ function App() {
     <Router basename="/">
       <Routes>
         <Route path="/" element={<WelcomePage />} />
-        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/register" element={<MainPage />} />
         <Route path="/signin" element={<SigninPage />} />
+
         <Route
           path="/main"
           element={
@@ -66,6 +68,14 @@ function App() {
           element={
             <PrivateRoute>
               <ShoppingList />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/search"
+          element={
+            <PrivateRoute>
+              <SearchPage />
             </PrivateRoute>
           }
         />

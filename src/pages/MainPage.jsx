@@ -10,6 +10,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
+import SearchBar from "../components/Search/SearchBar";
 
 const MainPage = () => {
   return (
@@ -79,16 +80,7 @@ const HeroSection = () => {
           justify="left"
           mt={4}
         >
-          <Input
-            placeholder="Search..."
-            size="lg"
-            mr={{ base: 0, md: 0 }}
-            mb={{ base: 2, md: 0 }}
-            width={{ base: "100%", md: "auto" }}
-          />
-          <Button colorScheme="teal" size="lg">
-            Search
-          </Button>
+          <SearchBar />
         </Flex>
       </Flex>
 
