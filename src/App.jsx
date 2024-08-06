@@ -20,7 +20,7 @@ function App() {
     <Router basename="/">
       <Routes>
         <Route path="/" element={<WelcomePage />} />
-        <Route path="/register" element={<MainPage />} />
+        <Route path="/register" element={<RegisterPage />} />
         <Route path="/signin" element={<SigninPage />} />
 
         <Route
