@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import ReactPaginate from "react-paginate";
 import "./Favorites.css";
-import deleteIcon from "../../images/deleteBttn/delete-bttn-mobile.png";
+import deleteIconMobile from "../../images/deleteBttn/delete-bttn-mobile.png";
+import deleteIconTablet from "../../images/deleteBttn/delete-bttn-tablet.png";
+import deleteIconDesktop from "../../images/deleteBttn/delete-bttn-desktop.png";
+
 
 const Favorites = () => {
   const recipes = [
@@ -8,7 +12,7 @@ const Favorites = () => {
       id: 1,
       title: "Spaghetti Carbonara",
       description:
-        "A classic Italian pasta dish with eggs, cheese, pancetta, and pepper. A classic Italian pasta dish with eggs, cheese, pancetta, and pepper. A classic Italian pasta dish with eggs, cheese, pancetta, and pepper. A classic Italian pasta dish with eggs, cheese, pancetta, and pepper. A classic Italian pasta dish with eggs, cheese, pancetta, and pepper. A classic Italian pasta dish with eggs, cheese, pancetta, and pepper. A classic Italian pasta dish with eggs, cheese, pancetta, and pepper. A classic Italian pasta dish with eggs, cheese, pancetta, and pepper.",
+        "A classic Italian pasta dish with eggs, cheese, pancetta, and pepper. A classic Italian pasta dish with eggs, cheese, pancetta, and pepper.A classic Italian pasta dish with eggs, cheese, pancetta, and pepper.A classic Italian pasta dish with eggs, cheese, pancetta, and pepper.A classic Italian pasta dish with eggs, cheese, pancetta, and pepper.A classic Italian pasta dish with eggs, cheese, pancetta, and pepper. A classic Italian pasta dish with eggs, cheese, pancetta, and pepper. A classic Italian pasta dish with eggs, cheese, pancetta, and pepper. pancetta, and pepper. A classic Italian pasta dish with eggs, cheese, pancetta, and pepper.A classic Italian pasta dish with eggs, cheese, pancetta, and pepper.A classic Italian pasta dish with eggs, cheese, pancetta, and pepper.A classic Italian pasta dish with eggs, cheese, pancetta, and pepper.A classic Italian pasta dish with eggs, cheese, pancetta, and pepper. A classic Italian pasta dish with eggs, cheese, pancetta, and pepper. A classic Italian pasta dish with eggs, cheese, pancetta, and pepper",
       image:
         "https://www.themealdb.com/images/media/meals/uuyrrx1487327597.jpg",
       preparationTime: "30 min",
@@ -55,67 +59,227 @@ const Favorites = () => {
       image: "https://via.placeholder.com/150",
       preparationTime: "1 hr 15 min",
     },
+    {
+      id: 7,
+      title: "Lasagna",
+      description: "Layered pasta with meat, cheese, and tomato sauce.",
+      image: "https://via.placeholder.com/150",
+      preparationTime: "1 hr 15 min",
+    },
+    {
+      id: 8,
+      title: "Lasagna",
+      description: "Layered pasta with meat, cheese, and tomato sauce.",
+      image: "https://via.placeholder.com/150",
+      preparationTime: "1 hr 15 min",
+    },
+    {
+      id: 9,
+      title: "Lasagna",
+      description: "Layered pasta with meat, cheese, and tomato sauce.",
+      image: "https://via.placeholder.com/150",
+      preparationTime: "1 hr 15 min",
+    },
+    {
+      id: 10,
+      title: "Lasagna",
+      description: "Layered pasta with meat, cheese, and tomato sauce.",
+      image: "https://via.placeholder.com/150",
+      preparationTime: "1 hr 15 min",
+    },
+    {
+      id: 11,
+      title: "Lasagna",
+      description: "Layered pasta with meat, cheese, and tomato sauce.",
+      image: "https://via.placeholder.com/150",
+      preparationTime: "1 hr 15 min",
+    },
+    {
+      id: 12,
+      title: "Lasagna",
+      description: "Layered pasta with meat, cheese, and tomato sauce.",
+      image: "https://via.placeholder.com/150",
+      preparationTime: "1 hr 15 min",
+    },
+    {
+      id: 13,
+      title: "Lasagna",
+      description: "Layered pasta with meat, cheese, and tomato sauce.",
+      image: "https://via.placeholder.com/150",
+      preparationTime: "1 hr 15 min",
+    },
+    {
+      id: 14,
+      title: "Lasagna",
+      description: "Layered pasta with meat, cheese, and tomato sauce.",
+      image: "https://via.placeholder.com/150",
+      preparationTime: "1 hr 15 min",
+    },
+    {
+      id: 15,
+      title: "Lasagna",
+      description: "Layered pasta with meat, cheese, and tomato sauce.",
+      image: "https://via.placeholder.com/150",
+      preparationTime: "1 hr 15 min",
+    },
+    {
+      id: 16,
+      title: "Lasagna",
+      description: "Layered pasta with meat, cheese, and tomato sauce.",
+      image: "https://via.placeholder.com/150",
+      preparationTime: "1 hr 15 min",
+    },
+    {
+      id: 17,
+      title: "Lasagna",
+      description: "Layered pasta with meat, cheese, and tomato sauce.",
+      image: "https://via.placeholder.com/150",
+      preparationTime: "1 hr 15 min",
+    },
+    {
+      id: 18,
+      title: "Lasagna",
+      description: "Layered pasta with meat, cheese, and tomato sauce.",
+      image: "https://via.placeholder.com/150",
+      preparationTime: "1 hr 15 min",
+    },
+    {
+      id: 19,
+      title: "Lasagna",
+      description: "Layered pasta with meat, cheese, and tomato sauce.",
+      image: "https://via.placeholder.com/150",
+      preparationTime: "1 hr 15 min",
+    },
+    {
+      id: 20,
+      title: "Lasagna",
+      description: "Layered pasta with meat, cheese, and tomato sauce.",
+      image: "https://via.placeholder.com/150",
+      preparationTime: "1 hr 15 min",
+    },
+    {
+      id: 31,
+      title: "Lasagna",
+      description: "Layered pasta with meat, cheese, and tomato sauce.",
+      image: "https://via.placeholder.com/150",
+      preparationTime: "1 hr 15 min",
+    },
+    {
+      id: 22,
+      title: "Lasagna",
+      description: "Layered pasta with meat, cheese, and tomato sauce.",
+      image: "https://via.placeholder.com/150",
+      preparationTime: "1 hr 15 min",
+    },
+    {
+      id: 23,
+      title: "Lasagna",
+      description: "Layered pasta with meat, cheese, and tomato sauce.",
+      image: "https://via.placeholder.com/150",
+      preparationTime: "1 hr 15 min",
+    },
+    {
+      id: 24,
+      title: "Lasagna",
+      description: "Layered pasta with meat, cheese, and tomato sauce.",
+      image: "https://via.placeholder.com/150",
+      preparationTime: "1 hr 15 min",
+    },
+    {
+      id: 25,
+      title: "Lasagna",
+      description: "Layered pasta with meat, cheese, and tomato sauce.",
+      image: "https://via.placeholder.com/150",
+      preparationTime: "1 hr 15 min",
+    },
+    {
+      id: 26,
+      title: "Lasagna",
+      description: "Layered pasta with meat, cheese, and tomato sauce.",
+      image: "https://via.placeholder.com/150",
+      preparationTime: "1 hr 15 min",
+    },
+    {
+      id: 27,
+      title: "Lasagna",
+      description: "Layered pasta with meat, cheese, and tomato sauce.",
+      image: "https://via.placeholder.com/150",
+      preparationTime: "1 hr 15 min",
+    },
+    {
+      id: 28,
+      title: "Lasagna",
+      description: "Layered pasta with meat, cheese, and tomato sauce.",
+      image: "https://via.placeholder.com/150",
+      preparationTime: "1 hr 15 min",
+    },
+    {
+      id: 29,
+      title: "Lasagna",
+      description: "Layered pasta with meat, cheese, and tomato sauce.",
+      image: "https://via.placeholder.com/150",
+      preparationTime: "1 hr 15 min",
+    },
   ];
 
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const recipesPerPage = 4;
 
-  // Calculate the recipes to display on the current page
-  const indexOfLastRecipe = currentPage * recipesPerPage;
-  const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
-  const currentRecipes = recipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-  // Change page
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const displayRecipes = recipes
+    .slice(currentPage * recipesPerPage, (currentPage + 1) * recipesPerPage)
+    .map((recipe) => (
+      <div key={recipe.id} className="recipe">
+        <img src={recipe.image} alt={recipe.title} className="recipe-image" />
+        <div className="recipe-details">
+          <h2>{recipe.title}</h2>
+          <p className="recipe-description">{recipe.description}</p>
+          <div className="timer-container">
+            <p className="prep-time">{recipe.preparationTime}</p>
+            <div className="recipe-actions">
+              <button className="btn-see">See recipe</button>
+              <button className="btn-delete">
+              <picture>
+                  <source media="(min-width: 1024px)" srcSet={deleteIconDesktop} />
+                  <source media="(min-width: 768px)" srcSet={deleteIconTablet} />
+                  <img src={deleteIconMobile} alt="Delete" className="delete-icon" />
+                </picture>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    ));
 
-  const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(recipes.length / recipesPerPage); i++) {
-    pageNumbers.push(i);
-  }
+  const pageCount = Math.ceil(recipes.length / recipesPerPage);
+  const pageRangeDisplayed = windowWidth < 768 ? 5 : 8;
 
   return (
     <div className="container">
-      <div className="test">
+      <div className="header">
         <h1>Favorites</h1>
       </div>
-      <div className="recipes">
-        {currentRecipes.map((recipe) => (
-          <div key={recipe.id} className="recipe">
-            <img
-              src={recipe.image}
-              alt={recipe.title}
-              className="recipe-image"
-            />
-            <div className="recipe-details">
-              <h2>{recipe.title}</h2>
-              <p className="recipe-description">{recipe.description}</p>
-              <div className="timer-container">
-                <p className="prep-time">{recipe.preparationTime}</p>
-                <div className="recipe-actions">
-                  <button className="btn-see">See Reecipe</button>
-                  <button className="btn-delete">
-                    <img
-                      src={deleteIcon}
-                      alt="Delete"
-                      className="delete-icon"
-                    />
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="pagination">
-        {pageNumbers.map((number) => (
-          <button
-            key={number}
-            onClick={() => paginate(number)}
-            className="page-link"
-          >
-            {number}
-          </button>
-        ))}
+      <div className="recipes">{displayRecipes}</div>
+      <div>
+        <ReactPaginate
+          previousLabel={"<"}
+          nextLabel={">"}
+          pageCount={pageCount}
+          onPageChange={({ selected }) => setCurrentPage(selected)}
+          containerClassName={"pagination"}
+          previousLinkClassName={"pagination__link"}
+          nextLinkClassName={"pagination__link"}
+          disabledClassName={"pagination__link--disabled"}
+          activeClassName={"pagination__link--active"}
+          pageRangeDisplayed={pageRangeDisplayed}
+          marginPagesDisplayed={1}
+        />
       </div>
     </div>
   );
