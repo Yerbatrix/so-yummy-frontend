@@ -1,5 +1,5 @@
 import { HamburgerIcon } from "@chakra-ui/icons";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import {
   Avatar,
@@ -39,8 +39,9 @@ import { logout, updateUser } from "../redux/slices/authSlice";
 
 const Header = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const user = useSelector((state) => state.auth.user); // Assuming user object is available
+  const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {
     isOpen: isDrawerOpen,
     onOpen: onDrawerOpen,
@@ -79,6 +80,10 @@ const Header = () => {
     }
   };
 
+  const handleCategoryClick = () => {
+    navigate("/categories/beef");
+  };
+
   return (
     <Box
       maxW="1440px"
@@ -110,7 +115,7 @@ const Header = () => {
             "shopping-list",
           ].map((path) => (
             <NavLink
-              to={`/${path}`}
+              to={path === "categories" ? "/categories/beef" : `/${path}`}
               key={path}
               style={({ isActive }) => ({
                 margin: "0 0.5rem",
@@ -137,7 +142,9 @@ const Header = () => {
                 alignItems="center"
               >
                 <Avatar size="sm" name={user?.name} src={user?.avatarUrl} />
-                <Text ml={2}>{user?.name}</Text>
+                <Text ml={2} fontWeight="bold">
+                  {user?.name}
+                </Text>{" "}
               </MenuButton>
               <MenuList>
                 <MenuItem onClick={onModalOpen}>
@@ -146,7 +153,7 @@ const Header = () => {
                   </Flex>
                 </MenuItem>
                 <MenuItem
-                  width="70%" // Ustaw na 100% dla pełnej szerokości elementu nadrzędnego
+                  width="70%"
                   borderRadius="24px 44px"
                   bg="hsla(76, 52%, 44%, 1)"
                   onClick={handleLogout}
@@ -217,14 +224,14 @@ const Header = () => {
                 ].map((path) => (
                   <Link
                     as={RouterLink}
-                    to={`/${path}`}
+                    to={path === "categories" ? "/categories/beef" : `/${path}`}
                     key={path}
                     mb={2}
                     onClick={onDrawerClose}
                     _hover={{ textDecoration: "none" }}
                     _activeLink={{ color: "teal.500" }}
                     width="100%"
-                    textAlign="center" // Dodaj wyrównanie do środka
+                    textAlign="center"
                   >
                     {path.charAt(0).toUpperCase() +
                       path.slice(1).replace("-", " ")}
@@ -280,7 +287,7 @@ const Header = () => {
                       top="50%"
                       left="50%"
                       transform="translate(-50%, -50%)"
-                      src="../../public/images/user.svg" // Path to your SVG icon
+                      src="../../public/images/user.svg"
                       alt="Upload Icon"
                       boxSize="54px"
                     />

@@ -9,11 +9,12 @@ import {
   Text,
 } from "@chakra-ui/react";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import React, { startTransition, useEffect, useState } from "react";
+import { Link as RouterLink, useParams } from "react-router-dom";
 
 const Categories = () => {
-  const [selectedCategory, setSelectedCategory] = useState("beef");
+  const { category } = useParams();
+  const [selectedCategory, setSelectedCategory] = useState(category || "beef");
   const [products, setProducts] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -51,6 +52,7 @@ const Categories = () => {
           });
           return acc;
         }, {});
+
         setProducts(categorizedProducts);
       } catch (error) {
         setError("Error fetching products.");
@@ -60,11 +62,23 @@ const Categories = () => {
       }
     };
 
-    fetchProducts();
+    startTransition(() => {
+      fetchProducts();
+    });
   }, []);
 
+  useEffect(() => {
+    if (category) {
+      startTransition(() => {
+        setSelectedCategory(category);
+      });
+    }
+  }, [category]);
+
   const handleCategoryClick = (category) => {
-    setSelectedCategory(category);
+    startTransition(() => {
+      setSelectedCategory(category);
+    });
   };
 
   return (
@@ -78,7 +92,7 @@ const Categories = () => {
             <Link
               key={category}
               as={RouterLink}
-              to="#"
+              to={`/categories/${category}`}
               onClick={() => handleCategoryClick(category)}
               textDecoration="none"
               color={
@@ -89,6 +103,11 @@ const Categories = () => {
               fontWeight={selectedCategory === category ? "bold" : "normal"}
               position="relative"
               p={2}
+              _active={{
+                textDecoration: "underline",
+                backgroundColor: "transparent",
+              }}
+              _focus={{ boxShadow: "none", backgroundColor: "transparent" }}
             >
               {category.charAt(0).toUpperCase() + category.slice(1)}
               {selectedCategory === category && (

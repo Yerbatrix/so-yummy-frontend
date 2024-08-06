@@ -11,12 +11,55 @@ import {
   List,
   ListItem,
   Text,
+  useToast,
 } from "@chakra-ui/react";
+import axios from "axios";
+import { useState } from "react";
 import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { Link as RouterLink } from "react-router-dom";
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+  const toast = useToast();
+
+  const handleSubscribe = async () => {
+    setLoading(true);
+    setError(null);
+    setSuccess(null);
+
+    try {
+      const response = await axios.post(
+        "https://t4-soyummy-api-2752d40c2586.herokuapp.com/api/subscribe",
+        { email },
+        { headers: { "Content-Type": "application/json" } }
+      );
+      setSuccess(response.data.message);
+      toast({
+        title: "Subscription successful",
+        description: response.data.message,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    } catch (err) {
+      console.error("Subscription error:", err);
+      setError(err.response?.data?.message || "Something went wrong");
+      toast({
+        title: "Subscription failed",
+        description: err.response?.data?.message || "Something went wrong",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <>
       <Box bg="hsla(218, 11%, 15%, 1)" color="white" py={8} width="100%">
@@ -50,7 +93,7 @@ const Footer = () => {
               listStyleType="disc"
               ml={4}
             >
-              <ListItem>Database of recipes that can be replenished </ListItem>
+              <ListItem>Database of recipes that can be replenished</ListItem>
               <ListItem>
                 Flexible search for desired and unwanted ingredients
               </ListItem>
@@ -139,7 +182,7 @@ const Footer = () => {
               Subscribe to our newsletter
             </Heading>
             <Text mb={4} display={{ base: "none", md: "block" }}>
-              Subscribe up to our newsletter. Be in touch with latest news and
+              Subscribe to our newsletter. Be in touch with the latest news and
               special offers, etc.
             </Text>
 
@@ -152,6 +195,8 @@ const Footer = () => {
                 placeholder="Enter your email address"
                 size="lg"
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </InputGroup>
             <Button
@@ -159,9 +204,21 @@ const Footer = () => {
               color="white"
               size="lg"
               _hover={{ bg: "hsla(76, 52%, 54%, 1)" }}
+              isLoading={loading}
+              onClick={handleSubscribe}
             >
               Subscribe
             </Button>
+            {error && (
+              <Text color="red.500" mt={2}>
+                {error}
+              </Text>
+            )}
+            {success && (
+              <Text color="green.500" mt={2}>
+                {success}
+              </Text>
+            )}
           </Box>
         </Flex>
       </Box>
