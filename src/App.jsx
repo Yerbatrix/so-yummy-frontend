@@ -32,7 +32,7 @@ function App() {
           }
         />
         <Route
-          path="/categories"
+          path="/categories/:category"
           element={
             <PrivateRoute>
               <Categories />
@@ -40,7 +40,7 @@ function App() {
           }
         />
         <Route
-          path="/add"
+          path="/add-recipes"
           element={
             <PrivateRoute>
               <AddRecipes />
@@ -48,7 +48,7 @@ function App() {
           }
         />
         <Route
-          path="/my"
+          path="/my-recipes"
           element={
             <PrivateRoute>
               <MyRecipes />
