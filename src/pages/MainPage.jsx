@@ -27,6 +27,7 @@ const MainPage = () => {
       />
       <Section title="Chicken" images={chickenImages} category="chicken" />
       <Section title="Desserts" images={dessertsImages} category="desserts" />
+      <OtherImagesButton />
     </>
   );
 };
@@ -84,9 +85,18 @@ const HeroSection = () => {
             size="lg"
             mr={{ base: 0, md: 0 }}
             mb={{ base: 2, md: 0 }}
-            width={{ base: "100%", md: "auto" }}
+            width={{ base: "100%", md: "300px" }}
+            borderRadius="24px 44px"
           />
-          <Button colorScheme="teal" size="lg">
+          <Button
+            backgroundColor="hsla(218, 11%, 15%, 1)"
+            width={{ base: "100%", md: "200px" }}
+            size="lg"
+            borderRadius="24px 44px"
+            color="white"
+            ml="-30px"
+            _hover={{ bg: "hsla(76, 52%, 54%, 1)" }}
+          >
             Search
           </Button>
         </Flex>
@@ -199,7 +209,7 @@ const Section = ({ title, images, category }) => {
         <Box textAlign="right" mt={4}>
           <Button
             as={RouterLink}
-            to={`/categories/${title.toLowerCase()}`}
+            to={`/categories/${category}`}
             variant="solid"
             bg="hsla(76, 52%, 44%, 1)"
             color="white"
@@ -210,6 +220,26 @@ const Section = ({ title, images, category }) => {
           </Button>
         </Box>
       </Box>
+    </Box>
+  );
+};
+
+const OtherImagesButton = () => {
+  return (
+    <Box textAlign="center" mt={8} marginBottom="70px">
+      <Button
+        as={RouterLink}
+        to={`/categories/beef`}
+        bg="transparent"
+        border="1px solid hsla(76, 52%, 54%, 1)"
+        color="black"
+        size="lg"
+        _hover={{ bg: "hsla(76, 52%, 54%, 1)" }}
+        borderRadius="24px 44px"
+        width="300px"
+      >
+        Other images
+      </Button>
     </Box>
   );
 };
