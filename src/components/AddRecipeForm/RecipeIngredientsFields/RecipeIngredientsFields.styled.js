@@ -96,8 +96,8 @@ export const IngrNumber = styled.p`
 export const IngrItem = styled.li`
   width: 343px;
   display: flex;
-  align-items: center;
-  margin: auto;
+  max-height: 59px;
+  margin-bottom: 30px;
 
   :not(:last-child) {
     margin-bottom: 18px;
@@ -123,7 +123,7 @@ export const IngrInputWrap = styled.div`
 export const IngrInput = styled.input`
   width: 194px;
   height: 53px;
-  margin-right: 14px;
+  // margin-right: 14px;
   padding: 16px;
   background-color: rgba(217, 217, 217, 0.25);
   border-radius: 6px;
@@ -222,6 +222,8 @@ export const IngrUnitSelect = styled.div`
     width: 55px;
     height: 59px;
     background-position: 28px 22px;
+    align-items: baseline;
+    margin-left : 0px;
   }
 
   svg {

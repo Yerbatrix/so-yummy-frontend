@@ -3,7 +3,7 @@ import React, { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addOwnRecipe } from "../../redux/recipes/operations";
-import { selectError, selectLoading } from "../../redux/recipes/selectors";
+import { selectLoading } from "../../redux/recipes/selectors";
 import {
   AddRecipeButton,
   AddRecipeFormStyles,
@@ -24,10 +24,10 @@ const AddRecipeForm = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [preparation, setPreparation] = useState("");
-
   const [errors, setErrors] = useState({});
-  const updateErrors = (value) => {
-    setErrors((prevState) => ({ ...prevState, [value]: "" }));
+
+  const updateErrors = (field) => {
+    setErrors((prevState) => ({ ...prevState, [field]: "" }));
   };
 
   const onInputImageSet = (event) => {
@@ -62,9 +62,11 @@ const AddRecipeForm = () => {
 
   const decrementIngredientsList = () => {
     const lastItem = ingredients[ingredients.length - 1];
-    setIngredients((prevState) =>
-      prevState.filter((item) => item.id !== lastItem.id)
-    );
+    if (lastItem) {
+      setIngredients((prevState) =>
+        prevState.filter((item) => item.id !== lastItem.id)
+      );
+    }
   };
 
   const deleteIngredients = (itemId) => {
@@ -98,7 +100,7 @@ const AddRecipeForm = () => {
       ingredients.map((ingredient) => {
         const { id, unitValue, unitNumber } = ingredient;
         const measure = `${unitNumber} ${unitValue}`;
-        return { measure: measure, id: id };
+        return { measure, id };
       }),
     [ingredients]
   );
@@ -125,36 +127,39 @@ const AddRecipeForm = () => {
   formData.append("instructions", preparation);
 
   const dispatch = useDispatch();
-  const error = useSelector(selectError);
   const isLoad = useSelector(selectLoading);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    addRecipeSchema
-      .validate(initialValues, { abortEarly: false })
-      .then(() => {
-        dispatch(addOwnRecipe(formData))
-          .unwrap()
-          .then(() => {
-            navigate("/my", { replace: true });
-            toast.success("Your recipe has been successfully added");
-          })
-          .catch((error) => {
-            toast.error("Something went wrong... Please, try again");
-          });
-      })
-      .catch((err) => {
-        const errors = err.inner.reduce(
-          (acc, curr) => ({ ...acc, [curr.path]: curr.message }),
-          {}
-        );
-        setErrors(errors);
-      });
+
+    try {
+      // Walidacja formularza
+      await addRecipeSchema.validateAsync(initialValues, { abortEarly: false });
+
+      // Dodawanie przepisu
+      await dispatch(addOwnRecipe(formData)).unwrap();
+
+      // Przekierowanie po udanym dodaniu
+      navigate("/my", { replace: true });
+    } catch (err) {
+      // Obsługa błędów walidacji
+      if (err.isJoi) {
+        const validationErrors = err.details.reduce((acc, curr) => {
+          acc[curr.path[0]] = curr.message;
+          return acc;
+        }, {});
+        setErrors(validationErrors);
+      } else {
+        console.error("Something went wrong... Please, try again", err);
+        setErrors({ general: "Something went wrong... Please, try again" });
+      }
+    }
   };
 
   return (
     <AddRecipeSection>
       <AddRecipeFormStyles onSubmit={handleSubmit}>
+        {errors.general && <p style={{ color: "red" }}>{errors.general}</p>}
         <RecipeDescriptionFields
           title={title}
           description={description}
@@ -182,7 +187,9 @@ const AddRecipeForm = () => {
           preparation={preparation}
           errors={errors}
         />
-        <AddRecipeButton type="submit">Add</AddRecipeButton>
+        <AddRecipeButton type="submit" disabled={isLoad}>
+          {isLoad ? "Adding..." : "Add"}
+        </AddRecipeButton>
       </AddRecipeFormStyles>
     </AddRecipeSection>
   );
