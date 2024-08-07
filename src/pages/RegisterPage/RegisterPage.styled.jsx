@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { devices } from "../../const/breakpoints";
-import desktop from "../../images/register/signin-background-desktop.svg";
-import mobile from "../../images/register/signin-background-mobile.svg";
-import tablet from "../../images/register/signin-background-tablet.svg";
+import desktop from "../../images/register/background-desktop.png";
+import mobile from "../../images/register/background-mobile.png";
+import tablet from "../../images/register/background-tablet.png";
 export const Section = styled.section`
   padding: 87px 20px 118px 20px;
   width: 100%;
@@ -21,10 +21,12 @@ export const Section = styled.section`
     min-height: 0;
     background-image: url(${tablet});
   }
+
   @media only screen and ${devices.desktopMini} {
     padding: 0;
-    background-size: 100%;
+    background-image: url(${desktop});
   }
+
   @media only screen and ${devices.desktop} {
     padding: 0;
     background-image: url(${desktop});

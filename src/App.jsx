@@ -11,6 +11,7 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import ShoppingListPage from "./pages/ShoppingListPage/ShoppingListPage";
 import SigninPage from "./pages/SignInPage/SigninPage";
 import WelcomePage from "./pages/WelcomePage";
+import SearchPage from "./pages/SearchPage/SearchPage";
 
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/" element={<WelcomePage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/signin" element={<SigninPage />} />
+
         <Route
           path="/main"
           element={
@@ -30,7 +32,7 @@ function App() {
           }
         />
         <Route
-          path="/categories"
+          path="/categories/:category"
           element={
             <PrivateRoute>
               <Categories />
@@ -38,7 +40,7 @@ function App() {
           }
         />
         <Route
-          path="/add"
+          path="/add-recipes"
           element={
             <PrivateRoute>
               <AddRecipes />
@@ -46,7 +48,7 @@ function App() {
           }
         />
         <Route
-          path="/my"
+          path="/my-recipes"
           element={
             <PrivateRoute>
               <MyRecipes />
@@ -66,6 +68,14 @@ function App() {
           element={
             <PrivateRoute>
               <ShoppingListPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/search"
+          element={
+            <PrivateRoute>
+              <SearchPage />
             </PrivateRoute>
           }
         />

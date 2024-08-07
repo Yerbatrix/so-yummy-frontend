@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCategoryList } from "../../../redux/categories/operations";
 import { selectCategoryList } from "../../../redux/categories/selectors";
 import {
+  DescrCategoryItem,
   DescrCategoryList,
   DescrError,
   DescrFileInput,
@@ -130,12 +131,12 @@ const RecipeDescriptionFields = ({
           {categoryIsActive && (
             <DescrCategoryList>
               {categoriesList.map((item, index) => (
-                <CDescrategoryItem
+                <DescrCategoryItem
                   key={index}
-                  onClick={() => setCategory(item)}
+                  onClick={() => setCategory(item.title)}
                 >
-                  {item}
-                </CDescrategoryItem>
+                  {item.title}
+                </DescrCategoryItem>
               ))}
             </DescrCategoryList>
           )}
