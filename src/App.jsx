@@ -8,7 +8,7 @@ import Favorites from "./pages/Favorites/Favorites";
 import MainPage from "./pages/MainPage";
 import MyRecipes from "./pages/MyRecipes";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
-import ShoppingList from "./pages/ShoppingList";
+import ShoppingListPage from "./pages/ShoppingListPage/ShoppingListPage";
 import SigninPage from "./pages/SignInPage/SigninPage";
 import WelcomePage from "./pages/WelcomePage";
 import SearchPage from "./pages/SearchPage/SearchPage";
@@ -67,7 +67,7 @@ function App() {
           path="/shopping-list"
           element={
             <PrivateRoute>
-              <ShoppingList />
+              <ShoppingListPage />
             </PrivateRoute>
           }
         />

@@ -3,8 +3,8 @@ import { categoriesReducer } from "../categories/slice";
 import { ingredientsReducer } from "../ingredients/slice";
 import { popularRecipesReducer } from "../poplarRecipes/slice";
 import { addOwnRecipeReducer } from "../recipes/slice";
+import { shoppingListReducer } from "../shoppingList/slice";
 import { searchReducer } from "../search/slice";
-
 import authReducer from "./authSlice";
 import userReducer from "./userSlice";
 
@@ -15,6 +15,7 @@ const rootReducer = combineReducers({
   categories: categoriesReducer,
   popularRecipe: popularRecipesReducer,
   ingredients: ingredientsReducer,
+  shoppingList: shoppingListReducer,
   search: searchReducer
 });
 
