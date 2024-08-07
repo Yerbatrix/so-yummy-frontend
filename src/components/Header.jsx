@@ -110,6 +110,7 @@ const Header = () => {
           display={{ base: "none", md: "flex" }}
           align="center"
           justify="center"
+          fontWeight="500"
         >
           {[
             "main",
@@ -127,6 +128,7 @@ const Header = () => {
                 textDecoration: "none",
                 color: isActive ? "hsla(76, 52%, 44%, 1)" : "inherit",
                 backgroundColor: isActive ? "transparent" : "transparent",
+                fontWeight: "500",
               })}
             >
               {path.charAt(0).toUpperCase() + path.slice(1).replace("-", " ")}
@@ -234,10 +236,15 @@ const Header = () => {
                     key={path}
                     mb={2}
                     onClick={onDrawerClose}
-                    _hover={{ textDecoration: "none" }}
-                    _activeLink={{ color: "teal.500" }}
+                    color="hsla(218, 11%, 15%, 1)"
+                    _hover={{
+                      textDecoration: "none",
+                      color: "hsla(76, 52%, 44%, 1)",
+                    }}
+                    _activeLink={{ color: "hsla(76, 52%, 44%, 1)" }}
                     width="100%"
                     textAlign="center"
+                    fontWeight="600"
                   >
                     {path.charAt(0).toUpperCase() +
                       path.slice(1).replace("-", " ")}
@@ -245,6 +252,24 @@ const Header = () => {
                 ))}
                 <Box mt="auto" width="100%">
                   <Switch isFullWidth />
+                </Box>
+                <Box
+                  position="absolute"
+                  width={{ base: "750px", md: "876px" }}
+                  height="944px"
+                  top={{ base: "-100px", md: "-700px" }}
+                  left={{ base: "-430px", md: "-850px", lg: "-1150px" }}
+                  zIndex={-2}
+                  display={{ base: "block", md: "block" }}
+                  transform={{ base: "rotate(50deg)", md: "rotate(140.57deg)" }}
+                >
+                  <Image
+                    src="/images/kisspng-pasta-spinach-dip-english-muffin-breakfast-sandwic-spinach-5abcc32f2ee473 1.png"
+                    alt="Additional Decorative"
+                    width="100%"
+                    height="100%"
+                    objectFit="contain"
+                  />
                 </Box>
               </Flex>
             </DrawerBody>

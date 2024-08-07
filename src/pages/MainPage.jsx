@@ -66,7 +66,7 @@ const HeroSection = () => {
             size="2xl"
             mb={4}
             sx={{
-              fontSize: "100px",
+              fontSize: "5rem",
               fontWeight: 400,
               lineHeight: "100px",
               letterSpacing: "-0.005em",
@@ -77,7 +77,7 @@ const HeroSection = () => {
             </Text>
             Yummy
           </Heading>
-          <Text fontSize="xl" mb={4}>
+          <Text fontSize={{ base: "1rem", md: "1.5rem" }} mb={4}>
             "What to cook?" is not only a recipe app, it is, in fact, your
             cookbook. You can add your own recipes to save them for the future.
           </Text>
@@ -115,8 +115,8 @@ const HeroSection = () => {
         />
         <Box
           position="absolute"
-          top={{ base: "-250px", md: "0px" }}
-          left={{ base: "250px", md: "400px" }}
+          top={{ base: "-250px", md: "0px", lg: "0px" }}
+          left={{ base: "200px", md: "100px", lg: "300px" }}
         >
           <Text
             fontSize="14px"
@@ -175,6 +175,24 @@ const HeroSection = () => {
           left={{ base: "-130px", md: "-87px" }}
           zIndex={-2}
           display={{ base: "block", md: "block" }}
+        >
+          <Image
+            src="/images/kisspng-pasta-spinach-dip-english-muffin-breakfast-sandwic-spinach-5abcc32f2ee473 1.png"
+            alt="Additional Decorative"
+            width="100%"
+            height="100%"
+            objectFit="contain"
+          />
+        </Box>
+        <Box
+          position="absolute"
+          width={{ base: "750px", md: "876px" }}
+          height="944px"
+          top={{ base: "-700px", md: "-700px" }}
+          left={{ base: "-130px", md: "-850px", lg: "-1150px" }}
+          zIndex={-2}
+          display={{ base: "block", md: "block" }}
+          transform={{ base: "rotate(50deg)", md: "rotate(140.57deg)" }}
         >
           <Image
             src="/images/kisspng-pasta-spinach-dip-english-muffin-breakfast-sandwic-spinach-5abcc32f2ee473 1.png"
