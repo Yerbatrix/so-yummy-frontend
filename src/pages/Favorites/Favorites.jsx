@@ -243,8 +243,8 @@ const Favorites = () => {
           <div className="timer-container">
             <p className="prep-time">{recipe.preparationTime}</p>
             <div className="recipe-actions">
-              <button className="btn-see">See recipe</button>
-              <button className="btn-delete">
+              <button className="btn-see-fav">See recipe</button>
+              <button className="btn-delete-fav">
               <picture>
                   <source media="(min-width: 1024px)" srcSet={deleteIconDesktop} />
                   <source media="(min-width: 768px)" srcSet={deleteIconTablet} />
