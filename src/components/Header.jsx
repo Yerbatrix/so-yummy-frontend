@@ -1,6 +1,4 @@
 import { HamburgerIcon } from "@chakra-ui/icons";
-import { NavLink, useNavigate } from "react-router-dom";
-
 import {
   Avatar,
   Box,
@@ -32,9 +30,9 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link as RouterLink } from "react-router-dom";
+import { NavLink, Link as RouterLink, useNavigate } from "react-router-dom";
 import { logout, updateUser } from "../redux/slices/authSlice";
 
 const Header = () => {
@@ -59,6 +57,13 @@ const Header = () => {
   } = useDisclosure();
   const [username, setUsername] = useState(user?.name || "");
   const [avatar, setAvatar] = useState(user?.avatarUrl || "");
+
+  useEffect(() => {
+    if (user) {
+      setUsername(user.name);
+      setAvatar(user.avatarUrl);
+    }
+  }, [user]);
 
   const handleLogout = () => {
     onLogoutConfirmOpen();
@@ -95,7 +100,7 @@ const Header = () => {
     >
       <Flex align="center" justify="space-between">
         <Heading color="hsla(214, 9%, 15%, 1)">
-          <Link as={RouterLink} to="/">
+          <Link as={RouterLink} to="/main">
             <Image src="../../images/logo.svg" alt="Logo" />
           </Link>
         </Heading>
@@ -142,9 +147,10 @@ const Header = () => {
                 alignItems="center"
               >
                 <Avatar size="sm" name={user?.name} src={user?.avatarUrl} />
-                <Text ml={2} fontWeight="bold">
-                  {user?.name}
-                </Text>{" "}
+                <Box ml={2} textAlign="left">
+                  <Text fontWeight="bold">{user?.name}</Text>
+                  <Text fontSize="sm">{user?.email}</Text>
+                </Box>
               </MenuButton>
               <MenuList>
                 <MenuItem onClick={onModalOpen}>
