@@ -13,7 +13,7 @@ import AddRecipes from "./pages/AddRecipePage/AddRecipes";
 import Categories from "./pages/Categories";
 import Favorites from "./pages/Favorites/Favorites";
 import MainPage from "./pages/MainPage";
-import MyRecipes from "./pages/MyRecipes";
+import MyRecipes from "./pages/MyRecipes/MyRecipes";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import ShoppingListPage from "./pages/ShoppingListPage/ShoppingListPage";
 import SigninPage from "./pages/SignInPage/SigninPage";
