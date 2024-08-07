@@ -6,13 +6,16 @@ import {
   FormContainer
 } from "./SearchForm.styled";
 
-const SearchForm = () => {
+const SearchForm = ({ searchType }) => { // Przyjmuj searchType jako props
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    navigate('/search', { state: { searchTerm } });
+    const params = new URLSearchParams();
+    params.set("query", searchTerm);
+    params.set("category", searchType);
+    navigate(`/search?${params.toString()}`); // Przekazuj query i category w URL
   };
 
   return (

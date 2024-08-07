@@ -8,7 +8,7 @@ import {
 const SearchTypeSelector = ({ onTypeChange }) => {
   return (
     <SelectorContainer>
-      <SelectorLabel htmlFor="search-type">Search by:</SelectorLabel>
+      <SelectorLabel htmlFor="search-type">Search by</SelectorLabel>
       <Selector id="search-type" onChange={(e) => onTypeChange(e.target.value)}>
         <option value="title">Title</option>
         <option value="ingredients">Ingredients</option>
