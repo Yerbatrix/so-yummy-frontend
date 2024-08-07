@@ -3,7 +3,7 @@ import React, { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addOwnRecipe } from "../../redux/recipes/operations";
-import { selectError, selectLoading } from "../../redux/recipes/selectors";
+import { selectLoading } from "../../redux/recipes/selectors";
 import {
   AddRecipeButton,
   AddRecipeFormStyles,
@@ -127,36 +127,39 @@ const AddRecipeForm = () => {
   formData.append("instructions", preparation);
 
   const dispatch = useDispatch();
-  const error = useSelector(selectError);
   const isLoad = useSelector(selectLoading);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    addRecipeSchema
-      .validate(initialValues, { abortEarly: false })
-      .then(() => {
-        dispatch(addOwnRecipe(formData))
-          .unwrap()
-          .then(() => {
-            navigate("/my", { replace: true });
-          })
-          .catch(() => {
-            // Możesz dodać tu obsługę błędów, jeśli chcesz
-            console.error("Something went wrong... Please, try again");
-          });
-      })
-      .catch((err) => {
-        const validationErrors = err.inner.reduce(
-          (acc, curr) => ({ ...acc, [curr.path]: curr.message }),
-          {}
-        );
+
+    try {
+      // Walidacja formularza
+      await addRecipeSchema.validateAsync(initialValues, { abortEarly: false });
+
+      // Dodawanie przepisu
+      await dispatch(addOwnRecipe(formData)).unwrap();
+
+      // Przekierowanie po udanym dodaniu
+      navigate("/my", { replace: true });
+    } catch (err) {
+      // Obsługa błędów walidacji
+      if (err.isJoi) {
+        const validationErrors = err.details.reduce((acc, curr) => {
+          acc[curr.path[0]] = curr.message;
+          return acc;
+        }, {});
         setErrors(validationErrors);
-      });
+      } else {
+        console.error("Something went wrong... Please, try again", err);
+        setErrors({ general: "Something went wrong... Please, try again" });
+      }
+    }
   };
 
   return (
     <AddRecipeSection>
       <AddRecipeFormStyles onSubmit={handleSubmit}>
+        {errors.general && <p style={{ color: "red" }}>{errors.general}</p>}
         <RecipeDescriptionFields
           title={title}
           description={description}
