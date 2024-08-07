@@ -217,7 +217,7 @@ h1 {
   transition-property: all;
 }
 
-.btn-delete {
+.btn-delete-fav {
   cursor: pointer;
   padding: 5px 6px;
   background-color: rgba(235, 243, 212, 1);
