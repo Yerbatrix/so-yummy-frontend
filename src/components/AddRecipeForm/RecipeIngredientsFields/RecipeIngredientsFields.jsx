@@ -112,13 +112,13 @@ const RecipeIngredientsFields = ({
     });
 
     setFilteredIngredients(
-      ingredientsList.filter((item) =>
-        item.name.toLowerCase().includes(value.toLowerCase())
+      ingredientsList.filter(
+        (ttl) =>
+          ttl && ttl.ttl && ttl.ttl.toLowerCase().includes(value.toLowerCase())
       )
     );
 
     updateIngredient(index, value, id);
-
     updateErrors([`ingredients[${index}].name`]);
   };
 
@@ -166,12 +166,12 @@ const RecipeIngredientsFields = ({
                     <IngrList>
                       {filteredIngredients.map((item) => (
                         <IngrItem
-                          key={item.name}
+                          key={item._id}
                           onClick={() =>
-                            setIngredient(index, item.name, item._id)
+                            setIngredient(index, item.ttl, item._id)
                           }
                         >
-                          {item.name}
+                          {item.ttl}
                         </IngrItem>
                       ))}
                     </IngrList>

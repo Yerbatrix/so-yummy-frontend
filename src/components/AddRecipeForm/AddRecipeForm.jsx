@@ -24,10 +24,10 @@ const AddRecipeForm = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [preparation, setPreparation] = useState("");
-
   const [errors, setErrors] = useState({});
-  const updateErrors = (value) => {
-    setErrors((prevState) => ({ ...prevState, [value]: "" }));
+
+  const updateErrors = (field) => {
+    setErrors((prevState) => ({ ...prevState, [field]: "" }));
   };
 
   const onInputImageSet = (event) => {
@@ -62,9 +62,11 @@ const AddRecipeForm = () => {
 
   const decrementIngredientsList = () => {
     const lastItem = ingredients[ingredients.length - 1];
-    setIngredients((prevState) =>
-      prevState.filter((item) => item.id !== lastItem.id)
-    );
+    if (lastItem) {
+      setIngredients((prevState) =>
+        prevState.filter((item) => item.id !== lastItem.id)
+      );
+    }
   };
 
   const deleteIngredients = (itemId) => {
@@ -98,7 +100,7 @@ const AddRecipeForm = () => {
       ingredients.map((ingredient) => {
         const { id, unitValue, unitNumber } = ingredient;
         const measure = `${unitNumber} ${unitValue}`;
-        return { measure: measure, id: id };
+        return { measure, id };
       }),
     [ingredients]
   );
@@ -137,18 +139,18 @@ const AddRecipeForm = () => {
           .unwrap()
           .then(() => {
             navigate("/my", { replace: true });
-            toast.success("Your recipe has been successfully added");
           })
-          .catch((error) => {
-            toast.error("Something went wrong... Please, try again");
+          .catch(() => {
+            // Możesz dodać tu obsługę błędów, jeśli chcesz
+            console.error("Something went wrong... Please, try again");
           });
       })
       .catch((err) => {
-        const errors = err.inner.reduce(
+        const validationErrors = err.inner.reduce(
           (acc, curr) => ({ ...acc, [curr.path]: curr.message }),
           {}
         );
-        setErrors(errors);
+        setErrors(validationErrors);
       });
   };
 
@@ -182,7 +184,9 @@ const AddRecipeForm = () => {
           preparation={preparation}
           errors={errors}
         />
-        <AddRecipeButton type="submit">Add</AddRecipeButton>
+        <AddRecipeButton type="submit" disabled={isLoad}>
+          {isLoad ? "Adding..." : "Add"}
+        </AddRecipeButton>
       </AddRecipeFormStyles>
     </AddRecipeSection>
   );
