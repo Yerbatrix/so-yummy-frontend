@@ -10,7 +10,6 @@ import { checkAuth } from "./redux/slices/authSlice";
 const container = document.getElementById("root");
 const root = createRoot(container);
 
-// Dispatch checkAuth to update the state with the token from localStorage
 store.dispatch(checkAuth());
 
 root.render(
