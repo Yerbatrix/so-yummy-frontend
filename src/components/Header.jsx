@@ -1,6 +1,4 @@
 import { HamburgerIcon } from "@chakra-ui/icons";
-import { NavLink, useNavigate } from "react-router-dom";
-
 import {
   Avatar,
   Box,
@@ -32,9 +30,9 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link as RouterLink } from "react-router-dom";
+import { NavLink, Link as RouterLink, useNavigate } from "react-router-dom";
 import { logout, updateUser } from "../redux/slices/authSlice";
 
 const Header = () => {
@@ -59,6 +57,13 @@ const Header = () => {
   } = useDisclosure();
   const [username, setUsername] = useState(user?.name || "");
   const [avatar, setAvatar] = useState(user?.avatarUrl || "");
+
+  useEffect(() => {
+    if (user) {
+      setUsername(user.name);
+      setAvatar(user.avatarUrl);
+    }
+  }, [user]);
 
   const handleLogout = () => {
     onLogoutConfirmOpen();
@@ -95,7 +100,7 @@ const Header = () => {
     >
       <Flex align="center" justify="space-between">
         <Heading color="hsla(214, 9%, 15%, 1)">
-          <Link as={RouterLink} to="/">
+          <Link as={RouterLink} to="/main">
             <Image src="../../images/logo.svg" alt="Logo" />
           </Link>
         </Heading>
@@ -105,6 +110,7 @@ const Header = () => {
           display={{ base: "none", md: "flex" }}
           align="center"
           justify="center"
+          fontWeight="500"
         >
           {[
             "main",
@@ -122,6 +128,7 @@ const Header = () => {
                 textDecoration: "none",
                 color: isActive ? "hsla(76, 52%, 44%, 1)" : "inherit",
                 backgroundColor: isActive ? "transparent" : "transparent",
+                fontWeight: "500",
               })}
             >
               {path.charAt(0).toUpperCase() + path.slice(1).replace("-", " ")}
@@ -142,9 +149,10 @@ const Header = () => {
                 alignItems="center"
               >
                 <Avatar size="sm" name={user?.name} src={user?.avatarUrl} />
-                <Text ml={2} fontWeight="bold">
-                  {user?.name}
-                </Text>{" "}
+                <Box ml={2} textAlign="left">
+                  <Text fontWeight="bold">{user?.name}</Text>
+                  <Text fontSize="sm">{user?.email}</Text>
+                </Box>
               </MenuButton>
               <MenuList>
                 <MenuItem onClick={onModalOpen}>
@@ -228,10 +236,15 @@ const Header = () => {
                     key={path}
                     mb={2}
                     onClick={onDrawerClose}
-                    _hover={{ textDecoration: "none" }}
-                    _activeLink={{ color: "teal.500" }}
+                    color="hsla(218, 11%, 15%, 1)"
+                    _hover={{
+                      textDecoration: "none",
+                      color: "hsla(76, 52%, 44%, 1)",
+                    }}
+                    _activeLink={{ color: "hsla(76, 52%, 44%, 1)" }}
                     width="100%"
                     textAlign="center"
+                    fontWeight="600"
                   >
                     {path.charAt(0).toUpperCase() +
                       path.slice(1).replace("-", " ")}
@@ -239,6 +252,24 @@ const Header = () => {
                 ))}
                 <Box mt="auto" width="100%">
                   <Switch isFullWidth />
+                </Box>
+                <Box
+                  position="absolute"
+                  width={{ base: "750px", md: "876px" }}
+                  height="944px"
+                  top={{ base: "-100px", md: "-700px" }}
+                  left={{ base: "-430px", md: "-850px", lg: "-1150px" }}
+                  zIndex={-2}
+                  display={{ base: "block", md: "block" }}
+                  transform={{ base: "rotate(50deg)", md: "rotate(140.57deg)" }}
+                >
+                  <Image
+                    src="/images/kisspng-pasta-spinach-dip-english-muffin-breakfast-sandwic-spinach-5abcc32f2ee473 1.png"
+                    alt="Additional Decorative"
+                    width="100%"
+                    height="100%"
+                    objectFit="contain"
+                  />
                 </Box>
               </Flex>
             </DrawerBody>

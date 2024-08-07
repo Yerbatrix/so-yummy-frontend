@@ -124,8 +124,8 @@ const Footer = () => {
                 </Link>
               </ListItem>
               <ListItem>
-                <Link as={RouterLink} to="/favorite">
-                  Favorite
+                <Link as={RouterLink} to="/favorites">
+                  Favorites
                 </Link>
               </ListItem>
               <ListItem>
