@@ -1,6 +1,13 @@
 import { lazy } from "react";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-
+import {
+  Route,
+  BrowserRouter as Router,
+  Routes,
+  Navigate,
+} from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { checkAuth } from "./redux/slices/authSlice";
+import React, { useEffect } from "react";
 import PrivateRoute from "./components/PrivateRoute";
 import AddRecipes from "./pages/AddRecipePage/AddRecipes";
 import Categories from "./pages/Categories";
@@ -16,10 +23,25 @@ import SearchPage from "./pages/SearchPage/SearchPage";
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 
 function App() {
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
+  useEffect(() => {
+    dispatch(checkAuth());
+  }, [dispatch]);
   return (
     <Router basename="/">
       <Routes>
-        <Route path="/" element={<WelcomePage />} />
+        <Route
+          path="/"
+          element={
+            isAuthenticated ? (
+              <Navigate to="/main" />
+            ) : (
+              <Navigate to="/signin" />
+            )
+          }
+        />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/signin" element={<SigninPage />} />
 

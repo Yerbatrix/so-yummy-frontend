@@ -1,10 +1,11 @@
 import { useState } from "react";
-
-import axios from "axios";
+import axios from "../../redux/axiosConfig";
 import { FaUser } from "react-icons/fa";
 import { MdOutlineEmail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/slices/authSlice";
 import {
   Button,
   Container,
@@ -31,6 +32,7 @@ const AuthFormRegister = () => {
   const [passwordBorderColor, setPasswordBorderColor] = useState("#F6C23E");
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setFormState({
@@ -41,23 +43,26 @@ const AuthFormRegister = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Walidacja formularza
     if (!formState.name || !formState.email || !formState.password) {
       setErrors({ message: "Please fill in all fields" });
       return;
     }
 
     try {
-      await axios.post(
+      const response = await axios.post(
         "https://t4-soyummy-api-2752d40c2586.herokuapp.com/api/auth/register",
         formState
       );
-      // Przekierowanie na stronę logowania po udanej rejestracji
-      navigate("/signin");
+
+      const { token, user } = response.data;
+      localStorage.setItem("token", token);
+      dispatch(login({ token, user }));
+      navigate("/main");
     } catch (error) {
       setErrors({ message: error.response.data.msg });
     }
   };
+
   const verifyName = (event) => {
     const { value } = event.currentTarget;
     const nameRegex = /^[a-zA-Z\s]+$/;
@@ -69,6 +74,7 @@ const AuthFormRegister = () => {
       setNameBorderColor("green");
     }
   };
+
   const verifyEmail = (event) => {
     const { value } = event.currentTarget;
     if (value.length === 0 || !value.includes("@")) {
@@ -95,6 +101,7 @@ const AuthFormRegister = () => {
       setPasswordBorderColor("green");
     }
   };
+
   return (
     <Container>
       <Form autoComplete="off" onSubmit={handleSubmit}>
