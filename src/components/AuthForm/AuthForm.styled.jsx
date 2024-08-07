@@ -106,8 +106,8 @@ export const List = styled.li`
 export const Input = styled.input`
   width: 100%;
   padding: 12px 14px 12px 40px;
-  background-color: transparent;
-  border: 1px solid #fafafa;
+  background-color: #2a2c36;
+  border: 2px solid ${({ isValid }) => (isValid ? "green" : "red")};
   border-radius: 6px;
   color: #fafafa;
   font-size: 14px;
@@ -119,34 +119,10 @@ export const Input = styled.input`
   transition: 250ms cubic-bezier(0.17, 0.67, 0.83, 0.67);
   transition-property: border, opacity;
 
-  &::placeholder {
-    color: #fafafa;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: -0.28px;
-    opacity: 0.8;
-    transition: 250ms cubic-bezier(0.17, 0.67, 0.83, 0.67);
-    transition-property: opacity;
-  }
-
-  &:is(:focus) {
-    border: 1px solid #fafafa;
-    opacity: 1;
-  }
-
-  &:is(:focus)::placeholder {
-    opacity: 1;
-  }
-
   @media only screen and ${devices.tablet} {
     padding: 16px 18px 16px 50px;
     font-size: 18px;
     letter-spacing: -0.36px;
-
-    &::placeholder {
-      font-size: 18px;
-    }
   }
 `;
 
@@ -195,7 +171,7 @@ export const Icon = styled(RiLockPasswordLine)`
   position: absolute;
   left: 14px;
   top: 50%;
-
+  color: 2px solid ${({ isValid }) => (isValid ? "green" : "red")};
   transform: translateY(-50%);
   opacity: 0.8;
   stroke: #fafafa;
