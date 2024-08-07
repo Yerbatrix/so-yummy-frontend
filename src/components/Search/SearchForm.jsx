@@ -1,12 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { 
-  SearchButton,
-  SearchInput,
-  FormContainer
-} from "./SearchForm.styled";
+import { SearchButton, SearchInput, FormContainer } from "./SearchForm.styled";
 
-const SearchForm = ({ searchType }) => { // Przyjmuj searchType jako props
+const SearchForm = ({ searchType = "title", onSearch }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
@@ -15,7 +11,7 @@ const SearchForm = ({ searchType }) => { // Przyjmuj searchType jako props
     const params = new URLSearchParams();
     params.set("query", searchTerm);
     params.set("category", searchType);
-    navigate(`/search?${params.toString()}`); // Przekazuj query i category w URL
+    navigate(`/search?${params.toString()}`);
   };
 
   return (
@@ -28,9 +24,7 @@ const SearchForm = ({ searchType }) => { // Przyjmuj searchType jako props
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <SearchButton type="submit">
-        Search
-      </SearchButton>
+      <SearchButton type="submit">Search</SearchButton>
     </FormContainer>
   );
 };

@@ -3,12 +3,13 @@ import { useEffect, useState } from "react";
 import { SearchPageTitle, SearchPageContainer } from "./SearchPage.styled";
 import SearchForm from "../../components/Search/SearchForm";
 import SearchTypeSelector from "../../components/Search/SearchTypeSelector";
+import { ResultsContainer, ResultItem, NoResults } from "./SearchPage.styled";
 
 const SearchPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState("");
-  const [searchType, setSearchType] = useState("title"); // Domyślny typ to "title"
+  const [searchType, setSearchType] = useState("title");
   const [results, setResults] = useState([]);
   const [error, setError] = useState(null);
 
@@ -17,11 +18,10 @@ const SearchPage = () => {
     const query = params.get("query");
     const type = params.get("category");
 
+    setSearchType(type || "title");
+
     if (query) {
       setSearchValue(query);
-    }
-    if (type) {
-      setSearchType(type);
     }
   }, [location.search]);
 
@@ -29,22 +29,21 @@ const SearchPage = () => {
     if (searchValue && searchType) {
       fetchResults(searchValue, searchType);
     } else {
-      // Jeśli brak wartości w query, wyświetl "No results found"
       setResults([]);
     }
   }, [searchValue, searchType]);
 
   const handleTypeChange = (type) => {
     setSearchType(type);
-    const params = new URLSearchParams(location.search);
+    const params = new URLSearchParams();
     params.set("category", type);
     params.set("query", searchValue);
-    navigate(`${location.pathname}?${params.toString()}`);
+    navigate(`/search?${params.toString()}`);
   };
 
   const fetchResults = async (query, type) => {
-    if (!query) {
-      setResults([]); // Ustaw puste wyniki, jeśli brak query
+    if (!query || !type) {
+      setResults([]);
       return;
     }
 
@@ -73,62 +72,51 @@ const SearchPage = () => {
       }
 
       const data = await response.json();
-      const resultsData = type === "title" ? data : data.data.recipes; // Zaktualizowana struktura
+      const resultsData = type === "title" ? data : data.data.recipes;
       setResults(resultsData);
     } catch (error) {
       setError(error.message);
-      setResults([]); // Ustaw puste wyniki w przypadku błędu
+      setResults([]);
       console.error('There was a problem with the fetch operation:', error);
     }
   };
 
   const handleSearch = (value) => {
     setSearchValue(value);
-    const params = new URLSearchParams(location.search);
+    const params = new URLSearchParams();
     params.set("query", value);
     params.set("category", searchType);
-    navigate(`${location.pathname}?${params.toString()}`);
+    navigate(`/search?${params.toString()}`);
   };
 
   return (
     <SearchPageContainer>
       <SearchPageTitle>Search</SearchPageTitle>
-      <SearchForm onSearch={handleSearch} />
+      <SearchForm searchType={searchType} onSearch={handleSearch} />
       <SearchTypeSelector onTypeChange={handleTypeChange} />
-      <div>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px' }}>
-          {results.length > 0 ? (
-            results.map((item, index) => (
-              <div key={index} style={{ width: 'calc(25% - 16px)' }}>
-                <img
-                  src={item.thumb || '/images/placeholder.png'} // Zakładając, że 'thumb' jest URL do obrazu
-                  alt={item.title || 'Recipe'}
-                  style={{ width: '100%', height: 'auto', borderRadius: '8px' }}
-                />
+      <ResultsContainer>
+        {results.length > 0 ? (
+          results.map((item, index) => (
+            <ResultItem key={index}>
+              <img
+                src={item.thumb || '/images/placeholder.png'}
+                alt={item.title || 'Recipe'}
+              />
+              <div className="title-container">
                 <p>{item.title || 'No Title'}</p>
               </div>
-            ))
-          ) : (
-            <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              textAlign: 'center',
-              width: '100%',
-              padding: '20px',
-              boxSizing: 'border-box'
-            }}>
-              <img
-                src="/images/vegetables.png" // Ścieżka do lokalnego obrazka
-                alt="No results"
-                style={{ width: '50%', height: 'auto', borderRadius: '8px' }}
-              />
-              <p>Try looking for something else...</p>
-            </div>
-          )}
-        </div>
-      </div>
+            </ResultItem>
+          ))
+        ) : (
+          <NoResults>
+            <img
+              src="/images/vegetables.png"
+              alt="No results"
+            />
+            <p>Try looking for something else...</p>
+          </NoResults>
+        )}
+      </ResultsContainer>
     </SearchPageContainer>
   );
 };
