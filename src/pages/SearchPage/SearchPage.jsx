@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 import { SearchPageTitle, SearchPageContainer } from "./SearchPage.styled";
 import SearchForm from "../../components/Search/SearchForm";
 import SearchTypeSelector from "../../components/Search/SearchTypeSelector";
-import { ResultsContainer, ResultItem, NoResults } from "./SearchPage.styled"; // Import nowego styled componentu
+import { ResultsContainer, ResultItem, NoResults } from "./SearchPage.styled";
 
 const SearchPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState("");
-  const [searchType, setSearchType] = useState("title"); // Domyślnie ustawiamy jako "title"
+  const [searchType, setSearchType] = useState("title");
   const [results, setResults] = useState([]);
   const [error, setError] = useState(null);
 
@@ -18,7 +18,6 @@ const SearchPage = () => {
     const query = params.get("query");
     const type = params.get("category");
 
-    // Ustawienie searchType na wartość z URL lub domyślną wartość "title"
     setSearchType(type || "title");
 
     if (query) {
