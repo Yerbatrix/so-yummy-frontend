@@ -31,7 +31,7 @@ export const SearchPageContainer = styled.div`
     padding: 0 32px;
     width: 768px;
   }
-  @media (min-width: 1440px) {
+  @media (min-width: 1px) {
     padding: 0 100px;
     width: 1440px;
   }
