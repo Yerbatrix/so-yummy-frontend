@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getIngredientsList } from "../../../redux/ingredients/operations";
 import { selectIngredientsList } from "../../../redux/ingredients/selectors";
@@ -40,77 +40,66 @@ const RecipeIngredientsFields = ({
   updateErrors,
 }) => {
   const unitValues = ["tbs", "tsp", "kg", "g"];
-  const [count, setCount] = useState(1);
-  const [unitIsActive, setUnitIsActive] = useState(
-    new Array(ingredients.length).fill(false)
-  );
+  const dispatch = useDispatch();
+  const ingredientsList = useSelector(selectIngredientsList);
+  const [filteredIngredients, setFilteredIngredients] =
+    useState(ingredientsList);
   const [ingrIsActive, setIngrIsActive] = useState(
     new Array(ingredients.length).fill(false)
   );
-
-  const dispatch = useDispatch();
-  const ingredientsList = useSelector(selectIngredientsList);
+  const [unitIsActive, setUnitIsActive] = useState(
+    new Array(ingredients.length).fill(false)
+  );
+  const listRefs = useRef([]);
 
   useEffect(() => {
     dispatch(getIngredientsList());
   }, [dispatch]);
 
-  const [filteredIngredients, setFilteredIngredients] =
-    useState(ingredientsList);
+  useEffect(() => {
+    setFilteredIngredients(ingredientsList);
+  }, [ingredientsList]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        listRefs.current &&
+        !listRefs.current.some((ref) => ref && ref.contains(event.target))
+      ) {
+        setIngrIsActive(new Array(ingredients.length).fill(false));
+        setUnitIsActive(new Array(ingredients.length).fill(false));
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ingredients.length]);
 
   const incrementCount = () => {
     incrementIngrList();
-    setCount((prevState) => prevState + 1);
   };
 
   const decrementCount = () => {
-    if (count === 0) {
-      return;
-    }
     decrementIngrList();
-    setCount((prevState) => prevState - 1);
   };
 
   const deleteItem = (itemId, index) => {
     deleteIngr(itemId);
-    setCount((prevState) => prevState - 1);
-
-    setIngrIsActive((prevState) => {
-      const newState = [...prevState];
-      newState[index] = false;
-      return newState;
-    });
-  };
-
-  const toggleUnit = (index) => {
-    setUnitIsActive((prevState) => {
-      const newState = [...prevState];
-      newState[index] = !newState[index];
-      return newState;
-    });
   };
 
   const setUnit = (index, value) => {
-    setUnitIsActive((prevState) => {
-      const newState = [...prevState];
-      newState[index] = !newState[index];
-      return newState;
-    });
     updateIngr(index, "unitValue", value);
+    toggleUnit(index);
   };
 
   const unitNumberChange = (index, value) => {
     updateIngr(index, "unitNumber", value);
-    updateErrors([`ingredients[${index}].unitNumber`]);
+    updateErrors(`ingredients[${index}].unitNumber`);
   };
 
   const onInputChange = (index, value, id) => {
-    setIngrIsActive((prevState) => {
-      const newState = [...prevState];
-      newState[index] = true;
-      return newState;
-    });
-
     setFilteredIngredients(
       ingredientsList.filter(
         (ttl) =>
@@ -119,7 +108,7 @@ const RecipeIngredientsFields = ({
     );
 
     updateIngredient(index, value, id);
-    updateErrors([`ingredients[${index}].name`]);
+    updateErrors(`ingredients[${index}].name`);
   };
 
   const setIngredient = (index, value, id) => {
@@ -132,6 +121,22 @@ const RecipeIngredientsFields = ({
     });
   };
 
+  const toggleIngredientList = (index) => {
+    setIngrIsActive((prevState) => {
+      const newState = [...prevState];
+      newState[index] = !newState[index];
+      return newState;
+    });
+  };
+
+  const toggleUnit = (index) => {
+    setUnitIsActive((prevState) => {
+      const newState = [...prevState];
+      newState[index] = !newState[index];
+      return newState;
+    });
+  };
+
   return (
     <IngrWrap>
       <IngrCountWrap>
@@ -140,83 +145,78 @@ const RecipeIngredientsFields = ({
           <IngrMinusButton type="button" onClick={decrementCount}>
             <AiOutlineMinus />
           </IngrMinusButton>
-          <IngrNumber>{count}</IngrNumber>
+          <IngrNumber>{ingredients.length}</IngrNumber>
           <IngrPlusButton type="button" onClick={incrementCount}>
             <AiOutlinePlus />
           </IngrPlusButton>
         </IngrCounter>
       </IngrCountWrap>
       <ul>
-        {ingredients.map((item, index) => {
-          return (
-            <IngrItem key={item.id}>
-              <IngrInputWrap>
-                <div>
-                  <IngrInput
-                    autoFocus={true}
-                    value={ingredients[index].name}
-                    onChange={(e) => onInputChange(index, e.target.value)}
-                  />
-                  {errors[`ingredients[${index}].name`] && (
-                    <IngrError>
-                      {errors[`ingredients[${index}].name`]}
-                    </IngrError>
-                  )}
-                  {ingrIsActive[index] && (
-                    <IngrList>
-                      {filteredIngredients.map((item) => (
-                        <IngrItem
-                          key={item._id}
-                          onClick={() =>
-                            setIngredient(index, item.ttl, item._id)
-                          }
-                        >
-                          {item.ttl}
-                        </IngrItem>
-                      ))}
-                    </IngrList>
-                  )}
-                </div>
-                <IngrNumberLabel>
-                  <IngrNumberInput
-                    type="number"
-                    value={item.unitNumber}
-                    onChange={(e) => unitNumberChange(index, e.target.value)}
-                  />
-                  <IngrUnitSelect onClick={() => toggleUnit(index)}>
-                    <IngrSelectText>
-                      {ingredients[index].unitValue}
-                    </IngrSelectText>
-                    <IoIosArrowDown size="18" />
-                  </IngrUnitSelect>
-                  {unitIsActive[index] && (
-                    <IngrUnitList>
-                      {unitValues.map((item) => (
-                        <IngrUnitItem
-                          key={item}
-                          onClick={() => setUnit(index, item)}
-                        >
-                          {item}
-                        </IngrUnitItem>
-                      ))}
-                    </IngrUnitList>
-                  )}
-                  {errors[`ingredients[${index}].unitNumber`] && (
-                    <IngrNumberError>
-                      {errors[`ingredients[${index}].unitNumber`]}
-                    </IngrNumberError>
-                  )}
-                </IngrNumberLabel>
-              </IngrInputWrap>
-              <IngrDeleteButton
-                type="button"
-                onClick={() => deleteItem(item.id, index)}
-              >
-                <VscChromeClose size="20px" />
-              </IngrDeleteButton>
-            </IngrItem>
-          );
-        })}
+        {ingredients.map((item, index) => (
+          <IngrItem key={item.id} ref={(el) => (listRefs.current[index] = el)}>
+            <IngrInputWrap>
+              <div>
+                <IngrInput
+                  autoFocus={true}
+                  value={item.name}
+                  onChange={(e) =>
+                    onInputChange(index, e.target.value, item.id)
+                  }
+                  onFocus={() => toggleIngredientList(index)}
+                />
+                {errors[`ingredients[${index}].name`] && (
+                  <IngrError>{errors[`ingredients[${index}].name`]}</IngrError>
+                )}
+                {ingrIsActive[index] && filteredIngredients.length > 0 && (
+                  <IngrList>
+                    {filteredIngredients.map((ingredient) => (
+                      <IngrItem
+                        key={ingredient._id}
+                        onClick={() =>
+                          setIngredient(index, ingredient.ttl, ingredient._id)
+                        }
+                      >
+                        {ingredient.ttl}
+                      </IngrItem>
+                    ))}
+                  </IngrList>
+                )}
+              </div>
+              <IngrNumberLabel>
+                <IngrNumberInput
+                  type="number"
+                  value={item.unitNumber}
+                  onChange={(e) => unitNumberChange(index, e.target.value)}
+                />
+                <IngrUnitSelect onClick={() => toggleUnit(index)}>
+                  <IngrSelectText>{item.unitValue}</IngrSelectText>
+                  <IoIosArrowDown size="18" />
+                </IngrUnitSelect>
+                {unitIsActive[index] && (
+                  <IngrUnitList>
+                    {unitValues.map((unit) => (
+                      <IngrUnitItem
+                        key={unit}
+                        onClick={() => setUnit(index, unit)}
+                      >
+                        {unit}
+                      </IngrUnitItem>
+                    ))}
+                  </IngrUnitList>
+                  <IngrNumberError>
+                    {errors[`ingredients[${index}].unitNumber`]}
+                  </IngrNumberError>
+                )}
+              </IngrNumberLabel>
+            </IngrInputWrap>
+            <IngrDeleteButton
+              type="button"
+              onClick={() => deleteItem(item.id, index)}
+            >
+              <VscChromeClose size="20px" />
+            </IngrDeleteButton>
+          </IngrItem>
+        ))}
       </ul>
     </IngrWrap>
   );

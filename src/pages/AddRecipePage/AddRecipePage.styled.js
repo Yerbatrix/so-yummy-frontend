@@ -1,16 +1,16 @@
 import styled from "styled-components";
 
 export const AddRecipeSection = styled.section`
-  padding-top: 114px;
+  padding-top: 44px;
   padding-bottom: 100px;
 
   @media screen and (min-width: 1440px) {
-    padding-top: 136px;
+    padding-top: 44px;
     padding-bottom: 200px;
   }
 
   @media screen and (min-width: 1440px) {
-    padding-top: 164px;
+    padding-top: 44px;
   }
 `;
 
