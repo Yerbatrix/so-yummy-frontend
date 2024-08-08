@@ -21,6 +21,7 @@ import WelcomePage from "./pages/WelcomePage";
 import SearchPage from "./pages/SearchPage/SearchPage";
 
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
+const RecipePage = lazy(() => import("./pages/RecipePage/RecipePage"));
 
 function App() {
   const dispatch = useDispatch();
@@ -76,6 +77,14 @@ function App() {
           element={
             <PrivateRoute>
               <Favorites />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="recipes/:recipeId"
+          element={
+            <PrivateRoute>
+              <RecipePage />
             </PrivateRoute>
           }
         />
