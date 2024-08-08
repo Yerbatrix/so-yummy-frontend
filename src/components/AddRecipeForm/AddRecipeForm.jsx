@@ -31,8 +31,16 @@ const AddRecipeForm = () => {
   };
 
   const onInputImageSet = (event) => {
-    setImage(event.target.files[0]);
-    updateErrors("image");
+    const file = event.target.files[0];
+
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      setImage(imageUrl);
+      updateErrors("image");
+    } else {
+      console.error("No file selected");
+      setImage("");
+    }
   };
 
   const onTitleChange = (value) => {
@@ -133,16 +141,25 @@ const AddRecipeForm = () => {
     e.preventDefault();
 
     try {
-      // Walidacja formularza
+      const formData = new FormData();
+      if (image) {
+        formData.append("image", image);
+      } else {
+        setErrors((prev) => ({ ...prev, image: "Image is required" }));
+        return;
+      }
+
+      formData.append("title", title);
+      formData.append("description", description);
+      formData.append("category", category);
+      formData.append("time", cookTime);
+      formData.append("ingredients", JSON.stringify(updatedIngredients));
+      formData.append("instructions", preparation);
+
       await addRecipeSchema.validateAsync(initialValues, { abortEarly: false });
-
-      // Dodawanie przepisu
       await dispatch(addOwnRecipe(formData)).unwrap();
-
-      // Przekierowanie po udanym dodaniu
-      navigate("/my", { replace: true });
+      navigate("/my-recipes", { replace: true });
     } catch (err) {
-      // Obsługa błędów walidacji
       if (err.isJoi) {
         const validationErrors = err.details.reduce((acc, curr) => {
           acc[curr.path[0]] = curr.message;

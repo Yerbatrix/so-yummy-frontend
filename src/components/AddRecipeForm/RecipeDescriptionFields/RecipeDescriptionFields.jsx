@@ -96,7 +96,7 @@ const RecipeDescriptionFields = ({
         {image && (
           <DescrRecipeImage src={image} alt="recipeImage"></DescrRecipeImage>
         )}
-        {errors.image && <Error>{errors.image}</Error>}
+        {errors.image && <p style={{ color: "red" }}>{errors.image}</p>}
       </DescrFileInputWrap>
 
       <DescrInputWrap>

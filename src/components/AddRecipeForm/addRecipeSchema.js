@@ -1,46 +1,23 @@
 import Joi from "joi";
 
 const addRecipeSchema = Joi.object({
-  image: Joi.string().required().messages({
-    "string.empty": "Add picture",
-    "any.required": "Add picture",
-  }),
-  title: Joi.string().required().messages({
-    "string.base": "Write a string",
-    "string.empty": "Enter title",
-    "any.required": "Enter title",
-  }),
-  description: Joi.string().required().messages({
-    "string.base": "Write a string",
-    "string.empty": "Enter about recipe",
-    "any.required": "Enter about recipe",
-  }),
-  cookingTime: Joi.string().allow(""),
-  category: Joi.string().allow(""),
+  image: Joi.string().uri().required().label("Image URL"),
+  title: Joi.string().required().label("Title"),
+  description: Joi.string().required().label("Description"),
+  cookTime: Joi.string().required().label("Cook Time"),
+  category: Joi.string().required().label("Category"),
   ingredients: Joi.array()
     .items(
       Joi.object({
-        unitNumber: Joi.string().required().messages({
-          "string.empty": "Enter number",
-          "any.required": "Enter number",
-        }),
-        name: Joi.string().required().messages({
-          "string.empty": "Enter ingredients",
-          "any.required": "Enter ingredients",
-        }),
-        unitValue: Joi.string().allow(""),
-        id: Joi.string().allow(""),
+        id: Joi.string().required(),
+        unitValue: Joi.string().required(),
+        unitNumber: Joi.string().required(),
+        name: Joi.string().required(),
       })
     )
     .required()
-    .messages({
-      "array.base": "Ingredients is required",
-      "any.required": "Ingredients is required",
-    }),
-  preparation: Joi.string().required().messages({
-    "string.empty": "Enter recipe",
-    "any.required": "Enter recipe",
-  }),
+    .label("Ingredients"),
+  preparation: Joi.string().required().label("Preparation"),
 });
 
 export default addRecipeSchema;
