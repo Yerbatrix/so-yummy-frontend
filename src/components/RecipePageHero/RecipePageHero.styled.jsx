@@ -7,7 +7,7 @@ import rpTab2 from "../../images/RecipePage/recipe_page_tab2.png";
 import rpDesk from "../../images/RecipePage/recipe_page_desk1.png";
 import rpDesk2 from "../../images/RecipePage/recipe_page_desk2.png";
 
-import { ReactComponent as ClockIcon } from "../../images/RecipePage/clock.svg";
+import ClockIcon from "../../images/RecipePage/clock.svg"; // Standardowy import SVG
 
 export const RecipeHeroContainer = styled.div`
   display: flex;
@@ -55,7 +55,8 @@ export const RecipeHeroContainer = styled.div`
     }
   }
 `;
-export const RecipeHeroTitle = styled.title`
+
+export const RecipeHeroTitle = styled.h1`
   display: block;
   text-align: center;
   font-size: 24px;
@@ -127,9 +128,8 @@ export const CookingTime = styled.div`
   }
 `;
 
-export const ClockIconStyled = styled(ClockIcon)`
+export const ClockIconStyled = styled.img.attrs({ src: ClockIcon })`
   margin-right: 5px;
-  stroke: black;
   display: inline-block;
   width: 14px;
   height: 14px;
