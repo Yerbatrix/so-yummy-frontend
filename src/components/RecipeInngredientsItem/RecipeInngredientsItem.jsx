@@ -11,23 +11,21 @@ import Food from "../../images/RecipePage/food.svg";
 
 const RecipeIngredientsItem = ({ image, nameIngredient, weight }) => {
   return (
-    <RecipeItem>
-      <RecipeItemWrapper>
-        <ImageWrapper>
-          <img src={image || Food} alt={nameIngredient} />
-        </ImageWrapper>
-        <TextContainer>
-          <NameIngredient>{nameIngredient}</NameIngredient>
-        </TextContainer>
+    <RecipeItemWrapper>
+      <ImageWrapper>
+        <img src={image || Food} alt={nameIngredient} />
+      </ImageWrapper>
+      <TextContainer>
+        <NameIngredient>{nameIngredient}</NameIngredient>
+      </TextContainer>
 
-        <WeighIngredient>{weight}</WeighIngredient>
-        <Checkbox
-          type="checkbox"
-          // onChange={}
-          // checked={}
-        />
-      </RecipeItemWrapper>
-    </RecipeItem>
+      <WeighIngredient>{weight}</WeighIngredient>
+      <Checkbox
+        type="checkbox"
+        // onChange={}
+        // checked={}
+      />
+    </RecipeItemWrapper>
   );
 };
 
