@@ -203,6 +203,8 @@ const RecipeIngredientsFields = ({
                       </IngrUnitItem>
                     ))}
                   </IngrUnitList>
+                )}
+                {errors[`ingredients[${index}].unitNumber`] && (
                   <IngrNumberError>
                     {errors[`ingredients[${index}].unitNumber`]}
                   </IngrNumberError>
