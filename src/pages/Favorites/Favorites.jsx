@@ -7,6 +7,7 @@ import deleteIconMobile from "../../images/deleteBttn/delete-bttn-mobile.png";
 import deleteIconTablet from "../../images/deleteBttn/delete-bttn-tablet.png";
 import deleteIconDesktop from "../../images/deleteBttn/delete-bttn-desktop.png";
 import sadFace from "../../images/sadFace/sad-face.jpg";
+import noImage from "../../images/noImage/no-image.png";
 
 const Favorites = () => {
   const [recipes, setRecipes] = useState([]);
@@ -47,18 +48,31 @@ const Favorites = () => {
     }
   };
 
+  const handleSeeRecipe = (id) => {
+    window.location.href = `https://soyummy-t4.netlify.app/recipes/${id}`;
+  };
+
   const displayRecipes = recipes
     .slice(currentPage * recipesPerPage, (currentPage + 1) * recipesPerPage)
     .map((recipe) => (
       <div key={recipe._id} className="recipe">
-        <img src={recipe.thumb} alt={recipe.title} className="recipe-image" />
+        <img
+          src={recipe.thumb || noImage}
+          alt={recipe.title}
+          className="recipe-image"
+        />
         <div className="recipe-details">
           <h2>{recipe.title}</h2>
           <p className="recipe-description">{recipe.description}</p>
           <div className="timer-container">
             <p className="prep-time">{recipe.time} min</p>
             <div className="recipe-actions">
-              <button className="btn-see-fav">See recipe</button>
+              <button
+                className="btn-see-fav"
+                onClick={() => handleSeeRecipe(recipe._id)}
+              >
+                See recipe
+              </button>
               <button
                 className="btn-delete-fav"
                 onClick={() => handleDelete(recipe._id)}
