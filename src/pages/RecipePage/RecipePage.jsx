@@ -12,7 +12,7 @@ const recipeObj = {
     "Mix all the ingredients in the Honey Teriyaki Glaze together. Whisk to blend well. Combine the salmon and the Glaze together.\r\n\r\nHeat up a skillet on medium-low heat. Add the oil, Pan-fry the salmon on both sides until it’s completely cooked inside and the glaze thickens.\r\n\r\nGarnish with sesame and serve immediately.",
   description:
     "A Japanese-inspired dish made with salmon fillets, teriyaki sauce, honey, and sesame seeds.",
-  thumb: "https://www.themealdb.com/images/media/meals/xxyupu1468262513.jpg",
+  thumb: "https://www.themealddb.com/images/media/meals/xxyupu1468262513.jpg",
   preview:
     "https://res.cloudinary.com/ddbvbv5sp/image/upload/v1678560401/yspi0frormix0zwglhos.jpg",
   time: "25",
@@ -95,3 +95,4 @@ const RecipePage = () => {
   );
 };
 export default RecipePage;
+
