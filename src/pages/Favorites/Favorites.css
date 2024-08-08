@@ -9,11 +9,11 @@
   display: flex;
 
   @media screen and (min-width: 768px) and (max-width: 1279px) {
-    width: 704px
+    width: 704px;
   }
 
   @media screen and (min-width: 1280px) {
-  width: 1240px ;
+    width: 1240px;
   }
 }
 
@@ -31,7 +31,7 @@ h1 {
   @media screen and (min-width: 1280px) {
     margin-bottom: 100px;
     font-size: 44px;
-    }
+  }
 }
 
 .recipes {
@@ -46,7 +46,7 @@ h1 {
 
   @media screen and (min-width: 1280px) {
     gap: 50px;
-    }
+  }
 }
 
 .recipe {
@@ -67,11 +67,11 @@ h1 {
   }
 
   @media screen and (min-width: 1280px) {
-    width: 1240px ;
+    width: 1240px;
     height: 404px;
     align-items: center;
     padding: 40px;
-    }
+  }
 }
 
 .recipe-image {
@@ -86,24 +86,23 @@ h1 {
   }
 
   @media screen and (min-width: 1280px) {
-    width: 318px ;
+    width: 318px;
     height: 324px;
-    }
+  }
 }
 
 .recipe-details {
   flex-grow: 1;
   padding-left: 15px;
   @media screen and (min-width: 768px) and (max-width: 1279px) {
-     height: 232px;
-     padding-left: 24px;
+    height: 232px;
+    padding-left: 24px;
   }
 
   @media screen and (min-width: 1280px) {
     height: 324px;
     padding-left: 40px;
-    }
-
+  }
 }
 
 .recipe-details h2 {
@@ -113,12 +112,12 @@ h1 {
   font-weight: 500;
 
   @media screen and (min-width: 768px) and (max-width: 1279px) {
-  font-size: 24px;
-  margin-bottom: 28px;
- }
- @media screen and (min-width: 1280px) {
-  font-size: 24px;
-  margin-bottom: 50px;
+    font-size: 24px;
+    margin-bottom: 28px;
+  }
+  @media screen and (min-width: 1280px) {
+    font-size: 24px;
+    margin-bottom: 50px;
   }
 }
 
@@ -143,16 +142,16 @@ h1 {
     height: 73px;
     width: 298px;
     -webkit-line-clamp: 4;
-   }
+  }
 
-   @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1280px) {
     font-size: 18px;
     margin-bottom: 45px;
     line-height: 1.33;
     height: 145px;
     width: 679px;
     -webkit-line-clamp: 6;
-    }
+  }
 }
 
 .prep-time {
@@ -162,11 +161,11 @@ h1 {
 
   @media screen and (min-width: 768px) and (max-width: 1279px) {
     font-size: 14px;
-   }
+  }
 
-   @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1280px) {
     font-size: 14px;
-    }
+  }
 }
 
 .recipe-actions {
@@ -176,12 +175,12 @@ h1 {
   margin-top: 10px;
 
   @media screen and (min-width: 768px) and (max-width: 1279px) {
-  margin: 0px;
-   }
-
-   @media screen and (min-width: 1280px) {
     margin: 0px;
-    }
+  }
+
+  @media screen and (min-width: 1280px) {
+    margin: 0px;
+  }
 }
 
 .btn-see-fav {
@@ -199,13 +198,13 @@ h1 {
     height: 45px;
     width: 138px;
     font-size: 14px;
-   }
+  }
 
-   @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1280px) {
     height: 54px;
     width: 160px;
     font-size: 16px;
-    }
+  }
 }
 .btn-see-fav:hover,
 :focus {
@@ -230,13 +229,13 @@ h1 {
     padding: 8px;
     top: 28px;
     right: 24px;
-   }
+  }
 
-   @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1280px) {
     padding: 11px;
     top: 40px;
     right: 40px;
-    }
+  }
 }
 
 .timer-container {
@@ -276,17 +275,17 @@ h1 {
     margin-bottom: 184px;
     height: 55px;
     align-items: center;
-  padding-left: 30px;
-  padding-right: 30px;
-  font-size: 16px;
-   }
-   @media screen and (min-width: 1280px) {
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 16px;
+  }
+  @media screen and (min-width: 1280px) {
     height: 55px;
     align-items: center;
-  padding-left: 30px;
-  padding-right: 30px;
-  font-size: 16px;
-    }
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 16px;
+  }
 }
 
 .pagination__link {
@@ -320,4 +319,35 @@ h1 {
   color: rgba(34, 37, 42, 1);
   border-radius: 50px;
   padding: 1px 6px;
+}
+
+.no-favorites {
+  text-align: center;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 100px;
+}
+
+.sad-face-image {
+  width: 200px;
+  height: auto;
+  margin-bottom: 20px;
+
+  @media screen and (min-width: 768px) and (max-width: 1279px) {
+    width: 300px;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 400px;
+  }
+}
+
+.loading-container {
+  min-height: 50vh; /* Możesz dostosować wysokość do swoich potrzeb */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
