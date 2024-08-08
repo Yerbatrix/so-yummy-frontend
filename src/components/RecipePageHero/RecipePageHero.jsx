@@ -1,3 +1,5 @@
+import React from "react";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   RecipeHeroContainer,
   RecipeHeroTitle,
@@ -5,7 +7,6 @@ import {
   CookingTime,
   ClockIconStyled,
 } from "./RecipePageHero.styled";
-
 import axios from "../../redux/axiosConfig";
 
 export const fetchRecipeById = createAsyncThunk(
@@ -35,3 +36,4 @@ const RecipePageHero = ({ recipeObj }) => {
 };
 
 export default RecipePageHero;
+
