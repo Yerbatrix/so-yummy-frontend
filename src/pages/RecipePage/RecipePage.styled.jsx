@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const RecipeContainer = styled.div`
   margin: 0 auto;
   padding: 0 16px;
-  min-height: 100vh;
+  min-height: 150vh;
 
   @media screen and (min-width: 768px) {
     padding: 0 32px;
@@ -22,6 +22,9 @@ export const HeaderTable = styled.div`
   padding: 0 14px;
   margin-bottom: 24px;
   color: #fafafa;
+  background-color: #8baa36;
+  font-weight: 600;
+  border-radius: 8px;
 
   @media screen and (min-width: 768px) {
     height: 58px;

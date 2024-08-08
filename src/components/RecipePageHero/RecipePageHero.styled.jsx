@@ -45,7 +45,7 @@ export const RecipeHeroContainer = styled.div`
   }
   @media screen and (min-width: 1280px) {
     padding-top: 164px;
-    height: 493px;
+    height: 100%;
     background-image: url(${rpDesk});
     @media screen and (min-device-pixel-ratio: 2),
       screen and (min-resolution: 192dpi),
@@ -64,7 +64,7 @@ export const RecipeHeroTitle = styled.h1`
   font-size: 24px;
   line-height: 1;
   margin-top: 18px;
-  color: #fafafa;
+  color: #8baa36;
   max-width: 330px;
   overflow: hidden;
   text-overflow: ellipsis;
