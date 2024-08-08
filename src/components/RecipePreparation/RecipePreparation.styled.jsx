@@ -22,7 +22,7 @@ export const PrepWrapper = styled.div`
   }
 `;
 
-export const PrepTitle = styled.title`
+export const PrepTitle = styled.h2`
   display: block;
   margin-bottom: 30px;
   font-weight: 600;
@@ -90,7 +90,7 @@ export const PrepText = styled.li`
   }
 `;
 
-export const InstrWrapperImg = styled.div`
+export const PrepWrapperImg = styled.div`
   & img {
     border-radius: 8px;
     width: 100%;
