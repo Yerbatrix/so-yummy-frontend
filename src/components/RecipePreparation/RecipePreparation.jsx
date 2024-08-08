@@ -10,6 +10,11 @@ import {
 import { nanoid } from "nanoid";
 
 const RecipePreparation = ({ image, instructions }) => {
+  // Sprawdź, czy instructions nie jest undefined
+  if (!instructions) {
+    return <div>No instructions provided</div>;
+  }
+
   const items = instructions
     .split("\r\n")
     .filter((elem) => {
@@ -41,7 +46,7 @@ const RecipePreparation = ({ image, instructions }) => {
       </PrepWrapper>
 
       <PrepWrapperImg>
-        <img src={image} alt={""} />
+        <img src={image} alt="Preparation" />
       </PrepWrapperImg>
     </PreparationWrapper>
   );
