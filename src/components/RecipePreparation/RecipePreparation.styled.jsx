@@ -7,7 +7,8 @@ export const PreparationWrapper = styled.div`
   }
   @media screen and (min-width: 1280px) {
     display: flex;
-    gap: 107px;
+    gap: 100px;
+    margin-right: 0;
   }
 `;
 
@@ -17,7 +18,7 @@ export const PrepWrapper = styled.div`
     margin-bottom: 53px;
   }
   @media screen and (min-width: 1280px) {
-    width: 469px;
+    width: 757px;
     margin-bottom: 0;
   }
 `;
@@ -29,7 +30,7 @@ export const PrepTitle = styled.h2`
   font-size: 24px;
   line-height: 1;
   letter-spacing: -0.02em;
-  color: #fafafa;
+  color: #3e4462;
   @media screen and (min-width: 768px) {
     margin-bottom: 32px;
     letter-spacing: -0.24px;
@@ -54,7 +55,6 @@ export const PrepList = styled.ul`
 
 export const PrepText = styled.li`
   display: flex;
-  flex-direction: row;
   overflow: hidden;
   align-items: flex-start;
   gap: 14px;
@@ -65,6 +65,9 @@ export const PrepText = styled.li`
     width: 21px;
     height: 21px;
     padding: 2px 7px 1px;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: #8baa36;
 
     font-size: 12px;
     line-height: 18px;
@@ -79,13 +82,13 @@ export const PrepText = styled.li`
   }
   & p {
     padding-top: 2px;
-    color: #ffffff;
+    color: #000000;
     width: 311px;
     @media screen and (min-width: 768px) {
       width: 660px;
     }
     @media screen and (min-width: 1280px) {
-      width: 433px;
+      width: 50vw;
     }
   }
 `;
@@ -98,9 +101,7 @@ export const PrepWrapperImg = styled.div`
     object-fit: cover;
     @media screen and (min-width: 768px) {
       height: 332px;
-    }
-    @media screen and (min-width: 1280px) {
-      width: 664px;
+      width: 433px;
     }
   }
 `;

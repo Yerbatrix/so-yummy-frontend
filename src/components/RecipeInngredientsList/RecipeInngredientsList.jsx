@@ -12,6 +12,7 @@ const RecipeInngredientList = ({ ingredients }) => {
           key={ingredient.id._id}
           image={ingredient.id.thb}
           nameIngredient={ingredient.id.ttl}
+          descriptionIngredient={ingredient.desc}
           weight={ingredient.measure ? ingredient.measure : "any"}
         />
       ))}
