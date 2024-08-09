@@ -48,7 +48,7 @@ const Categories = () => {
             id: recipe._id,
             name: recipe.title,
             src: recipe.thumb,
-            link: `/product/${recipe._id}`,
+            link: `/recipes/${recipe._id}`,
           });
           return acc;
         }, {});
