@@ -69,7 +69,7 @@ export const NameIngredient = styled.p`
   }
 `;
 
-export const WeighIngredient = styled.p`
+export const WeightIngredient = styled.p`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -118,5 +118,20 @@ export const Checkbox = styled.input`
   @media (min-width: 768px) {
     height: 35px;
     width: 35px;
+  }
+`;
+
+export const DescriptionIngredient = styled.p`
+  font-weight: 500;
+  font-size: 8px;
+  line-height: 1.38;
+  letter-spacing: -0.24px;
+  color: #7e7e7e;
+  @media screen and (min-width: 768px) {
+    overflow-y: clip;
+
+    line-height: 1;
+    font-size: 14px;
+    line-height: 1.67;
   }
 `;

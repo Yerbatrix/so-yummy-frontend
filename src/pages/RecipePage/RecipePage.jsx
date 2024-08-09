@@ -1,5 +1,5 @@
 import RecipePageHero from "../../components/RecipePageHero/RecipePageHero";
-import RecipeInngredientsList from "../../components/RecipeInngredientsList/RecipeInngredientList";
+import RecipeInngredientsList from "../../components/RecipeInngredientsList/RecipeInngredientsList";
 import RecipePreparation from "../../components/RecipePreparation/RecipePreparation";
 import { HeaderTable, RecipeContainer } from "./RecipePage.styled";
 import Loader from "../../components/Loader/Loader";
@@ -7,22 +7,9 @@ import Loader from "../../components/Loader/Loader";
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 
-import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 axios.defaults.baseURL = "https://t4-soyummy-api-2752d40c2586.herokuapp.com/";
-
-const getRecipesById = createAsyncThunk(
-  "recipes/getOneRecipe",
-  async (id, thunkAPI) => {
-    try {
-      const response = await axios.get(`/recipes/${id}`, credentials);
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
 
 const RecipePage = () => {
   const [recipeObj, setRecipeObj] = useState(null);
@@ -35,8 +22,8 @@ const RecipePage = () => {
     async function getOneRecipe() {
       try {
         setIsLoading(true);
-        const { recipe } = await API.getRecipesById(recipeId);
-        setRecipeObj(recipe);
+        const response = await axios.get(`/api/recipes/${recipeId}`);
+        setRecipeObj(response.data);
       } catch (error) {
         setError({ error });
       } finally {
@@ -62,7 +49,10 @@ const RecipePage = () => {
                 Number <span>Add to list</span>
               </p>
             </HeaderTable>
-            <RecipeInngredientsList ingredients={recipeObj.ingredients} />
+            <RecipeInngredientsList
+              ingredients={recipeObj.ingredients}
+              recipeId={recipeId}
+            />
             <RecipePreparation
               image={recipeObj.thumb}
               instructions={recipeObj.instructions}
