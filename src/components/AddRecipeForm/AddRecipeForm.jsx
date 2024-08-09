@@ -20,7 +20,7 @@ const AddRecipeForm = () => {
   const [ingredients, setIngredients] = useState([
     { id: nanoid(), unitValue: "tbs", unitNumber: "", name: "" },
   ]);
-  const [image, setImage] = useState(null); // Przechowywanie rzeczywistego pliku
+  const [image, setImage] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [preparation, setPreparation] = useState("");
@@ -34,10 +34,12 @@ const AddRecipeForm = () => {
     const file = event.target.files[0];
 
     if (file) {
-      setImage(file); // Przechowujemy rzeczywisty plik w stanie
+      const imageUrl = URL.createObjectURL(file);
+      setImage(imageUrl);
       updateErrors("image");
     } else {
-      setImage(null);
+      console.error("No file selected");
+      setImage("");
     }
   };
 
@@ -123,6 +125,15 @@ const AddRecipeForm = () => {
 
   const navigate = useNavigate();
 
+  const formData = new FormData();
+  formData.append("image", image);
+  formData.append("title", title);
+  formData.append("description", description);
+  formData.append("category", category);
+  formData.append("time", cookTime);
+  formData.append("ingredients", JSON.stringify(updatedIngredients));
+  formData.append("instructions", preparation);
+
   const dispatch = useDispatch();
   const isLoad = useSelector(selectLoading);
 
@@ -132,7 +143,10 @@ const AddRecipeForm = () => {
     try {
       const formData = new FormData();
       if (image) {
-        formData.append("image", image); // Przesyłamy rzeczywisty plik
+        formData.append("image", image);
+      } else {
+        setErrors((prev) => ({ ...prev, image: "Image is required" }));
+        return;
       }
 
       formData.append("title", title);
