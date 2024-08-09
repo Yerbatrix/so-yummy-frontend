@@ -1,4 +1,4 @@
-import { useLocation, useNavigate, Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { SearchPageTitle, SearchPageContainer } from "./SearchPage.styled";
 import SearchForm from "../../components/Search/SearchForm";
@@ -72,10 +72,10 @@ const SearchPage = () => {
       }
 
       const data = await response.json();
-
       const resultsData = type === "title" ? data.map(item => ({ ...item, id: item._id })) : data.data.recipes.map(item => ({ ...item, id: item._id }));
       
       setResults(resultsData);
+      console.log("Results Data:", resultsData);
     } catch (error) {
       setError(error.message);
       setResults([]);
@@ -96,10 +96,10 @@ const SearchPage = () => {
       <SearchPageTitle>Search</SearchPageTitle>
       <SearchForm searchType={searchType} onSearch={handleSearch} />
       <SearchTypeSelector onTypeChange={handleTypeChange} />
-      <ResultsContainer>
-        {results.length > 0 ? (
-          results.map((item, index) => (
-            <StyledLink to={`/recipe/${item.id}`} key={index}>
+      {results.length > 0 ? (
+        <ResultsContainer>
+          {results.map((item, index) => (
+            <StyledLink to={`/recipes/${item.id}`} key={index}>
               <ResultItem>
                 <img
                   src={item.thumb || '/images/placeholder.png'}
@@ -110,17 +110,17 @@ const SearchPage = () => {
                 </div>
               </ResultItem>
             </StyledLink>
-          ))
-        ) : (
-          <NoResults>
-            <img
-              src="/images/vegetables.png"
-              alt="No results"
-            />
-            <p>Try looking for something else...</p>
-          </NoResults>
-        )}
-      </ResultsContainer>
+          ))}
+        </ResultsContainer>
+      ) : (
+        <NoResults>
+          <img
+            src="/images/vegetables.png"
+            alt="No results"
+          />
+          <p>Try looking for something else...</p>
+        </NoResults>
+      )}
     </SearchPageContainer>
   );
 };

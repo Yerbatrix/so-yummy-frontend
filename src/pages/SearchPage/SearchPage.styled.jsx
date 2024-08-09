@@ -97,13 +97,14 @@ export const NoResults = styled.div`
   box-sizing: border-box;
 
   img {
-    width: 30%;
+    width: 50%;
     height: auto;
     border-radius: 8px;
+    margin-bottom: 16px;
   }
 
   p {
-    margin-top: 10px;
+    margin: 0;
     font-size: 16px;
     color: #666;
   }
