@@ -1,7 +1,7 @@
 import Joi from "joi";
 
 const addRecipeSchema = Joi.object({
-  image: Joi.string().uri().required().label("Image URL"),
+  image: Joi.any().optional().label("Image"), // Zmieniamy typ na "any", co pozwala na przesłanie pliku
   title: Joi.string().required().label("Title"),
   description: Joi.string().required().label("Description"),
   cookTime: Joi.string().required().label("Cook Time"),
