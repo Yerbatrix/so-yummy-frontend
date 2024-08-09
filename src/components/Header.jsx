@@ -101,13 +101,14 @@ const Header = () => {
       <Flex align="center" justify="space-between">
         <Heading color="hsla(214, 9%, 15%, 1)">
           <Link as={RouterLink} to="/main">
-            <Image src="../../images/logo.svg" alt="Logo" />
+            <Image src="../../public/images/logo.png" alt="Logo" />
           </Link>
         </Heading>
 
         {/* Desktop Menu */}
         <Flex
           display={{ base: "none", md: "flex" }}
+          fontSize={{ base: "none", md: "17px", lg: "20px" }}
           align="center"
           justify="center"
           fontWeight="500"
