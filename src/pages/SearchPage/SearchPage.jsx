@@ -1,9 +1,9 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { SearchPageTitle, SearchPageContainer } from "./SearchPage.styled";
 import SearchForm from "../../components/Search/SearchForm";
 import SearchTypeSelector from "../../components/Search/SearchTypeSelector";
-import { ResultsContainer, ResultItem, NoResults } from "./SearchPage.styled";
+import { ResultsContainer, ResultItem, NoResults, StyledLink } from "./SearchPage.styled";
 
 const SearchPage = () => {
   const location = useLocation();
@@ -72,7 +72,9 @@ const SearchPage = () => {
       }
 
       const data = await response.json();
-      const resultsData = type === "title" ? data : data.data.recipes;
+
+      const resultsData = type === "title" ? data.map(item => ({ ...item, id: item._id })) : data.data.recipes.map(item => ({ ...item, id: item._id }));
+      
       setResults(resultsData);
     } catch (error) {
       setError(error.message);
@@ -97,15 +99,17 @@ const SearchPage = () => {
       <ResultsContainer>
         {results.length > 0 ? (
           results.map((item, index) => (
-            <ResultItem key={index}>
-              <img
-                src={item.thumb || '/images/placeholder.png'}
-                alt={item.title || 'Recipe'}
-              />
-              <div className="title-container">
-                <p>{item.title || 'No Title'}</p>
-              </div>
-            </ResultItem>
+            <StyledLink to={`/recipe/${item.id}`} key={index}>
+              <ResultItem>
+                <img
+                  src={item.thumb || '/images/placeholder.png'}
+                  alt={item.title || 'Recipe'}
+                />
+                <div className="title-container">
+                  <p>{item.title || 'No Title'}</p>
+                </div>
+              </ResultItem>
+            </StyledLink>
           ))
         ) : (
           <NoResults>
