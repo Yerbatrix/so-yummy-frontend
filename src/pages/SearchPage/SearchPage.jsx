@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { SearchPageTitle, SearchPageContainer } from "./SearchPage.styled";
 import SearchForm from "../../components/Search/SearchForm";
 import SearchTypeSelector from "../../components/Search/SearchTypeSelector";
-import { ResultsContainer, ResultItem, NoResults } from "./SearchPage.styled";
+import { ResultsContainer, ResultItem, NoResults, StyledLink } from "./SearchPage.styled";
 
 const SearchPage = () => {
   const location = useLocation();
@@ -72,8 +72,10 @@ const SearchPage = () => {
       }
 
       const data = await response.json();
-      const resultsData = type === "title" ? data : data.data.recipes;
+      const resultsData = type === "title" ? data.map(item => ({ ...item, id: item._id })) : data.data.recipes.map(item => ({ ...item, id: item._id }));
+      
       setResults(resultsData);
+      console.log("Results Data:", resultsData);
     } catch (error) {
       setError(error.message);
       setResults([]);
@@ -94,29 +96,31 @@ const SearchPage = () => {
       <SearchPageTitle>Search</SearchPageTitle>
       <SearchForm searchType={searchType} onSearch={handleSearch} />
       <SearchTypeSelector onTypeChange={handleTypeChange} />
-      <ResultsContainer>
-        {results.length > 0 ? (
-          results.map((item, index) => (
-            <ResultItem key={index}>
-              <img
-                src={item.thumb || '/images/placeholder.png'}
-                alt={item.title || 'Recipe'}
-              />
-              <div className="title-container">
-                <p>{item.title || 'No Title'}</p>
-              </div>
-            </ResultItem>
-          ))
-        ) : (
-          <NoResults>
-            <img
-              src="/images/vegetables.png"
-              alt="No results"
-            />
-            <p>Try looking for something else...</p>
-          </NoResults>
-        )}
-      </ResultsContainer>
+      {results.length > 0 ? (
+        <ResultsContainer>
+          {results.map((item, index) => (
+            <StyledLink to={`/recipes/${item.id}`} key={index}>
+              <ResultItem>
+                <img
+                  src={item.thumb || '/images/placeholder.png'}
+                  alt={item.title || 'Recipe'}
+                />
+                <div className="title-container">
+                  <p>{item.title || 'No Title'}</p>
+                </div>
+              </ResultItem>
+            </StyledLink>
+          ))}
+        </ResultsContainer>
+      ) : (
+        <NoResults>
+          <img
+            src="/images/vegetables.png"
+            alt="No results"
+          />
+          <p>Try looking for something else...</p>
+        </NoResults>
+      )}
     </SearchPageContainer>
   );
 };
