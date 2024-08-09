@@ -58,50 +58,52 @@ const MyRecipes = () => {
 
   const displayRecipes = myRecipes
     .slice(currentPage * recipesPerPage, (currentPage + 1) * recipesPerPage)
-    .map((recipe) => (
-      <div key={recipe._id} className="recipe">
-        <img
-          src={recipe.thumb || noImage}
-          alt={recipe.title}
-          className="recipe-image"
-        />
-        <div className="recipe-details">
-          <h2>{recipe.title}</h2>
-          <p className="recipe-description">{recipe.description}</p>
-          <div className="timer-container">
-            <p className="prep-time">{recipe.time} min</p>
-            <div className="recipe-actions">
-              <button
-                className="btn-see"
-                onClick={() => handleSeeRecipe(recipe._id)}
-              >
-                See recipe
-              </button>
-              <button
-                className="btn-delete"
-                onClick={() => handleDelete(recipe._id)}
-              >
-                <picture>
-                  <source
-                    media="(min-width: 1024px)"
-                    srcSet={deleteIconDesktop}
-                  />
-                  <source
-                    media="(min-width: 768px)"
-                    srcSet={deleteIconTablet}
-                  />
-                  <img
-                    src={deleteIconMobile}
-                    alt="Delete"
-                    className="delete-icon"
-                  />
-                </picture>
-              </button>
+    .map((recipe) => {
+      const fullThumbUrl = recipe.thumb
+        ? `https://t4-soyummy-api-2752d40c2586.herokuapp.com/${recipe.thumb}`
+        : noImage;
+
+      return (
+        <div key={recipe._id} className="recipe">
+          <img src={fullThumbUrl} alt={recipe.title} className="recipe-image" />
+          <div className="recipe-details">
+            <h2>{recipe.title}</h2>
+            <p className="recipe-description">{recipe.description}</p>
+            <div className="timer-container">
+              <p className="prep-time">{recipe.time} min</p>
+              <div className="recipe-actions">
+                <button
+                  className="btn-see"
+                  onClick={() => handleSeeRecipe(recipe._id)}
+                >
+                  See recipe
+                </button>
+                <button
+                  className="btn-delete"
+                  onClick={() => handleDelete(recipe._id)}
+                >
+                  <picture>
+                    <source
+                      media="(min-width: 1024px)"
+                      srcSet={deleteIconDesktop}
+                    />
+                    <source
+                      media="(min-width: 768px)"
+                      srcSet={deleteIconTablet}
+                    />
+                    <img
+                      src={deleteIconMobile}
+                      alt="Delete"
+                      className="delete-icon"
+                    />
+                  </picture>
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    ));
+      );
+    });
 
   const pageCount = Math.ceil(myRecipes.length / recipesPerPage);
   const pageRangeDisplayed = windowWidth < 768 ? 5 : 8;
