@@ -1,4 +1,4 @@
-import React from "react";
+import RecipePageBtn from "../RecipePageBtn/RecipePageBtn";
 
 import {
   RecipeHeroContainer,
@@ -10,10 +10,13 @@ import {
 
 const RecipePageHero = ({ recipeObj }) => {
   const { title, description, time } = recipeObj;
+
   return (
     <RecipeHeroContainer>
       <RecipeHeroTitle>{title}</RecipeHeroTitle>
       <RecipeHeroText>{description}</RecipeHeroText>
+
+      <RecipePageBtn text="Add to favorite recipes" />
       <CookingTime>
         <ClockIconStyled />
         <span>{time + `min`}</span>

@@ -23,6 +23,7 @@ const RecipePage = () => {
       try {
         setIsLoading(true);
         const response = await axios.get(`/api/recipes/${recipeId}`);
+
         setRecipeObj(response.data);
       } catch (error) {
         setError({ error });
@@ -49,10 +50,7 @@ const RecipePage = () => {
                 Number <span>Add to list</span>
               </p>
             </HeaderTable>
-            <RecipeInngredientsList
-              ingredients={recipeObj.ingredients}
-              recipeId={recipeId}
-            />
+            <RecipeInngredientsList ingredients={recipeObj.ingredients} />
             <RecipePreparation
               image={recipeObj.thumb}
               instructions={recipeObj.instructions}

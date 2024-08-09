@@ -19,11 +19,7 @@ const RecipeIngredientsItem = ({
   return (
     <RecipeItemWrapper>
       <ImageWrapper>
-        {image !== " " ? (
-          <img src={image} alt={nameIngredient} />
-        ) : (
-          <img src={Food} alt={nameIngredient} />
-        )}
+        <img src={image || Food} alt={nameIngredient} />
       </ImageWrapper>
       <TextContainer>
         <NameIngredient>

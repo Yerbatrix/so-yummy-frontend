@@ -118,6 +118,7 @@ export const Checkbox = styled.input`
   @media (min-width: 768px) {
     height: 35px;
     width: 35px;
+    border: 2px solid rgba(126, 126, 126, 0.5);
   }
 `;
 
