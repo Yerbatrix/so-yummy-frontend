@@ -1,24 +1,31 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { ShoppingList } from "../../components/ShoppingList/ShoppingList";
 import { getShoppingList } from "../../redux/shoppingList/operations";
+import {
+  selectShoppingList,
+  selectIsLoading,
+  selectError,
+} from "../../redux/shoppingList/selectors";
 import { Container, MainPageTitle } from "./ShoppingListPage.styled";
 
 const ShoppingListPage = () => {
-  const [shoppingList, setShoppingList] = useState([]);
+  const dispatch = useDispatch();
+  const shoppingList = useSelector(selectShoppingList);
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getShoppingList(); // Zdobądź dane z operacji
-        console.log(data);
-        setShoppingList(data.data);
-      } catch (error) {
-        console.error("Failed to fetch shopping list:", error);
-      }
-    };
+    dispatch(getShoppingList());
+  }, [dispatch]);
 
-    fetchData(); // Wywołaj funkcję async wewnątrz useEffect
-  }, []);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <Container>
