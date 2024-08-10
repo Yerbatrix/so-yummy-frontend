@@ -226,8 +226,8 @@ const Header = () => {
                 {[
                   "main",
                   "categories",
-                  "add",
-                  "my",
+                  "add-recipes",
+                  "my-recipes",
                   "favorites",
                   "shopping-list",
                 ].map((path) => (
