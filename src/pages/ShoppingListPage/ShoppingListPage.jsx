@@ -1,46 +1,30 @@
-import React, { useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import IngredientsTitle from "../../components/IngredientsTitle/IngredientsTitle";
-import ShoppingList from "../../components/ShoppingList/ShoppingList";
+import { useEffect, useState } from "react";
+import { ShoppingList } from "../../components/ShoppingList/ShoppingList";
 import { getShoppingList } from "../../redux/shoppingList/operations";
-import {
-  selectError,
-  selectIsLoading,
-} from "../../redux/shoppingList/selectors";
-import {
-  Container,
-  Info,
-  PageTitleText,
-  SectionShoppingList,
-  Wrap,
-} from "./ShoppingListPage.styled";
+import { Container, MainPageTitle } from "./ShoppingListPage.styled";
 
 const ShoppingListPage = () => {
-  const isLoading = useSelector(selectIsLoading);
-  const error = useSelector(selectError);
-  const dispatch = useDispatch();
-  const isMountedRef = useRef(false);
+  const [shoppingList, setShoppingList] = useState([]);
 
   useEffect(() => {
-    if (!isMountedRef.current) {
-      dispatch(getShoppingList());
-      isMountedRef.current = true;
-    }
-  }, [dispatch, isMountedRef]);
+    const fetchData = async () => {
+      try {
+        const data = await getShoppingList(); // Zdobądź dane z operacji
+        console.log(data);
+        setShoppingList(data.data);
+      } catch (error) {
+        console.error("Failed to fetch shopping list:", error);
+      }
+    };
+
+    fetchData(); // Wywołaj funkcję async wewnątrz useEffect
+  }, []);
 
   return (
-    <SectionShoppingList>
-      <Container>
-        <Wrap>
-          <PageTitleText>Shopping list</PageTitleText>
-        </Wrap>
-        <Wrap>
-          <IngredientsTitle title="Product" action="Remove" />
-        </Wrap>
-        {error && <Info>{error}</Info>}
-        {!isLoading && <ShoppingList />}
-      </Container>
-    </SectionShoppingList>
+    <Container>
+      <MainPageTitle>Shopping List</MainPageTitle>
+      <ShoppingList shoppingList={shoppingList} />
+    </Container>
   );
 };
 
