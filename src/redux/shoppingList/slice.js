@@ -18,7 +18,7 @@ const shoppingList = createSlice({
         state.error = null;
       })
       .addCase(getShoppingList.fulfilled, (state, { payload }) => {
-        state.shoppingList = payload;
+        state.items = payload;
         state.deletedProductId = [];
         state.isLoading = false;
       })
