@@ -1,4 +1,5 @@
-import { lazy } from "react";
+import React, { useEffect } from "react"; // Dodanie brakującego importu useEffect
+import { lazy, Suspense } from "react";
 import {
   Route,
   BrowserRouter as Router,
@@ -7,7 +8,6 @@ import {
 } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { checkAuth } from "./redux/slices/authSlice";
-import React, { useEffect } from "react";
 import PrivateRoute from "./components/PrivateRoute";
 import AddRecipes from "./pages/AddRecipePage/AddRecipes";
 import Categories from "./pages/Categories";
@@ -19,6 +19,7 @@ import ShoppingListPage from "./pages/ShoppingListPage/ShoppingListPage";
 import SigninPage from "./pages/SignInPage/SigninPage";
 import WelcomePage from "./pages/WelcomePage";
 import SearchPage from "./pages/SearchPage/SearchPage";
+import Loader from "./components/Loader/Loader";
 
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 const RecipePage = lazy(() => import("./pages/RecipePage/RecipePage"));
@@ -30,93 +31,98 @@ function App() {
   useEffect(() => {
     dispatch(checkAuth());
   }, [dispatch]);
+
   return (
     <Router basename="/">
-      <Routes>
-        <Route
-          path="/"
-          element={isAuthenticated ? <Navigate to="/main" /> : <WelcomePage />}
-        />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/signin" element={<SigninPage />} />
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              isAuthenticated ? <Navigate to="/main" /> : <WelcomePage />
+            }
+          />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/signin" element={<SigninPage />} />
 
-        <Route
-          path="/main"
-          element={
-            <PrivateRoute>
-              <MainPage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/categories/:category"
-          element={
-            <PrivateRoute>
-              <Categories />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/add-recipes"
-          element={
-            <PrivateRoute>
-              <AddRecipes />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/my-recipes"
-          element={
-            <PrivateRoute>
-              <MyRecipes />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/favorites"
-          element={
-            <PrivateRoute>
-              <Favorites />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="recipes/:recipeId"
-          element={
-            isAuthenticated ? (
+          <Route
+            path="/main"
+            element={
               <PrivateRoute>
-                <RecipePage />
+                <MainPage />
               </PrivateRoute>
-            ) : (
-              <Navigate to="/signin" />
-            )
-          }
-        />
-        <Route
-          path="/shopping-list"
-          element={
-            <PrivateRoute>
-              <ShoppingListPage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/search"
-          element={
-            <PrivateRoute>
-              <SearchPage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="*"
-          element={
-            <PrivateRoute>
-              <NotFoundPage />
-            </PrivateRoute>
-          }
-        />
-      </Routes>
+            }
+          />
+          <Route
+            path="/categories/:category"
+            element={
+              <PrivateRoute>
+                <Categories />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/add-recipes"
+            element={
+              <PrivateRoute>
+                <AddRecipes />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/my-recipes"
+            element={
+              <PrivateRoute>
+                <MyRecipes />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/favorites"
+            element={
+              <PrivateRoute>
+                <Favorites />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="recipes/:recipeId"
+            element={
+              isAuthenticated ? (
+                <PrivateRoute>
+                  <RecipePage />
+                </PrivateRoute>
+              ) : (
+                <Navigate to="/signin" />
+              )
+            }
+          />
+          <Route
+            path="/shopping-list"
+            element={
+              <PrivateRoute>
+                <ShoppingListPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/search"
+            element={
+              <PrivateRoute>
+                <SearchPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <PrivateRoute>
+                <NotFoundPage />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+      </Suspense>
     </Router>
   );
 }

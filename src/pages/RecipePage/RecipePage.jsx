@@ -19,27 +19,26 @@ const RecipePage = () => {
   const { recipeId } = useParams();
 
   useEffect(() => {
-    async function getOneRecipe() {
+    const getOneRecipe = async () => {
       try {
         setIsLoading(true);
         const response = await axios.get(`/api/recipes/${recipeId}`);
-
         setRecipeObj(response.data);
       } catch (error) {
-        setError({ error });
+        setError(error);
       } finally {
         setIsLoading(false);
       }
-    }
+    };
 
     getOneRecipe();
   }, [recipeId]);
 
+  if (isLoading) return <Loader />;
+  if (error) return <p>Whoops, something went wrong: {error.message}</p>;
+
   return (
     <>
-      {error && <p> Whoops, something went wrong: {error.message}</p>}
-      {isLoading && <Loader />}
-
       {recipeObj && (
         <>
           <RecipePageHero recipeObj={recipeObj} />
@@ -61,4 +60,5 @@ const RecipePage = () => {
     </>
   );
 };
+
 export default RecipePage;
