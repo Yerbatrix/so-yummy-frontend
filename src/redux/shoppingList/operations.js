@@ -7,19 +7,22 @@ export const getShoppingList = createAsyncThunk(
   "shoppingList/getAll",
   async (_, thunkAPI) => {
     try {
-      const { data } = await axios.get(`api/ingredients/list/`);
-      return data.data.categories;
+      const { data } = await axios.get(`api/shopping-list`);
+      return data.data.results;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
-export const updateShoppingList = createAsyncThunk(
+export const deleteIngrFromShoppingList = createAsyncThunk(
   "shoppingList/updateShoppingList",
-  async (credentials, thunkAPI) => {
+  async (productId, thunkAPI) => {
     try {
-      const { data } = await axios.put(`api/ingredients/list/`, credentials);
+      const { data } = await axios.put(
+        `api/shopping-list/${productId}`,
+        productId
+      );
       return data.updatedList;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

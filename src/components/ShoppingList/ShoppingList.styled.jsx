@@ -1,124 +1,173 @@
-import { GrClose } from "react-icons/gr";
+import { VscChromeClose } from "react-icons/vsc";
 import styled from "styled-components";
 
-export const IngedientsItem = styled.li`
+export const Table = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding-bottom: 100px;
+`;
+
+export const Blocks = styled.div`
+  //   display: flex;
+  //   flex-wrap: wrap;
+  //
+`;
+
+export const TableHead = styled.div`
   display: flex;
   width: 100%;
+  align-items: center;
   justify-content: space-between;
-  padding: 35px 19px 24px 0;
-  border-bottom: 1px solid #e0e0e0;
+  padding: 10px;
+  margin-bottom: 8px;
+  background: #8baa36;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #fafafa;
+
   @media (min-width: 768px) {
-    padding: 50px 45px 105px 0px;
+    font-size: 18px;
+    line-height: 1.44;
+    padding: 20px;
+  }
+
+  @media (min-width: 1280px) {
+    line-height: 1.5;
+    padding: 21px 40px;
+    letter-spacing: 0.03em;
   }
 `;
 
-export const Wrap = styled.div`
+export const TableHeadProduct = styled.div`
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  flex-grow: 2;
 `;
 
-export const IngedientsImgThumb = styled.div`
+export const TableHeadNumber = styled.div`
+  display: flex;
+  align-items: center;
+  margin-right: 24px;
+
+  @media (min-width: 768px) {
+    margin-right: 78px;
+  }
+
+  @media (min-width: 1280px) {
+    margin-right: 142px;
+  }
+`;
+
+export const TableHeadRemove = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const TableRow = styled.div`
+  display: flex;
+  padding: 25px 22px 23px 0px;
+  border-bottom: 1px solid #e0e0e0;
+
+  @media (min-width: 768px) {
+    padding: 44px 45px 43px 0px;
+  }
+
+  @media (min-width: 1280px) {
+    padding: 44px 70px 43px 40px;
+  }
+`;
+
+export const TableProduct = styled.div`
+  display: flex;
+  align-items: flex-start;
+  flex-grow: 2;
+`;
+
+export const TableProductBox = styled.div`
+  display: flex;
+  justify-content: center;
   width: 60px;
   height: 60px;
-  padding: 6px;
-  margin-right: 10px;
-  background-color: #ebf3d4;
+  padding: 12px;
+  background: #ebf3d4;
+
   border-radius: 6px;
+  margin-right: 10px;
+
   @media (min-width: 768px) {
     width: 93px;
     height: 97px;
-    padding: 8px;
+    // padding: 12px 15px;
     margin-right: 16px;
+    border-radius: 8px;
   }
 `;
 
-export const Img = styled.img`
-  display: block;
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-`;
-
-export const IngedientsTitle = styled.p`
-  font-family: "Poppins";
-  font-weight: 500};
+export const TableProductText = styled.div`
+  font-weight: 500;
   font-size: 10px;
   line-height: 1.2;
-  color: #23262A;
+  color: #3e4462;
+
   @media (min-width: 768px) {
     font-size: 16px;
     line-height: 1.5;
   }
 `;
-
-export const IngedientsMeasure = styled.span`
-  margin-right: 46px;
-  border-radius: 4px;
+export const TableNumberBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 37px;
+  min-height: 23px;
+  max-width: 75px;
   padding: 4px;
-  background-color: #8baa36;
-  font-family: "Poppins";
+
+  background: #8baa36;
+  border-radius: 4px;
   font-weight: 600;
   font-size: 10px;
   line-height: 1.5;
   color: #fafafa;
+  margin-right: 48px;
+
   @media (min-width: 768px) {
+    max-width: 150px;
+    // height: 35px;
     font-size: 18px;
-    line-height: 1.5;
-    padding: 4px 8px;
     margin-right: 110px;
   }
-  @media (min-width: 1440px) {
-    margin-right: 151px;
+  @media (min-width: 1280px) {
+    margin-right: 174px;
   }
 `;
 
-export const Button = styled.button`
+export const TableNumber = styled.div``;
+
+export const TableRemove = styled.button`
+  height: 100%;
   background-color: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
-  padding: 4px;
-  color: #333333;
-  cursor: pointer;
   border: none;
-  outline: none;
-  padding: 4;
-  margin: 0;
+  cursor: pointer;
 `;
 
-export const CloseIcon = styled(GrClose)`
-  width: 18px;
-  height: 18px;
-  fill: currentColor;
+export const CloseButtom = styled(VscChromeClose)`
+  color: #3e4462;
+  width: 13.33px;
 
   @media (min-width: 768px) {
-    width: 28px;
-    height: 28px;
+    width: 18.675px;
   }
 `;
 
-export const ImgEmptyPageThumb = styled.div`
-  width: 208px;
-  height: 133px;
-  margin: 0 auto;
-  margin-bottom: 24px;
-  @media (min-width: 768px) {
-    width: 350px;
-    height: 225px;
-    margin-bottom: 44px;
-  }
-`;
-
-export const Text = styled.p`
+export const EmptyList = styled.p`
+  color: #3e4462;
   text-align: center;
-  font-family: "Poppins";
-  font-weight: 500;
-  font-size: 10px;
-  line-height: 1.2;
-  color: #23262a;
-  @media (min-width: 768px) {
-    font-size: 18px;
-    line-height: 1.5;
-  }
+  padding-top: 50px;
+  padding-bottom: 200px;
+  font-size: 22px;
 `;
