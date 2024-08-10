@@ -92,7 +92,7 @@ const HeroSection = () => {
     >
       {/* Left Section */}
       <Flex
-        height={{ base: "100vh", md: "auto" }}
+        height={{ base: "100%", md: "auto" }}
         direction="column"
         align="left"
         justifyContent={{ base: "space-between", md: "center" }}
@@ -134,15 +134,15 @@ const HeroSection = () => {
         align="center"
         justify="center"
         width={{ base: "100%", md: "50%" }}
-        height={{ base: "300px", md: "auto" }}
+        height={{ base: "100px", md: "auto" }}
       >
         {/* Background layer */}
         <Box
           position="absolute"
           width="1241px"
           height="912px"
-          top={{ base: "-308px", md: "-628px" }}
-          left={{ base: "250px", md: "50px" }}
+          top={{ base: "-500px", md: "-628px" }}
+          left={{ base: "150px", md: "50px" }}
           backgroundColor="hsla(75, 56%, 89%, 1)"
           transform={{ base: "rotate(50deg)", md: "rotate(10.57deg)" }}
           zIndex="-5"
@@ -151,11 +151,11 @@ const HeroSection = () => {
         />
         <Box
           position="absolute"
-          top={{ base: "-250px", md: "0px", lg: "0px" }}
+          top={{ base: "-300px", md: "0px", lg: "0px" }}
           left={{ base: "70px", md: "100px", lg: "300px" }}
         >
           <Text
-            fontSize="14px"
+            fontSize={{ base: "12px", md: "14px" }}
             fontWeight="500"
             backgroundColor="white"
             borderRadius="20px"
@@ -185,10 +185,10 @@ const HeroSection = () => {
         {/* Image layer */}
         <Box
           position="absolute"
-          width={{ base: "220px", md: "478px", lg: "578px" }}
+          width={{ base: "340px", md: "458px", lg: "578px" }}
           height="539px"
-          top={{ base: "-450px", md: "-200px" }}
-          left="auto"
+          top={{ base: "-510px", md: "-200px" }}
+          left={{ base: "-10px", md: "auto" }}
           right={{ base: "70px", md: "0" }}
           opacity="1"
           zIndex={-1}
