@@ -83,9 +83,13 @@ function App() {
         <Route
           path="recipes/:recipeId"
           element={
-            <PrivateRoute>
-              <RecipePage />
-            </PrivateRoute>
+            isAuthenticated ? (
+              <PrivateRoute>
+                <RecipePage />
+              </PrivateRoute>
+            ) : (
+              <Navigate to="/signin" />
+            )
           }
         />
         <Route

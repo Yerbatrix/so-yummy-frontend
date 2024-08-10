@@ -154,7 +154,7 @@ const HeroSection = () => {
           top={{ base: "-300px", md: "0px", lg: "0px" }}
           left={{ base: "70px", md: "100px", lg: "300px" }}
         >
-          <Text
+          <Box
             fontSize={{ base: "12px", md: "14px" }}
             fontWeight="500"
             backgroundColor="white"
@@ -179,7 +179,7 @@ const HeroSection = () => {
                 <Icon as={ArrowForwardIcon} boxSize={5} color="gray.500" />{" "}
               </Flex>
             </Flex>
-          </Text>
+          </Box>
         </Box>
 
         {/* Image layer */}

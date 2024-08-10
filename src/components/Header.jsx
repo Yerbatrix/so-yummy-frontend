@@ -218,7 +218,7 @@ const Header = () => {
             <DrawerCloseButton />
             <DrawerHeader>
               <Link as={RouterLink} to="/" onClick={onDrawerClose}>
-                <Image src="../../public/images/logo.svg" alt="Logo" />
+                <Image src="/images/logo.svg" alt="Logo" />
               </Link>
             </DrawerHeader>
             <DrawerBody flex="1">
@@ -319,7 +319,7 @@ const Header = () => {
                       top="50%"
                       left="50%"
                       transform="translate(-50%, -50%)"
-                      src="../../public/images/user.svg"
+                      src="/images/user.svg"
                       alt="Upload Icon"
                       boxSize="54px"
                     />
