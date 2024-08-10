@@ -9,6 +9,7 @@ import {
   TableHeadProduct,
   TableHeadRemove,
 } from "./ShoppingList.styled";
+import { IngredientItem } from "./ItemsFromShopingList";
 
 export const ShoppingList = () => {
   const list = useSelector(selectShoppingList);
