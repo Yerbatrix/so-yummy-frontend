@@ -29,17 +29,20 @@ import {
   Switch,
   Text,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Link as RouterLink, useNavigate } from "react-router-dom";
-import { logout, updateUser } from "../redux/slices/authSlice";
+import { logout, updateUser, fetchUserData } from "../redux/slices/authSlice";
+import axios from "../redux/axiosConfig";
 
 const Header = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const toast = useToast();
   const {
     isOpen: isDrawerOpen,
     onOpen: onDrawerOpen,
@@ -55,13 +58,19 @@ const Header = () => {
     onOpen: onLogoutConfirmOpen,
     onClose: onLogoutConfirmClose,
   } = useDisclosure();
-  const [username, setUsername] = useState(user?.name || "");
-  const [avatar, setAvatar] = useState(user?.avatarUrl || "");
+  const [username, setUsername] = useState("");
+  const [avatar, setAvatar] = useState("");
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      dispatch(fetchUserData()); // Pobranie danych użytkownika po zalogowaniu
+    }
+  }, [isAuthenticated, dispatch]);
 
   useEffect(() => {
     if (user) {
-      setUsername(user.name);
-      setAvatar(user.avatarUrl);
+      setUsername(user.name || "");
+      setAvatar(user.avatar || "");
     }
   }, [user]);
 
@@ -74,19 +83,40 @@ const Header = () => {
     onLogoutConfirmClose();
   };
 
-  const handleSaveChanges = () => {
-    dispatch(updateUser({ name: username, avatar }));
-    onModalClose();
+  const handleSaveChanges = async () => {
+    try {
+      const response = await axios.put("/api/auth/user", {
+        name: username,
+        avatar,
+      });
+
+      dispatch(updateUser(response.data));
+
+      toast({
+        title: "Profile updated.",
+        description: "Your profile information has been updated.",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+
+      onModalClose();
+    } catch (error) {
+      console.error("Error updating user:", error);
+      toast({
+        title: "Error.",
+        description: "An error occurred while updating your profile.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
   };
 
   const handleAvatarChange = (e) => {
     if (e.target.files.length > 0) {
       setAvatar(URL.createObjectURL(e.target.files[0]));
     }
-  };
-
-  const handleCategoryClick = () => {
-    navigate("/categories/beef");
   };
 
   return (
@@ -138,7 +168,7 @@ const Header = () => {
         </Flex>
 
         <Flex align="center">
-          {isAuthenticated && (
+          {isAuthenticated && user && (
             <Menu>
               <MenuButton
                 as={Button}
@@ -149,11 +179,18 @@ const Header = () => {
                 display="flex"
                 alignItems="center"
               >
-                <Avatar size="sm" name={user?.name} src={user?.avatarUrl} />
-                <Box ml={2} textAlign="left">
-                  <Text fontWeight="bold">{user?.name}</Text>
-                  <Text fontSize="sm">{user?.email}</Text>
-                </Box>
+                <Avatar
+                  size="sm"
+                  name={user.name}
+                  src={
+                    user.avatar
+                      ? `/path/to/avatars/${user.avatar}`
+                      : "/images/default-avatar.png"
+                  }
+                />
+                <Text ml={2} fontWeight="bold">
+                  {user.name}
+                </Text>
               </MenuButton>
               <MenuList>
                 <MenuItem onClick={onModalOpen}>
@@ -319,7 +356,7 @@ const Header = () => {
                       top="50%"
                       left="50%"
                       transform="translate(-50%, -50%)"
-                      src="/images/user.svg"
+                      src={avatar || "/images/user.svg"}
                       alt="Upload Icon"
                       boxSize="54px"
                     />

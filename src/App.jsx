@@ -7,7 +7,6 @@ import {
   Navigate,
 } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { checkAuth } from "./redux/slices/authSlice";
 import PrivateRoute from "./components/PrivateRoute";
 import AddRecipes from "./pages/AddRecipePage/AddRecipes";
 import Categories from "./pages/Categories";
@@ -20,6 +19,7 @@ import SigninPage from "./pages/SignInPage/SigninPage";
 import WelcomePage from "./pages/WelcomePage";
 import SearchPage from "./pages/SearchPage/SearchPage";
 import Loader from "./components/Loader/Loader";
+import { fetchUserData, checkAuth } from "./redux/slices/authSlice";
 
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 const RecipePage = lazy(() => import("./pages/RecipePage/RecipePage"));
@@ -30,6 +30,7 @@ function App() {
 
   useEffect(() => {
     dispatch(checkAuth());
+    dispatch(fetchUserData());
   }, [dispatch]);
 
   return (

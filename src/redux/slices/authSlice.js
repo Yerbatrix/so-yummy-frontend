@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import axios from "../axiosConfig";
 
 const initialState = {
   isAuthenticated: false,
@@ -32,6 +33,9 @@ const authSlice = createSlice({
         state.token = null;
       }
     },
+    setUser(state, action) {
+      state.user = action.payload;
+    },
     updateUser(state, action) {
       if (state.user) {
         state.user = { ...state.user, ...action.payload };
@@ -40,5 +44,16 @@ const authSlice = createSlice({
   },
 });
 
-export const { login, logout, checkAuth, updateUser } = authSlice.actions;
+export const { login, logout, checkAuth, setUser, updateUser } =
+  authSlice.actions;
+
+export const fetchUserData = () => async (dispatch) => {
+  try {
+    const response = await axios.get("/api/auth/user");
+    dispatch(setUser(response.data));
+  } catch (error) {
+    console.error("Failed to fetch user data", error);
+  }
+};
+
 export default authSlice.reducer;
