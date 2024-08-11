@@ -7,6 +7,7 @@ import {
   Checkbox,
   DescriptionIngredient,
 } from "./RecipeInngredientsItem.styled";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   addIngredientToShoppingList,
@@ -19,17 +20,21 @@ const RecipeIngredientsItem = ({
   nameIngredient,
   descriptionIngredient,
   weight,
-  isChecked,
   ingredientId,
-  recipeId, // Dodanie recipeId jako props
+  isChecked,
+  recipeId,
 }) => {
   const dispatch = useDispatch();
+  const [checked, setChecked] = useState(isChecked);
+
+  useEffect(() => {
+    setChecked(isChecked);
+  }, [isChecked]);
 
   const handleCheckboxChange = () => {
-    if (isChecked) {
-      dispatch(deleteIngrFromShoppingList({ recipeId, ingredientId }));
-    } else {
+    if (!checked) {
       dispatch(addIngredientToShoppingList({ recipeId, ingredientId }));
+      setChecked(true); // Zaznacz checkbox po dodaniu składnika
     }
   };
 
@@ -52,7 +57,7 @@ const RecipeIngredientsItem = ({
       <WeightIngredient>{weight}</WeightIngredient>
       <Checkbox
         type="checkbox"
-        checked={isChecked}
+        checked={checked}
         onChange={handleCheckboxChange}
       />
     </RecipeItemWrapper>

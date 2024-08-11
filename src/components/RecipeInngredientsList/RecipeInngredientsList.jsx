@@ -1,7 +1,11 @@
 import RecipeIngredientsItem from "../RecipeInngredientsItem/RecipeInngredientsItem";
 import { IngredientsListStyled } from "./RecipeInngredientsList.styled";
 
-const RecipeInngredientsList = ({ ingredients, recipeId }) => {
+const RecipeInngredientsList = ({ ingredients, recipeId, shoppingList }) => {
+  const checkIfIngredientInShoppingList = (ingredientId) => {
+    return shoppingList.some((item) => item.id === ingredientId);
+  };
+
   return (
     <IngredientsListStyled>
       {ingredients.map((ingredient) => (
@@ -12,7 +16,8 @@ const RecipeInngredientsList = ({ ingredients, recipeId }) => {
           descriptionIngredient={ingredient.desc || ""}
           weight={ingredient.measure || "any"}
           ingredientId={ingredient.id}
-          recipeId={recipeId} // Przekazanie recipeId do każdego składnika
+          recipeId={recipeId}
+          isChecked={checkIfIngredientInShoppingList(ingredient.id)} // Sprawdzenie, czy składnik jest na liście
         />
       ))}
     </IngredientsListStyled>

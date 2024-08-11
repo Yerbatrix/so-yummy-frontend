@@ -23,7 +23,7 @@ const Categories = () => {
     "beef",
     "breakfast",
     "chicken",
-    "desserts",
+    "dessert",
     "goat",
     "lamb",
     "miscellaneous",
