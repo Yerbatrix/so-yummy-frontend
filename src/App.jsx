@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"; // Dodanie brakującego importu useEffect
+import React, { useEffect } from "react";
 import { lazy, Suspense } from "react";
 import {
   Route,
@@ -19,6 +19,7 @@ import SigninPage from "./pages/SignInPage/SigninPage";
 import WelcomePage from "./pages/WelcomePage";
 import SearchPage from "./pages/SearchPage/SearchPage";
 import Loader from "./components/Loader/Loader";
+import Layout from "./components/Layout"; // Importujemy Layout
 import { fetchUserData, checkAuth } from "./redux/slices/authSlice";
 
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
@@ -30,13 +31,16 @@ function App() {
 
   useEffect(() => {
     dispatch(checkAuth());
-    dispatch(fetchUserData());
-  }, [dispatch]);
+    if (isAuthenticated) {
+      dispatch(fetchUserData());
+    }
+  }, [dispatch, isAuthenticated]);
 
   return (
     <Router basename="/">
       <Suspense fallback={<Loader />}>
         <Routes>
+          {/* Główna ścieżka */}
           <Route
             path="/"
             element={
@@ -46,6 +50,7 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/signin" element={<SigninPage />} />
 
+          {/* Strony wymagające autoryzacji */}
           <Route
             path="/main"
             element={
@@ -89,13 +94,9 @@ function App() {
           <Route
             path="recipes/:recipeId"
             element={
-              isAuthenticated ? (
-                <PrivateRoute>
-                  <RecipePage />
-                </PrivateRoute>
-              ) : (
-                <Navigate to="/signin" />
-              )
+              <PrivateRoute>
+                <RecipePage />
+              </PrivateRoute>
             }
           />
           <Route
@@ -114,12 +115,14 @@ function App() {
               </PrivateRoute>
             }
           />
+
+          {/* Obsługa nieznanych ścieżek z Layoutem */}
           <Route
             path="*"
             element={
-              <PrivateRoute>
+              <Layout>
                 <NotFoundPage />
-              </PrivateRoute>
+              </Layout>
             }
           />
         </Routes>
