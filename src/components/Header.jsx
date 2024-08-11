@@ -34,7 +34,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Link as RouterLink, useNavigate } from "react-router-dom";
 import { logout, updateUser } from "../redux/slices/authSlice";
-
+import ThemeToggle from "./ThemeToggle";
 const Header = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const user = useSelector((state) => state.auth.user);
@@ -111,6 +111,7 @@ const Header = () => {
           align="center"
           justify="center"
           fontWeight="500"
+          fontSize="14px"
         >
           {[
             "main",
@@ -177,7 +178,7 @@ const Header = () => {
             </Menu>
           )}
 
-          <Switch
+          {/* <Switch
             ml={4}
             display={{ base: "none", md: "block" }}
             css={{
@@ -188,8 +189,8 @@ const Header = () => {
                 backgroundColor: "white",
               },
             }}
-          />
-
+          /> */}
+          <ThemeToggle />
           {/* Mobile and Tablet Menu Button */}
           <IconButton
             display={{ base: "flex", md: "none" }}

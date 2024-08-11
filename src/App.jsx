@@ -1,13 +1,11 @@
-import { lazy } from "react";
+import React, { lazy, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
+  Navigate,
   Route,
   BrowserRouter as Router,
   Routes,
-  Navigate,
 } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { checkAuth } from "./redux/slices/authSlice";
-import React, { useEffect } from "react";
 import PrivateRoute from "./components/PrivateRoute";
 import AddRecipes from "./pages/AddRecipePage/AddRecipes";
 import Categories from "./pages/Categories";
@@ -15,10 +13,11 @@ import Favorites from "./pages/Favorites/Favorites";
 import MainPage from "./pages/MainPage";
 import MyRecipes from "./pages/MyRecipes/MyRecipes";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import SearchPage from "./pages/SearchPage/SearchPage";
 import ShoppingListPage from "./pages/ShoppingListPage/ShoppingListPage";
 import SigninPage from "./pages/SignInPage/SigninPage";
 import WelcomePage from "./pages/WelcomePage";
-import SearchPage from "./pages/SearchPage/SearchPage";
+import { checkAuth } from "./redux/slices/authSlice";
 
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 const RecipePage = lazy(() => import("./pages/RecipePage/RecipePage"));
