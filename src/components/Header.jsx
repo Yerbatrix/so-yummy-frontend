@@ -35,6 +35,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Link as RouterLink, useNavigate } from "react-router-dom";
 import { logout, updateUser, fetchUserData } from "../redux/slices/authSlice";
+import ThemeToggle from "./ThemeToggle";
 import axios from "../redux/axiosConfig";
 
 const Header = () => {
@@ -215,7 +216,7 @@ const Header = () => {
             </Menu>
           )}
 
-          <Switch
+          {/* <Switch
             ml={4}
             display={{ base: "none", md: "block" }}
             css={{
@@ -226,8 +227,8 @@ const Header = () => {
                 backgroundColor: "white",
               },
             }}
-          />
-
+          /> */}
+          <ThemeToggle />
           {/* Mobile and Tablet Menu Button */}
           <IconButton
             display={{ base: "flex", md: "none" }}

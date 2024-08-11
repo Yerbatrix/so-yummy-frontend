@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { lazy, Suspense } from "react";
 import {
+  Navigate,
   Route,
   BrowserRouter as Router,
   Routes,
-  Navigate,
 } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import PrivateRoute from "./components/PrivateRoute";
@@ -14,10 +14,10 @@ import Favorites from "./pages/Favorites/Favorites";
 import MainPage from "./pages/MainPage";
 import MyRecipes from "./pages/MyRecipes/MyRecipes";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import SearchPage from "./pages/SearchPage/SearchPage";
 import ShoppingListPage from "./pages/ShoppingListPage/ShoppingListPage";
 import SigninPage from "./pages/SignInPage/SigninPage";
 import WelcomePage from "./pages/WelcomePage";
-import SearchPage from "./pages/SearchPage/SearchPage";
 import Loader from "./components/Loader/Loader";
 import Layout from "./components/Layout"; // Importujemy Layout
 import { fetchUserData, checkAuth } from "./redux/slices/authSlice";

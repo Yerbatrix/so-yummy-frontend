@@ -14,12 +14,6 @@ export const Container = styled.div`
   @media only screen and ${devices.tablet} {
     top: 347px;
   }
-  @media only screen and ${devices.desktopMini} {
-    position: static;
-    display: inline;
-    flex-direction: column;
-    max-width: 500px;
-  }
   @media only screen and ${devices.desktop} {
     position: static;
     display: inline;
