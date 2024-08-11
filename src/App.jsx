@@ -18,7 +18,6 @@ import SearchPage from "./pages/SearchPage/SearchPage";
 import ShoppingListPage from "./pages/ShoppingListPage/ShoppingListPage";
 import SigninPage from "./pages/SignInPage/SigninPage";
 import WelcomePage from "./pages/WelcomePage";
-import SearchPage from "./pages/SearchPage/SearchPage";
 import Loader from "./components/Loader/Loader";
 import Layout from "./components/Layout"; // Importujemy Layout
 import { fetchUserData, checkAuth } from "./redux/slices/authSlice";

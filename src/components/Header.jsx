@@ -143,7 +143,6 @@ const Header = () => {
           align="center"
           justify="center"
           fontWeight="500"
-          fontSize="14px"
         >
           {[
             "main",
