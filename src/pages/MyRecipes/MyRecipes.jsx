@@ -65,7 +65,12 @@ const MyRecipes = () => {
 
       return (
         <div key={recipe._id} className="recipe">
-          <img src={fullThumbUrl} alt={recipe.title} className="recipe-image" />
+          <img
+            crossOrigin="anonymous"
+            src={fullThumbUrl}
+            alt={recipe.title}
+            className="recipe-image"
+          />
           <div className="recipe-details">
             <h2>{recipe.title}</h2>
             <p className="recipe-description">{recipe.description}</p>
