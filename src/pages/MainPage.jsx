@@ -1,5 +1,4 @@
 import { ArrowForwardIcon } from "@chakra-ui/icons";
-
 import {
   Box,
   Button,
@@ -10,26 +9,68 @@ import {
   Image,
   Link,
   Text,
+  useBreakpointValue,
 } from "@chakra-ui/react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import SearchBar from "../components/Search/SearchBar";
 
 const MainPage = () => {
+  const [recipes, setRecipes] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchRecipes = async () => {
+      try {
+        const { data } = await axios.get(
+          "https://t4-soyummy-api-2752d40c2586.herokuapp.com/api/recipes/"
+        );
+        const categorizedRecipes = data.reduce((acc, recipe) => {
+          const category = recipe.category.toLowerCase();
+          if (!acc[category]) {
+            acc[category] = [];
+          }
+          acc[category].push({
+            id: recipe._id,
+            name: recipe.title,
+            src: recipe.thumb,
+            link: `/recipes/${recipe._id}`,
+          });
+          return acc;
+        }, {});
+
+        setRecipes(categorizedRecipes);
+      } catch (error) {
+        setError("Error fetching recipes.");
+        console.error("Error fetching recipes:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRecipes();
+  }, []);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
+
+  const categories = ["breakfast", "miscellaneous", "chicken", "desserts"];
+
   return (
     <>
       <HeroSection />
-      <Section
-        title="Breakfast"
-        images={breakfastImages}
-        category="breakfast"
-      />
-      <Section
-        title="Miscellaneous"
-        images={miscellaneousImages}
-        category="miscellaneous"
-      />
-      <Section title="Chicken" images={chickenImages} category="chicken" />
-      <Section title="Desserts" images={dessertsImages} category="desserts" />
+      {categories.map((category) =>
+        recipes[category] && recipes[category].length > 0 ? (
+          <Section
+            key={category}
+            title={category.charAt(0).toUpperCase() + category.slice(1)}
+            images={recipes[category]}
+            category={category}
+          />
+        ) : null
+      )}
       <OtherImagesButton />
     </>
   );
@@ -51,7 +92,7 @@ const HeroSection = () => {
     >
       {/* Left Section */}
       <Flex
-        height={{ base: "100vh", md: "auto" }}
+        height={{ base: "100%", md: "auto" }}
         direction="column"
         align="left"
         justifyContent={{ base: "space-between", md: "center" }}
@@ -60,28 +101,23 @@ const HeroSection = () => {
         p={4}
         zIndex={1}
       >
-        <box>
+        <Box>
           <Heading
             as="h1"
-            size="2xl"
             mb={4}
-            sx={{
-              fontSize: "5rem",
-              fontWeight: 400,
-              lineHeight: "100px",
-              letterSpacing: "-0.005em",
-            }}
+            fontSize={{ base: "45px", md: "70px", lg: "80px" }}
+            fontWeight="500"
           >
             <Text as="span" color="hsla(76, 52%, 44%, 1)">
               So
             </Text>
             Yummy
           </Heading>
-          <Text fontSize={{ base: "1rem", md: "1.5rem" }} mb={4}>
+          <Text fontSize={{ base: "1rem", md: "1.2rem", lg: "1.5rem" }} mb={4}>
             "What to cook?" is not only a recipe app, it is, in fact, your
             cookbook. You can add your own recipes to save them for the future.
           </Text>
-        </box>
+        </Box>
         <Flex
           direction={{ base: "column", md: "row" }}
           align="left"
@@ -98,15 +134,15 @@ const HeroSection = () => {
         align="center"
         justify="center"
         width={{ base: "100%", md: "50%" }}
-        height={{ base: "300px", md: "auto" }}
+        height={{ base: "100px", md: "auto" }}
       >
         {/* Background layer */}
         <Box
           position="absolute"
           width="1241px"
           height="912px"
-          top={{ base: "-308px", md: "-628px" }}
-          left={{ base: "250px", md: "50px" }}
+          top={{ base: "-500px", md: "-628px" }}
+          left={{ base: "150px", md: "50px" }}
           backgroundColor="hsla(75, 56%, 89%, 1)"
           transform={{ base: "rotate(50deg)", md: "rotate(10.57deg)" }}
           zIndex="-5"
@@ -115,11 +151,11 @@ const HeroSection = () => {
         />
         <Box
           position="absolute"
-          top={{ base: "-250px", md: "0px", lg: "0px" }}
-          left={{ base: "200px", md: "100px", lg: "300px" }}
+          top={{ base: "-300px", md: "0px", lg: "0px" }}
+          left={{ base: "70px", md: "100px", lg: "300px" }}
         >
-          <Text
-            fontSize="14px"
+          <Box
+            fontSize={{ base: "12px", md: "14px" }}
             fontWeight="500"
             backgroundColor="white"
             borderRadius="20px"
@@ -141,20 +177,19 @@ const HeroSection = () => {
                   </Link>
                 </Box>
                 <Icon as={ArrowForwardIcon} boxSize={5} color="gray.500" />{" "}
-                {/* Arrow icon */}
               </Flex>
             </Flex>
-          </Text>
+          </Box>
         </Box>
 
         {/* Image layer */}
         <Box
           position="absolute"
-          width={{ base: "220px", md: "578px" }}
+          width={{ base: "340px", md: "458px", lg: "578px" }}
           height="539px"
-          top={{ base: "-450px", md: "-200px" }}
-          left="auto"
-          right={{ base: "130px", md: "0" }}
+          top={{ base: "-510px", md: "-200px" }}
+          left={{ base: "-10px", md: "auto" }}
+          right={{ base: "70px", md: "0" }}
           opacity="1"
           zIndex={-1}
           display={{ base: "block", md: "block" }}
@@ -169,7 +204,7 @@ const HeroSection = () => {
         </Box>
         <Box
           position="absolute"
-          width={{ base: "750px", md: "876px" }}
+          width={{ base: "550px", md: "876px" }}
           height="944px"
           top={{ base: "-700px", md: "-486px" }}
           left={{ base: "-130px", md: "-87px" }}
@@ -186,7 +221,7 @@ const HeroSection = () => {
         </Box>
         <Box
           position="absolute"
-          width={{ base: "750px", md: "876px" }}
+          width={{ base: "10px", md: "876px" }}
           height="944px"
           top={{ base: "-700px", md: "-700px" }}
           left={{ base: "-130px", md: "-850px", lg: "-1150px" }}
@@ -203,12 +238,18 @@ const HeroSection = () => {
           />
         </Box>
       </Flex>
-      s
     </Box>
   );
 };
 
 const Section = ({ title, images, category }) => {
+  // Use Chakra UI's useBreakpointValue hook to get the number of images based on screen size
+  const displayCount = useBreakpointValue({
+    base: 1, // mobile
+    md: 2, // tablet
+    lg: 4, // desktop
+  });
+
   return (
     <Box p={8} width="100%" overflow="hidden" position="relative" zIndex="2">
       <Box maxWidth="1440px" mx="auto">
@@ -217,39 +258,40 @@ const Section = ({ title, images, category }) => {
         </Heading>
         <Grid
           templateColumns={{
-            base: "repeat(1, 1fr)",
-            md: "repeat(2, 1fr)",
-            lg: "repeat(4,1fr)",
+            base: `repeat(${displayCount}, 1fr)`,
+            md: `repeat(${displayCount}, 1fr)`,
+            lg: `repeat(${displayCount}, 1fr)`,
           }}
           gap={4}
         >
-          {images.map((image, index) => (
-            <Box key={index} position="relative" width="100%" mb={4}>
-              <Link as={RouterLink} to={image.link}>
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  width="100%"
-                  height="auto"
-                  borderRadius="md"
-                  objectFit="cover"
-                />
-                <Box
-                  position="absolute"
-                  bottom="5"
-                  left="7"
-                  width="80%"
-                  bg="white"
-                  color="black"
-                  p={2}
-                  textAlign="center"
-                  borderRadius="10px"
-                >
-                  {image.name}
-                </Box>
-              </Link>
-            </Box>
-          ))}
+          {images &&
+            images.slice(0, displayCount).map((image, index) => (
+              <Box key={index} position="relative" width="100%" mb={4}>
+                <Link as={RouterLink} to={image.link}>
+                  <Image
+                    src={image.src}
+                    alt={image.name}
+                    width="100%"
+                    height="auto"
+                    borderRadius="md"
+                    objectFit="cover"
+                  />
+                  <Box
+                    position="absolute"
+                    bottom="5"
+                    left="7"
+                    width="80%"
+                    bg="white"
+                    color="black"
+                    p={2}
+                    textAlign="center"
+                    borderRadius="10px"
+                  >
+                    {image.name}
+                  </Box>
+                </Link>
+              </Box>
+            ))}
         </Grid>
         <Box textAlign="right" mt={4}>
           <Button
@@ -288,113 +330,5 @@ const OtherImagesButton = () => {
     </Box>
   );
 };
-
-const breakfastImages = [
-  {
-    src: "/images/assorted-sliced-fruits-in-white-ceramic-bowl-1092730 1.jpg",
-    alt: "Breakfast Item 1",
-    name: "Pancakes",
-    link: "/pancakes",
-  },
-  {
-    src: "/images/M6A1135.jpg",
-    alt: "Breakfast Item 2",
-    name: "Waffles",
-    link: "/pancakes",
-  },
-  {
-    src: "/images/Spinach_quinoa_patties_01.jpg",
-    alt: "Breakfast Item 3",
-    name: "Omelette",
-    link: "/pancakes",
-  },
-  {
-    src: "/images/Spinach_quinoa_patties_01 (1).jpg",
-    alt: "Breakfast Item 4",
-    name: "Smoothie",
-    link: "/pancakes",
-  },
-];
-
-const miscellaneousImages = [
-  {
-    src: "/images/m1.jpg",
-    alt: "Miscellaneous Item 1",
-    name: "Spring Rolls",
-    link: "/pancakes",
-  },
-  {
-    src: "/images/m2.jpg",
-    alt: "Miscellaneous Item 2",
-    name: "Samosas",
-    link: "/pancakes",
-  },
-  {
-    src: "/images/m3.jpg",
-    alt: "Miscellaneous Item 3",
-    name: "Bruschetta",
-    link: "/pancakes",
-  },
-  {
-    src: "/images/m4.jpg",
-    alt: "Miscellaneous Item 4",
-    name: "Guacamole",
-    link: "/pancakes",
-  },
-];
-
-const chickenImages = [
-  {
-    src: "/images/chicken1.jpg",
-    alt: "Chicken Item 1",
-    name: "Grilled Chicken",
-    link: "/pancakes",
-  },
-  {
-    src: "/images/chicken2.jpg",
-    alt: "Chicken Item 2",
-    name: "Chicken Curry",
-    link: "/pancakes",
-  },
-  {
-    src: "/images/chicken3.jpg",
-    alt: "Chicken Item 3",
-    name: "Chicken Salad",
-    link: "/pancakes",
-  },
-  {
-    src: "/images/chicken4.jpg",
-    alt: "Chicken Item 4",
-    name: "Chicken Wings",
-    link: "/pancakes",
-  },
-];
-
-const dessertsImages = [
-  {
-    src: "images/desert1.jpg",
-    alt: "Dessert Item 1",
-    name: "Chocolate Cake",
-    link: "/pancakes",
-  },
-  {
-    src: "images/desert2.jpg",
-    alt: "Dessert Item 2",
-    name: "Ice Cream",
-    link: "/pancakes",
-  },
-  {
-    src: "/images/desertr3.jpg",
-    alt: "Dessert Item 3",
-    name: "Cookies",
-    link: "/pancakes",
-  },
-  {
-    src: "/images/desert4.jpg",
-    alt: "Dessert Item 4",
-    name: "Brownies",
-    link: "/pancakes",
-  },
-];
 
 export default MainPage;

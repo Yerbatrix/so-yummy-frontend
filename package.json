@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "start": "react-scripts start",
     "dev": "vite",
     "build": "vite build",
     "deploy": "gh-pages -d dist",
@@ -17,6 +18,7 @@
     "@emotion/styled": "^11.13.0",
     "@reduxjs/toolkit": "^2.2.7",
     "axios": "^1.7.3",
+    "bootstrap-icons": "^1.11.3",
     "framer-motion": "^11.3.19",
     "joi": "^17.13.3",
     "nanoid": "^5.0.7",
@@ -33,7 +35,8 @@
     "react-toastify": "^10.0.5",
     "redux": "^5.0.1",
     "redux-persist": "^6.0.0",
-    "styled-components": "^6.1.12"
+    "styled-components": "^6.1.12",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
@@ -44,6 +47,6 @@
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
     "gh-pages": "^6.1.1",
-    "vite": "^5.3.5"
+    "vite": "^5.4.0"
   }
 }

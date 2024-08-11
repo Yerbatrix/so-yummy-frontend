@@ -1,46 +1,37 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import IngredientsTitle from "../../components/IngredientsTitle/IngredientsTitle";
-import ShoppingList from "../../components/ShoppingList/ShoppingList";
+import { ShoppingList } from "../../components/ShoppingList/ShoppingList";
 import { getShoppingList } from "../../redux/shoppingList/operations";
 import {
-  selectError,
+  selectShoppingList,
   selectIsLoading,
+  selectError,
 } from "../../redux/shoppingList/selectors";
-import {
-  Container,
-  Info,
-  PageTitleText,
-  SectionShoppingList,
-  Wrap,
-} from "./ShoppingListPage.styled";
+import { Container, MainPageTitle } from "./ShoppingListPage.styled";
 
 const ShoppingListPage = () => {
+  const dispatch = useDispatch();
+  const shoppingList = useSelector(selectShoppingList);
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
-  const dispatch = useDispatch();
-  const isMountedRef = useRef(false);
 
   useEffect(() => {
-    if (!isMountedRef.current) {
-      dispatch(getShoppingList());
-      isMountedRef.current = true;
-    }
-  }, [dispatch, isMountedRef]);
+    dispatch(getShoppingList());
+  }, [dispatch]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
-    <SectionShoppingList>
-      <Container>
-        <Wrap>
-          <PageTitleText>Shopping list</PageTitleText>
-        </Wrap>
-        <Wrap>
-          <IngredientsTitle title="Product" action="Remove" />
-        </Wrap>
-        {error && <Info>{error}</Info>}
-        {!isLoading && <ShoppingList />}
-      </Container>
-    </SectionShoppingList>
+    <Container>
+      <MainPageTitle>Shopping List</MainPageTitle>
+      <ShoppingList shoppingList={shoppingList} />
+    </Container>
   );
 };
 

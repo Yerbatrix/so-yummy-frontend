@@ -7,8 +7,8 @@ export const getPopularRecipes = createAsyncThunk(
   "recipes/getPopular",
   async (_, thunkAPI) => {
     try {
-      const { data } = await axios.get("api/recipes/popular-recipes/");
-      return data.popularRecipes;
+      const { data } = await axios.get("api/recipes/popular/");
+      return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

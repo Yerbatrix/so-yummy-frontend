@@ -18,7 +18,7 @@ export const RecipeHeroContainer = styled.div`
   width: 100%;
   height: 455px;
   margin-bottom: 32px;
-  padding-top: 144px;
+  padding-top: 120px;
   padding-bottom: 90px;
   background-size: 100%;
   margin-left: auto;
@@ -32,7 +32,7 @@ export const RecipeHeroContainer = styled.div`
 
   @media screen and (min-width: 768px) {
     margin-bottom: 50px;
-    padding-top: 136px;
+    padding-top: 120px;
     padding-bottom: 32px;
     height: 495px;
     background-image: url(${rpTab});
@@ -44,8 +44,7 @@ export const RecipeHeroContainer = styled.div`
     }
   }
   @media screen and (min-width: 1280px) {
-    padding-top: 164px;
-    height: 493px;
+    height: 100%;
     background-image: url(${rpDesk});
     @media screen and (min-device-pixel-ratio: 2),
       screen and (min-resolution: 192dpi),
@@ -64,9 +63,8 @@ export const RecipeHeroTitle = styled.h1`
   font-size: 24px;
   line-height: 1;
   margin-top: 18px;
-  color: #fafafa;
+  color: #8baa36;
   max-width: 330px;
-  overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 1;
@@ -75,7 +73,7 @@ export const RecipeHeroTitle = styled.h1`
   @media screen and (min-width: 768px) {
     max-width: 680px;
     font-size: 44px;
-    margin-bottom: 24px;
+    margin-bottom: 30px;
   }
   @media screen and (min-width: 1280px) {
     max-width: 1000px;
@@ -83,12 +81,14 @@ export const RecipeHeroTitle = styled.h1`
 `;
 
 export const RecipeHeroText = styled.p`
+  font-family: "Poppins";
+  font-weight: 500;
   text-align: center;
   font-size: 12px;
   line-height: 1.33;
   letter-spacing: -0.02em;
   width: 303px;
-  margin-bottom: 15px;
+  margin-bottom: 25px;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -108,20 +108,21 @@ export const RecipeHeroText = styled.p`
 `;
 
 export const CookingTime = styled.div`
+  font-family: "Poppins";
   display: flex;
   width: fit-content;
   align-items: center;
   color: black;
-  margin-top: 42px;
+  margin-top: 50px;
   font-weight: 500;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.4;
   letter-spacing: -0.24px;
   height: 14px;
   @media screen and (min-width: 768px) {
     height: 20px;
     margin-top: 60px;
-    font-size: 14px;
+    font-size: 16px;
   }
   @media screen and (min-width: 1280px) {
     margin-top: 48px;

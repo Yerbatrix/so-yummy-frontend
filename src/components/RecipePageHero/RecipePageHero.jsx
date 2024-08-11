@@ -1,5 +1,5 @@
-import React from "react";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import RecipePageBtn from "../RecipePageBtn/RecipePageBtn";
+
 import {
   RecipeHeroContainer,
   RecipeHeroTitle,
@@ -7,26 +7,16 @@ import {
   CookingTime,
   ClockIconStyled,
 } from "./RecipePageHero.styled";
-import axios from "../../redux/axiosConfig";
-
-export const fetchRecipeById = createAsyncThunk(
-  "recipes/fetchRecipeById",
-  async (recipeId, thunkAPI) => {
-    try {
-      const response = await axios.get(`/api/recipes/${recipeId}`);
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
 
 const RecipePageHero = ({ recipeObj }) => {
   const { title, description, time } = recipeObj;
+
   return (
     <RecipeHeroContainer>
       <RecipeHeroTitle>{title}</RecipeHeroTitle>
       <RecipeHeroText>{description}</RecipeHeroText>
+
+      <RecipePageBtn text="Add to favorite recipes" />
       <CookingTime>
         <ClockIconStyled />
         <span>{time + `min`}</span>
@@ -36,4 +26,3 @@ const RecipePageHero = ({ recipeObj }) => {
 };
 
 export default RecipePageHero;
-

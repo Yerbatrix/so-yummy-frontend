@@ -1,50 +1,46 @@
-import { createSlice, isAnyOf } from "@reduxjs/toolkit";
-import { getShoppingList, updateShoppingList } from "./operations";
+import { createSlice } from "@reduxjs/toolkit";
+import { deleteIngrFromShoppingList, getShoppingList } from "./operations";
 
 const initialState = {
   items: [],
+  deletedProductId: null,
   isLoading: false,
   error: null,
 };
 
-const extraActions = [getShoppingList, updateShoppingList];
-
-const getActions = (type) =>
-  isAnyOf(...extraActions.map((action) => action[type]));
-
-const getShoppingListFulfilledReducer = (state, action) => {
-  state.shoppingList = action.payload;
-};
-
-const updateShoppingListFulfilledReducer = (state, action) => {
-  state.shoppingList = action.payload;
-};
-
-const shoppingListAnyPendingReducer = (state) => {
-  state.isLoading = true;
-};
-
-const shoppingListAnyFulfilledReducer = (state) => {
-  state.isLoading = false;
-  state.error = null;
-};
-
-const shoppingListAnyRejectedReducer = (state, action) => {
-  state.isLoading = false;
-  state.error = action.payload;
-};
-
-const shoppingListSlice = createSlice({
+const shoppingList = createSlice({
   name: "shoppingList",
   initialState,
-  reducers: {},
-  extraReducers: (builder) =>
+  extraReducers: (builder) => {
     builder
-      .addCase(getShoppingList.fulfilled, getShoppingListFulfilledReducer)
-      .addCase(updateShoppingList.fulfilled, updateShoppingListFulfilledReducer)
-      .addMatcher(getActions("pending"), shoppingListAnyPendingReducer)
-      .addMatcher(getActions("rejected"), shoppingListAnyRejectedReducer)
-      .addMatcher(getActions("fulfilled"), shoppingListAnyFulfilledReducer),
+      .addCase(getShoppingList.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(getShoppingList.fulfilled, (state, { payload }) => {
+        state.items = payload; // Aktualizacja stanu na podstawie pobranych danych
+        state.isLoading = false;
+      })
+      .addCase(getShoppingList.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
+      })
+      .addCase(deleteIngrFromShoppingList.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(
+        deleteIngrFromShoppingList.fulfilled,
+        (state, { payload: ingredientId }) => {
+          state.items = state.items.filter((item) => item._id !== ingredientId); // Usunięcie składnika z listy
+          state.isLoading = false;
+        }
+      )
+      .addCase(deleteIngrFromShoppingList.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
+      });
+  },
 });
 
-export const shoppingListReducer = shoppingListSlice.reducer;
+export const shoppingListReducer = shoppingList.reducer;

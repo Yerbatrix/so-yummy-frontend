@@ -13,11 +13,9 @@ const root = createRoot(container);
 store.dispatch(checkAuth());
 
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <ChakraProvider theme={theme}>
-        <App />
-      </ChakraProvider>
-    </Provider>
-  </React.StrictMode>
+  <Provider store={store}>
+    <ChakraProvider theme={theme}>
+      <App />
+    </ChakraProvider>
+  </Provider>
 );
