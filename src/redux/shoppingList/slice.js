@@ -31,11 +31,8 @@ const shoppingList = createSlice({
         state.error = null;
       })
       .addCase(deleteIngrFromShoppingList.fulfilled, (state, { payload }) => {
-        state.shoppingList = state.shoppingList.filter(
-          (product) => product.ingredientId !== payload.ingredientId
-        );
-        console.log(state.shoppingList);
-        state.deletedProductId = payload.ingredientId;
+        state.items = payload;
+        state.deletedProductId = null;
         state.isLoading = false;
       })
       .addCase(deleteIngrFromShoppingList.rejected, (state, { payload }) => {

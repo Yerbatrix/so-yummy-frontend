@@ -19,10 +19,7 @@ export const deleteIngrFromShoppingList = createAsyncThunk(
   "shoppingList/updateShoppingList",
   async (productId, thunkAPI) => {
     try {
-      const { data } = await axios.put(
-        `api/shopping-list/${productId}`,
-        productId
-      );
+      const { data } = await axios.delete(`api/shopping-list/${productId}`);
       return data.updatedList;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
