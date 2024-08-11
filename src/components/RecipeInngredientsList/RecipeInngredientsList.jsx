@@ -2,8 +2,6 @@ import RecipeIngredientsItem from "../RecipeInngredientsItem/RecipeInngredientsI
 import { IngredientsListStyled } from "./RecipeInngredientsList.styled";
 
 const RecipeInngredientsList = ({ ingredients, recipeId }) => {
-  console.log("Ingredients:", ingredients);
-
   return (
     <IngredientsListStyled>
       {ingredients.map((ingredient) => (

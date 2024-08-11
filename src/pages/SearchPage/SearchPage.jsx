@@ -3,7 +3,12 @@ import { useEffect, useState } from "react";
 import { SearchPageTitle, SearchPageContainer } from "./SearchPage.styled";
 import SearchForm from "../../components/Search/SearchForm";
 import SearchTypeSelector from "../../components/Search/SearchTypeSelector";
-import { ResultsContainer, ResultItem, NoResults, StyledLink } from "./SearchPage.styled";
+import {
+  ResultsContainer,
+  ResultItem,
+  NoResults,
+  StyledLink,
+} from "./SearchPage.styled";
 
 const SearchPage = () => {
   const location = useLocation();
@@ -47,39 +52,43 @@ const SearchPage = () => {
       return;
     }
 
-    let url = '';
+    let url = "";
     if (type === "title") {
-      url = `https://t4-soyummy-api-2752d40c2586.herokuapp.com/api/recipes/search?keyword=${encodeURIComponent(query)}`;
+      url = `https://t4-soyummy-api-2752d40c2586.herokuapp.com/api/recipes/search?keyword=${encodeURIComponent(
+        query
+      )}`;
     } else if (type === "ingredients") {
-      url = `https://t4-soyummy-api-2752d40c2586.herokuapp.com/api/ingredients?ttl=${encodeURIComponent(query)}`;
+      url = `https://t4-soyummy-api-2752d40c2586.herokuapp.com/api/ingredients?ttl=${encodeURIComponent(
+        query
+      )}`;
     }
-
-    console.log("Fetching URL:", url);
 
     try {
       const response = await fetch(url, {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Accept': 'application/json',
+          Accept: "application/json",
         },
       });
 
-      console.log("Response status:", response.status);
-
       if (!response.ok) {
         const errorText = await response.text();
-        throw new Error(`HTTP error! Status: ${response.status}. Response: ${errorText}`);
+        throw new Error(
+          `HTTP error! Status: ${response.status}. Response: ${errorText}`
+        );
       }
 
       const data = await response.json();
-      const resultsData = type === "title" ? data.map(item => ({ ...item, id: item._id })) : data.data.recipes.map(item => ({ ...item, id: item._id }));
-      
+      const resultsData =
+        type === "title"
+          ? data.map((item) => ({ ...item, id: item._id }))
+          : data.data.recipes.map((item) => ({ ...item, id: item._id }));
+
       setResults(resultsData);
-      console.log("Results Data:", resultsData);
     } catch (error) {
       setError(error.message);
       setResults([]);
-      console.error('There was a problem with the fetch operation:', error);
+      console.error("There was a problem with the fetch operation:", error);
     }
   };
 
@@ -102,11 +111,11 @@ const SearchPage = () => {
             <StyledLink to={`/recipes/${item.id}`} key={index}>
               <ResultItem>
                 <img
-                  src={item.thumb || '/images/placeholder.png'}
-                  alt={item.title || 'Recipe'}
+                  src={item.thumb || "/images/placeholder.png"}
+                  alt={item.title || "Recipe"}
                 />
                 <div className="title-container">
-                  <p>{item.title || 'No Title'}</p>
+                  <p>{item.title || "No Title"}</p>
                 </div>
               </ResultItem>
             </StyledLink>
@@ -114,10 +123,7 @@ const SearchPage = () => {
         </ResultsContainer>
       ) : (
         <NoResults>
-          <img
-            src="/images/vegetables.png"
-            alt="No results"
-          />
+          <img src="/images/vegetables.png" alt="No results" />
           <p>Try looking for something else...</p>
         </NoResults>
       )}

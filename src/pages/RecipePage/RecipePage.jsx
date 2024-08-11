@@ -33,11 +33,7 @@ const RecipePage = () => {
           `/api/recipes/${recipeId}/shopping-list`
         );
         setIngredients(ingredientsResponse.data);
-
-        console.log("Loaded recipe:", recipeResponse.data);
-        console.log("Loaded ingredients:", ingredientsResponse.data);
       } catch (error) {
-        console.error("Error loading recipe:", error);
         setError(error);
       } finally {
         setIsLoading(false);
