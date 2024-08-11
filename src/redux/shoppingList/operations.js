@@ -31,3 +31,22 @@ export const deleteIngrFromShoppingList = createAsyncThunk(
     }
   }
 );
+
+export const addIngredientToShoppingList = createAsyncThunk(
+  "shoppingList/addIngredient",
+  async ({ recipeId, ingredientId }, thunkAPI) => {
+    // Dodaj `recipeId` jako argument
+    try {
+      const response = await axios.post(
+        `/api/recipes/${recipeId}/shopping-list`,
+        { ingredientId }
+      );
+
+      return response.data.data.ingredients.find(
+        (ingredient) => ingredient.id === ingredientId
+      );
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);

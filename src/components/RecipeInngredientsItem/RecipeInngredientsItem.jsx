@@ -7,7 +7,11 @@ import {
   Checkbox,
   DescriptionIngredient,
 } from "./RecipeInngredientsItem.styled";
-
+import { useDispatch } from "react-redux";
+import {
+  addIngredientToShoppingList,
+  deleteIngrFromShoppingList,
+} from "../../redux/shoppingList/operations";
 import Food from "../../images/RecipePage/food.svg";
 
 const RecipeIngredientsItem = ({
@@ -15,7 +19,20 @@ const RecipeIngredientsItem = ({
   nameIngredient,
   descriptionIngredient,
   weight,
+  isChecked,
+  ingredientId,
+  recipeId, // Dodanie recipeId jako props
 }) => {
+  const dispatch = useDispatch();
+
+  const handleCheckboxChange = () => {
+    if (isChecked) {
+      dispatch(deleteIngrFromShoppingList({ recipeId, ingredientId }));
+    } else {
+      dispatch(addIngredientToShoppingList({ recipeId, ingredientId }));
+    }
+  };
+
   return (
     <RecipeItemWrapper>
       <ImageWrapper>
@@ -35,8 +52,8 @@ const RecipeIngredientsItem = ({
       <WeightIngredient>{weight}</WeightIngredient>
       <Checkbox
         type="checkbox"
-        // onChange={}
-        // checked={}
+        checked={isChecked}
+        onChange={handleCheckboxChange}
       />
     </RecipeItemWrapper>
   );

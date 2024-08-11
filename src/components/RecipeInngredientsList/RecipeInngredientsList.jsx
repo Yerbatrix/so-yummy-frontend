@@ -1,20 +1,24 @@
-import RecipeInngredientsItem from "../RecipeInngredientsItem/RecipeInngredientsItem";
+import RecipeIngredientsItem from "../RecipeInngredientsItem/RecipeInngredientsItem";
 import { IngredientsListStyled } from "./RecipeInngredientsList.styled";
 
-const RecipeInngredientList = ({ ingredients }) => {
+const RecipeInngredientsList = ({ ingredients, recipeId }) => {
+  console.log("Ingredients:", ingredients);
+
   return (
     <IngredientsListStyled>
-      {ingredients.map((ingredient, index) => (
-        <RecipeInngredientsItem
-          key={`${ingredient.id._id}-${index}`}
-          image={ingredient.id.thb}
-          nameIngredient={ingredient.id.ttl}
-          descriptionIngredient={ingredient.id.desc}
-          weight={ingredient.measure ? ingredient.measure : "any"}
+      {ingredients.map((ingredient) => (
+        <RecipeIngredientsItem
+          key={ingredient.id}
+          image={ingredient.thb}
+          nameIngredient={ingredient.ttl || "No name available"}
+          descriptionIngredient={ingredient.desc || ""}
+          weight={ingredient.measure || "any"}
+          ingredientId={ingredient.id}
+          recipeId={recipeId} // Przekazanie recipeId do każdego składnika
         />
       ))}
     </IngredientsListStyled>
   );
 };
 
-export default RecipeInngredientList;
+export default RecipeInngredientsList;
