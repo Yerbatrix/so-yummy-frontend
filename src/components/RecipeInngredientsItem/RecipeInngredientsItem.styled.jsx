@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import CheckIcon from "../../images/RecipePage/checkbox.svg";
+import CheckIcon from "/images/checkbox.svg";
 
 export const RecipeItemWrapper = styled.div`
   display: flex;
