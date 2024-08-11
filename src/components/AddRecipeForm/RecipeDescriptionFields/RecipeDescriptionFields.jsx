@@ -89,7 +89,7 @@ const RecipeDescriptionFields = ({
           <DescrImage>
             <source srcSet={photoMobile} media="(max-width: 1439px)" />
             <source srcSet={photoDesktop} media="(min-width: 1440px)" />
-            <img src={photoMobile} alt="addphoto" />
+            <img crossOrigin="anonymous" src={photoMobile} alt="addphoto" />
           </DescrImage>
         </label>
         <DescrFileInput type="file" accept=".jpg, .jpeg, .png" id="photo" />

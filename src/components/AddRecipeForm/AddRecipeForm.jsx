@@ -132,7 +132,7 @@ const AddRecipeForm = () => {
     try {
       const formData = new FormData();
       if (image) {
-        formData.append("image", image); // Przesyłamy rzeczywisty plik
+        formData.append("image", image);
       }
 
       formData.append("title", title);
