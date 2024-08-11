@@ -57,7 +57,13 @@ const Favorites = () => {
     .map((recipe) => (
       <div key={recipe._id} className="recipe">
         <img
-          src={recipe.thumb || noImage}
+          src={
+            recipe.thumb
+              ? recipe.thumb.startsWith("http")
+                ? recipe.thumb
+                : `https://t4-soyummy-api-2752d40c2586.herokuapp.com/uploads/recipes/${recipe.thumb}`
+              : noImage
+          }
           alt={recipe.title}
           className="recipe-image"
         />

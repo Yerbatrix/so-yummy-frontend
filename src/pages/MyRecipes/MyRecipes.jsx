@@ -60,7 +60,9 @@ const MyRecipes = () => {
     .slice(currentPage * recipesPerPage, (currentPage + 1) * recipesPerPage)
     .map((recipe) => {
       const fullThumbUrl = recipe.thumb
-        ? `https://t4-soyummy-api-2752d40c2586.herokuapp.com/${recipe.thumb}`
+        ? recipe.thumb.startsWith("http")
+          ? recipe.thumb
+          : `https://t4-soyummy-api-2752d40c2586.herokuapp.com/uploads/recipes/${recipe.thumb}`
         : noImage;
 
       return (
