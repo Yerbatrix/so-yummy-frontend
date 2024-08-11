@@ -5,6 +5,7 @@ const initialState = {
   isAuthenticated: false,
   user: null,
   token: localStorage.getItem("token") || null,
+  loading: true,
 };
 
 const authSlice = createSlice({
@@ -15,12 +16,14 @@ const authSlice = createSlice({
       state.isAuthenticated = true;
       state.user = action.payload.user;
       state.token = action.payload.token;
+      state.loading = false;
       localStorage.setItem("token", action.payload.token);
     },
     logout(state) {
       state.isAuthenticated = false;
       state.user = null;
       state.token = null;
+      state.loading = false;
       localStorage.removeItem("token");
     },
     checkAuth(state) {
@@ -32,6 +35,7 @@ const authSlice = createSlice({
         state.isAuthenticated = false;
         state.token = null;
       }
+      state.loading = false;
     },
     setUser(state, action) {
       state.user = action.payload;
@@ -47,12 +51,22 @@ const authSlice = createSlice({
 export const { login, logout, checkAuth, setUser, updateUser } =
   authSlice.actions;
 
-export const fetchUserData = () => async (dispatch) => {
+export const fetchUserData = () => async (dispatch, getState) => {
   try {
-    const response = await axios.get("/api/auth/user");
+    const token = getState().auth.token;
+    if (!token) {
+      throw new Error("No token found");
+    }
+
+    const response = await axios.get("/api/auth/user", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     dispatch(setUser(response.data));
   } catch (error) {
     console.error("Failed to fetch user data", error);
+    dispatch(logout());
   }
 };
 

@@ -4,7 +4,11 @@ import { useSelector } from "react-redux";
 import Layout from "./Layout";
 
 const PrivateRoute = ({ children }) => {
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const { isAuthenticated, loading } = useSelector((state) => state.auth);
+
+  if (loading) {
+    return <div>Loading...</div>; // Możesz dodać tutaj bardziej zaawansowany loader
+  }
 
   return isAuthenticated ? (
     <Layout>{children}</Layout>

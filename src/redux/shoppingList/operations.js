@@ -8,7 +8,12 @@ export const getShoppingList = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const { data } = await axios.get(`api/shopping-list`);
-      return data.data.results.flatMap((list) => list.ingredients);
+
+      if (data && data.data && Array.isArray(data.data.results)) {
+        return data.data.results.flatMap((list) => list.ingredients);
+      } else {
+        return [];
+      }
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -35,7 +40,6 @@ export const deleteIngrFromShoppingList = createAsyncThunk(
 export const addIngredientToShoppingList = createAsyncThunk(
   "shoppingList/addIngredient",
   async ({ recipeId, ingredientId }, thunkAPI) => {
-    // Dodaj `recipeId` jako argument
     try {
       const response = await axios.post(
         `/api/recipes/${recipeId}/shopping-list`,

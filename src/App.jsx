@@ -27,7 +27,7 @@ const RecipePage = lazy(() => import("./pages/RecipePage/RecipePage"));
 
 function App() {
   const dispatch = useDispatch();
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const { isAuthenticated, loading } = useSelector((state) => state.auth);
 
   useEffect(() => {
     dispatch(checkAuth());
@@ -35,6 +35,10 @@ function App() {
       dispatch(fetchUserData());
     }
   }, [dispatch, isAuthenticated]);
+
+  if (loading) {
+    return <Loader />; // Wstawienie loadera podczas sprawdzania autoryzacji
+  }
 
   return (
     <Router basename="/">
