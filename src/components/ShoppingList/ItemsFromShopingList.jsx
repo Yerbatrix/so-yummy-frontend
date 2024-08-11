@@ -16,7 +16,7 @@ export const IngredientItem = ({ item }) => {
   const dispatch = useDispatch();
 
   const onClick = () => {
-    dispatch(deleteIngrFromShoppingList(item._id));
+    dispatch(deleteIngrFromShoppingList(item._id)); // Przekazywanie poprawnego ID do operacji usunięcia
   };
 
   return (
