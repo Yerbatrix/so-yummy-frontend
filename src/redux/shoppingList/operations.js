@@ -8,12 +8,7 @@ export const getShoppingList = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const { data } = await axios.get(`api/shopping-list`);
-
-      if (data && data.data && Array.isArray(data.data.results)) {
-        return data.data.results.flatMap((list) => list.ingredients);
-      } else {
-        return [];
-      }
+      return data?.data?.result?.ingredients || [];
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
