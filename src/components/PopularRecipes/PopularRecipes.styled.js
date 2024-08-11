@@ -36,9 +36,10 @@ export const PopularRecipesItem = styled(Link)`
   display: flex;
   padding-bottom: 13px;
   border-bottom: 1px solid rgba(112, 112, 112, 0.17);
+  margin-bottom: 10px;
 
   :not(:last-child) {
-    margin-bottom: 24px;
+    margin-bottom: 10px;
   }
 
   @media screen and (min-width: 768px) {

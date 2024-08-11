@@ -14,6 +14,11 @@ import {
 
 import photoRecipe from "../../images/AddRecipePage/small-photo-recipes.png";
 
+const truncateText = (text, length) => {
+  if (!text) return "";
+  return text.length > length ? `${text.slice(0, length)}...` : text;
+};
+
 const PopularRecipes = () => {
   const dispatch = useDispatch();
   const popularRecipes = useSelector(selectPopularRecipes);
@@ -35,7 +40,9 @@ const PopularRecipes = () => {
               />
               <div>
                 <PopularRecipesSubtitle>{recipe.title}</PopularRecipesSubtitle>
-                <PopularRecipesText>{recipe.instructions}</PopularRecipesText>
+                <PopularRecipesText>
+                  {truncateText(recipe.instructions, 110)}
+                </PopularRecipesText>
               </div>
             </PopularRecipesItem>
           ))}
