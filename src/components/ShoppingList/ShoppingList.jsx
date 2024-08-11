@@ -12,7 +12,7 @@ import {
 import { IngredientItem } from "./ItemsFromShopingList";
 
 export const ShoppingList = () => {
-  const list = useSelector(selectShoppingList);
+  const list = useSelector(selectShoppingList) || [];
 
   return (
     <>

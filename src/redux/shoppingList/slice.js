@@ -18,8 +18,7 @@ const shoppingList = createSlice({
         state.error = null;
       })
       .addCase(getShoppingList.fulfilled, (state, { payload }) => {
-        state.items = payload;
-        state.deletedProductId = [];
+        state.items = payload; // Aktualizacja stanu na podstawie pobranych danych
         state.isLoading = false;
       })
       .addCase(getShoppingList.rejected, (state, { payload }) => {
@@ -30,14 +29,13 @@ const shoppingList = createSlice({
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(deleteIngrFromShoppingList.fulfilled, (state, { payload }) => {
-        state.shoppingList = state.shoppingList.filter(
-          (product) => product.ingredientId !== payload.ingredientId
-        );
-        console.log(state.shoppingList);
-        state.deletedProductId = payload.ingredientId;
-        state.isLoading = false;
-      })
+      .addCase(
+        deleteIngrFromShoppingList.fulfilled,
+        (state, { payload: ingredientId }) => {
+          state.items = state.items.filter((item) => item._id !== ingredientId); // Usunięcie składnika z listy
+          state.isLoading = false;
+        }
+      )
       .addCase(deleteIngrFromShoppingList.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.error = payload;
