@@ -1,10 +1,19 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { SearchButton, SearchInput, FormContainer } from "./SearchForm.styled";
 
 const SearchForm = ({ searchType = "title", onSearch }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const query = params.get("query");
+    if (query) {
+      setSearchTerm(query);
+    }
+  }, [location.search]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
