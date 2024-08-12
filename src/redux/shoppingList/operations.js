@@ -17,15 +17,17 @@ export const getShoppingList = createAsyncThunk(
 
 export const deleteIngrFromShoppingList = createAsyncThunk(
   "shoppingList/deleteIngredient",
-  async (ingredientId, thunkAPI) => {
+  async ({ ingredientId, recipeId }, thunkAPI) => {
     try {
-      const response = await axios.delete(`api/shopping-list/${ingredientId}`);
+      const response = await axios.delete(`api/shopping-list/${ingredientId}`, {
+        data: { recipeId },
+      });
 
       if (response.status !== 200) {
         throw new Error("Failed to delete ingredient from the server");
       }
 
-      return ingredientId;
+      return { ingredientId, recipeId };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -42,7 +44,8 @@ export const addIngredientToShoppingList = createAsyncThunk(
       );
 
       return response.data.data.ingredients.find(
-        (ingredient) => ingredient.id === ingredientId
+        (ingredient) =>
+          ingredient.id === ingredientId && ingredient.recipeId === recipeId
       );
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
