@@ -1,12 +1,6 @@
-import { useState, useEffect } from "react";
-import RecipePageBtn from "../RecipePageBtn/RecipePageBtn";
-import { useSelector } from "react-redux";
-import {
-  checkFavorite,
-  addToFavorite,
-  deleteFavorite,
-} from "../../redux/recipes/operations";
 import { useDispatch } from "react-redux";
+import RecipePageBtn from "../RecipePageBtn/RecipePageBtn";
+import { addToFavorite } from "../../redux/recipes/operations";
 import {
   RecipeHeroContainer,
   RecipeHeroTitle,
@@ -14,61 +8,30 @@ import {
   CookingTime,
   ClockIconStyled,
 } from "./RecipePageHero.styled";
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom"; // Import useParams to get recipeId from URL
 
-const RecipePageHero = ({ recipeObj, id }) => {
+const RecipePageHero = ({ recipeObj }) => {
   const { title, description, time } = recipeObj;
   const dispatch = useDispatch();
-  const [btnText, setBtnText] = useState(false);
+  const { recipeId } = useParams(); // Get recipeId from URL parameters
 
-  const data = useSelector((state) => state.favorites.items);
-  // wiem ze tu selector jest undefined, ale nie wiem czym tu mozna by było go zastapic
-  const { recipeId } = useParams();
-
-  useEffect(() => {
-    if (!data) {
-      dispatch(checkFavorite());
+  const handleAddToFavorite = () => {
+    if (recipeId) {
+      dispatch(addToFavorite(recipeId)); // Use recipeId obtained from URL
+    } else {
+      console.error("Recipe ID is undefined. Unable to add to favorites.");
     }
-  }, [dispatch, data]);
-
-  function removeFromFavorite() {
-    dispatch(deleteFavorite(id));
-    setBtnText(false);
-    return;
-  }
-
-  function getFavorite(recipeId) {
-    if (data) {
-      const recipe = data.some((favorite) => favorite._id === recipeId);
-      return recipe;
-    }
-    return false;
-  }
-
-  function addFavorite() {
-    dispatch(addToFavorite(id));
-    setBtnText(true);
-    return;
-  }
+  };
 
   return (
     <RecipeHeroContainer>
       <RecipeHeroTitle>{title}</RecipeHeroTitle>
       <RecipeHeroText>{description}</RecipeHeroText>
-      {btnText || getFavorite(recipeId) ? (
-        <RecipePageBtn
-          type="button"
-          text={"Remove from favorite recipes"}
-          onClick={removeFromFavorite}
-        />
-      ) : (
-        <RecipePageBtn
-          type="button"
-          text={"Add to favorite recipes"}
-          onClick={addFavorite}
-        />
-      )}
-
+      <RecipePageBtn
+        type="button"
+        text="Add to favorite recipes"
+        fn={handleAddToFavorite}
+      />
       <CookingTime>
         <ClockIconStyled />
         <span>{time + `min`}</span>
