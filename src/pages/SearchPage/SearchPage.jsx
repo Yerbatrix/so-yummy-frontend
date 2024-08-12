@@ -23,7 +23,11 @@ const SearchPage = () => {
     const query = params.get("query");
     const type = params.get("category");
 
-    setSearchType(type || "title");
+    if (type) {
+      setSearchType(type);
+    } else {
+      setSearchType("title");
+    }
 
     if (query) {
       setSearchValue(query);
@@ -104,7 +108,10 @@ const SearchPage = () => {
     <SearchPageContainer>
       <SearchPageTitle>Search</SearchPageTitle>
       <SearchForm searchType={searchType} onSearch={handleSearch} />
-      <SearchTypeSelector onTypeChange={handleTypeChange} />
+      <SearchTypeSelector
+        searchType={searchType}
+        onTypeChange={handleTypeChange}
+      />
       {results.length > 0 ? (
         <ResultsContainer>
           {results.map((item, index) => (

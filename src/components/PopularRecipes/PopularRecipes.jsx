@@ -14,6 +14,11 @@ import {
 
 import photoRecipe from "../../images/AddRecipePage/small-photo-recipes.png";
 
+const truncateText = (text, length) => {
+  if (!text) return "";
+  return text.length > length ? `${text.slice(0, length)}...` : text;
+};
+
 const PopularRecipes = () => {
   const dispatch = useDispatch();
   const popularRecipes = useSelector(selectPopularRecipes);
@@ -28,14 +33,16 @@ const PopularRecipes = () => {
       {popularRecipes && popularRecipes.length > 0 ? (
         <PopularRecipesList>
           {popularRecipes.map((recipe) => (
-            <PopularRecipesItem to={`/recipe/${recipe._id}`} key={recipe._id}>
+            <PopularRecipesItem to={`/recipes/${recipe._id}`} key={recipe._id}>
               <PopularRecipesImage
                 src={recipe.preview || photoRecipe}
                 alt="dish"
               />
               <div>
                 <PopularRecipesSubtitle>{recipe.title}</PopularRecipesSubtitle>
-                <PopularRecipesText>{recipe.instructions}</PopularRecipesText>
+                <PopularRecipesText>
+                  {truncateText(recipe.instructions, 110)}
+                </PopularRecipesText>
               </div>
             </PopularRecipesItem>
           ))}

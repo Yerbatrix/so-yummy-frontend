@@ -109,7 +109,7 @@ const Footer = () => {
           >
             <List spacing={2} mb={4}>
               <ListItem>
-                <Link as={RouterLink} to="/ingredients">
+                <Link as={RouterLink} to="/search?category=ingredients">
                   Ingredients
                 </Link>
               </ListItem>
