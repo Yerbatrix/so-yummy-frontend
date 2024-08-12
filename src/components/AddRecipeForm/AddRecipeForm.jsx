@@ -20,7 +20,7 @@ const AddRecipeForm = () => {
   const [ingredients, setIngredients] = useState([
     { id: nanoid(), unitValue: "tbs", unitNumber: "", name: "" },
   ]);
-  const [image, setImage] = useState(null); // Przechowywanie rzeczywistego pliku
+  const [image, setImage] = useState(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [preparation, setPreparation] = useState("");
@@ -34,7 +34,7 @@ const AddRecipeForm = () => {
     const file = event.target.files[0];
 
     if (file) {
-      setImage(file); // Przechowujemy rzeczywisty plik w stanie
+      setImage(file);
       updateErrors("image");
     } else {
       setImage(null);
@@ -139,8 +139,18 @@ const AddRecipeForm = () => {
       formData.append("description", description);
       formData.append("category", category);
       formData.append("time", cookTime);
-      formData.append("ingredients", JSON.stringify(updatedIngredients));
+
+      updatedIngredients.forEach((ingredient, index) => {
+        formData.append(`ingredients[${index}][id]`, ingredient.id);
+        formData.append(`ingredients[${index}][measure]`, ingredient.measure);
+      });
+
       formData.append("instructions", preparation);
+
+      console.log("FormData content:");
+      for (let pair of formData.entries()) {
+        console.log(pair[0] + ": " + pair[1]);
+      }
 
       await addRecipeSchema.validateAsync(initialValues, { abortEarly: false });
       await dispatch(addOwnRecipe(formData)).unwrap();
