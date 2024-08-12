@@ -33,7 +33,7 @@ const PopularRecipes = () => {
       {popularRecipes && popularRecipes.length > 0 ? (
         <PopularRecipesList>
           {popularRecipes.map((recipe) => (
-            <PopularRecipesItem to={`/recipe/${recipe._id}`} key={recipe._id}>
+            <PopularRecipesItem to={`/recipes/${recipe._id}`} key={recipe._id}>
               <PopularRecipesImage
                 src={recipe.preview || photoRecipe}
                 alt="dish"
