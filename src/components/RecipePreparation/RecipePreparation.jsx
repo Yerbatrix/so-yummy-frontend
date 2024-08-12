@@ -10,7 +10,6 @@ import {
 import { nanoid } from "nanoid";
 
 const RecipePreparation = ({ image, instructions }) => {
-  // Sprawdź, czy instructions nie jest undefined
   if (!instructions) {
     return <div>No instructions provided</div>;
   }
@@ -31,8 +30,7 @@ const RecipePreparation = ({ image, instructions }) => {
         }
       }
       return (
-        <PrepText key={nanoid()}>
-          <span>{index + 1}</span>
+        <PrepText key={nanoid()} data-step={index + 1}>
           <p>{slicedItem}</p>
         </PrepText>
       );

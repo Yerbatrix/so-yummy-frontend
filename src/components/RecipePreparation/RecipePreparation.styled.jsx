@@ -7,19 +7,23 @@ export const PreparationWrapper = styled.div`
   }
   @media screen and (min-width: 1280px) {
     display: flex;
-    gap: 100px;
+    justify-content: space-between;
     margin-right: 0;
   }
 `;
 
 export const PrepWrapper = styled.div`
   margin-bottom: 40px;
+  flex-basis: 60%;
   @media screen and (min-width: 768px) {
     margin-bottom: 53px;
   }
   @media screen and (min-width: 1280px) {
-    width: 757px;
     margin-bottom: 0;
+  }
+  @media screen and (max-width: 490px) {
+    margin-bottom: 20px;
+    font-size: 16px;
   }
 `;
 
@@ -27,7 +31,7 @@ export const PrepTitle = styled.h2`
   display: block;
   margin-bottom: 30px;
   font-weight: 600;
-  font-size: 24px;
+  font-size: 28px;
   line-height: 1;
   letter-spacing: -0.02em;
   color: #3e4462;
@@ -35,73 +39,62 @@ export const PrepTitle = styled.h2`
     margin-bottom: 32px;
     letter-spacing: -0.24px;
   }
+  @media screen and (max-width: 490px) {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
 `;
 
 export const PrepList = styled.ul`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  list-style: none;
   font-weight: 400;
   font-size: 12px;
   line-height: 1.17;
   letter-spacing: -0.02em;
   gap: 14px;
   @media screen and (min-width: 768px) {
-    gap: 18px;
     font-size: 14px;
     line-height: 1.29;
+  }
+  @media screen and (max-width: 490px) {
+    font-size: 14px;
+    line-height: 1.4;
   }
 `;
 
 export const PrepText = styled.li`
+  margin-bottom: 20px;
   display: flex;
-  overflow: hidden;
   align-items: flex-start;
-  gap: 14px;
-  & span {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    width: 21px;
-    height: 21px;
-    padding: 2px 7px 1px;
-    font-weight: 600;
-    color: #ffffff;
-    background-color: #8baa36;
-
-    font-size: 12px;
-    line-height: 18px;
-    color: #ffffff;
-    border-radius: 100px;
-    flex: none;
-    @media screen and (min-width: 768px) {
-      padding: 0.5px 7px 2.5px;
-      font-size: 14px;
-      line-height: 21px;
-    }
+  &::before {
+    content: attr(data-step) ")";
+    font-weight: bold;
+    margin-right: 8px;
+    color: #8baa36;
   }
+
   & p {
     padding-top: 2px;
     color: #000000;
-    width: 311px;
-    @media screen and (min-width: 768px) {
-      width: 660px;
-    }
-    @media screen and (min-width: 1280px) {
-      width: 50vw;
-    }
+    width: 100%;
   }
 `;
 
 export const PrepWrapperImg = styled.div`
+  flex-basis: 35%;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  max-width: 100%;
+
+  @media screen and (max-width: 490px) {
+    flex-basis: 100%;
+    margin: 0 auto 20px;
+  }
+
   & img {
     border-radius: 8px;
     width: 100%;
-    height: 219px;
-    object-fit: cover;
-    @media screen and (min-width: 768px) {
-      height: 332px;
-      width: 433px;
-    }
+    height: auto;
+    object-fit: contain;
   }
 `;
