@@ -3,9 +3,7 @@ import { IngredientsListStyled } from "./RecipeInngredientsList.styled";
 
 const RecipeInngredientsList = ({ ingredients, recipeId, shoppingList }) => {
   const checkIfIngredientInShoppingList = (ingredientId) => {
-    return shoppingList.some(
-      (item) => item.id === ingredientId && item.recipeId === recipeId
-    );
+    return shoppingList.some((item) => item.id === ingredientId);
   };
 
   return (

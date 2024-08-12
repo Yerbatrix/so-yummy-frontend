@@ -12,11 +12,11 @@ import {
   TableRow,
 } from "./ShoppingList.styled";
 
-export const IngredientItem = ({ item, recipeId }) => {
+export const IngredientItem = ({ item }) => {
   const dispatch = useDispatch();
 
   const onClick = () => {
-    dispatch(deleteIngrFromShoppingList({ ingredientId: item._id, recipeId })); // Przekazujemy recipeId
+    dispatch(deleteIngrFromShoppingList(item._id)); // Przekazywanie poprawnego ID do operacji usunięcia
   };
 
   return (
